@@ -1,30 +1,95 @@
+from asyncio import sleep
 from datetime import datetime
+from glob import glob
+
+import discord
+from itertools import cycle
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from discord import Embed, File
+from discord.errors import HTTPException, Forbidden
 from discord.ext.commands import Bot as BotBase
-from discord.ext.commands import CommandNotFound
+from discord.ext.commands import Context
+from discord.ext.commands import (CommandNotFound, BadArgument, MissingRequiredArgument,
+								  CommandOnCooldown)
+from apscheduler.triggers.cron import CronTrigger
+from discord.ext.commands import when_mentioned_or, command, has_permissions
 
-PREFIX = "."
-OWNER_IDS = [611941774373683210]
+from ..db import db
+
+OWNER_IDS = [611941774373683210, 218807000115445760]
+COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
+IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument)
+
+
+def get_prefix(bot, message):
+	prefix = db.field("SELECT Prefix FROM guilds WHERE GuildID = ?", message.guild.id)
+	return when_mentioned_or(prefix)(bot, message)
+
+
+class Ready(object):
+	def __init__(self):
+		for cog in COGS:
+			setattr(self, cog, False)
+
+	def ready_up(self, cog):
+		setattr(self, cog, True)
+		print(f" {cog} cog ready")
+
+	def all_ready(self):
+		return all([getattr(self, cog) for cog in COGS])
 
 
 class Bot(BotBase):
 	def __init__(self):
-		self.PREFIX = PREFIX
 		self.ready = False
+		self.cogs_ready = Ready()
+
 		self.scheduler = AsyncIOScheduler()
 
-		super().__init__(command_prefix=PREFIX, owner_ids=OWNER_IDS)
+		db.autosave(self.scheduler)
+		super().__init__(command_prefix=get_prefix, owner_ids=OWNER_IDS)
+
+	def setup(self):
+		for cog in COGS:
+			self.load_extension(f"lib.cogs.{cog}")
+			print(f" {cog} cog loaded")
+
+		print("setup complete")
 
 	def run(self, version):
 		self.VERSION = version
+
+		print("running setup...")
+		self.setup()
 
 		with open("./lib/bot/token.0", "r", encoding="utf-8") as tf:
 			self.TOKEN = tf.read()
 
 		print("running bot...")
 		super().run(self.TOKEN, reconnect=True)
+
+	async def process_commands(self, message):
+		ctx = await self.get_context(message, cls=Context)
+
+		if ctx.command is not None and ctx.guild is not None:
+			if self.ready:
+				await self.invoke(ctx)
+
+			else:
+				await ctx.send("Can you like wait for me to come online? :pepehiss:")
+
+
+	async def change_status(self):
+		status = cycle(['with Eggies', 'with Awies', 'Eggshell Simulator',
+					'Shining Moon RO', 'with Lunch', 'wtih Tsucci', 'with Nick',
+					'with Ashe', 'with Lunar'])
+		await bot.change_presence(activity=discord.Game(next(status)))
+
+
+	async def dailies_reminder(self): # example of a scheduled task
+		await self.botch.send("Remember to collect your dailies, dear citizens of Awie Village!")
+
 
 	async def on_connect(self):
 		print("bot connected")
@@ -34,54 +99,74 @@ class Bot(BotBase):
 
 	async def on_error(self, err, *args, **kwargs):
 		if err == "on_command_error":
-			await args[0].send("You fucked up")
+			await args[0].send("Sora's code fucked up")
 
 		else:
-			channel = self.get_channel(734998277828771880)
-			await channel.send("An error occured")
+			await self.send("An error occured")
 
 		raise
 
 	async def on_command_error(self, ctx, exc):
-		if isinstance(exc, CommandNotFound):
+		if any([isinstance(exc, error) for error in IGNORE_EXCEPTIONS]):
 			pass
 
+		elif isinstance(exc, MissingRequiredArgument):
+			await ctx.send("One or more required arguments are missing.")
+
+		elif isinstance(exc, CommandOnCooldown):
+			await ctx.send(f"That command is on {str(exc.cooldown.type).split('.')[-1]} cooldown. Try again in {exc.retry_after:,.2f} secs.")
+
+		elif hasattr(exc, "original"):
+			if isinstance(exc.original, HTTPException):
+				await ctx.send("Unable to send message.")
+
+			elif isinstance(exc.original, Forbidden):
+				await ctx.send("I do not have permission to do that.")
+
+			else:
+				raise exc.original
+
 		else:
-			raise exc.original
+			raise exc
+
 
 	async def on_ready(self):
 		if not self.ready:
+			self.guild = self.get_guild(228966491628765185)
+			self.botch = self.get_channel(642347588107894815)
+			self.scheduler.start()
+
+			await self.botch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
+
+			# embed = Embed(title="Nyes, it is I, teh mighty Chimkin", description="This isn't even my final form",
+			# 			  colour=0xFF0000, timestamp=datetime.utcnow())
+			# fields = [("Name", "Value", True),
+			# 		   ("Another field", "This field is next to the other one.", True),
+			# 		   ("A non-inline field", "This field will appear on it's own row.", False)]
+			# 
+			# for name, value, inline in fields:
+			# 	 embed.add_field(name=name, value=value, inline=inline)
+			# 	 embed.set_author(name="Butter", icon_url=self.guild.icon_url)
+			# 	 embed.set_footer(text="This is a footer")
+			# 	 embed.set_thumbnail(url=self.guild.icon_url)
+			# 	 embed.set_image(url=self.guild.icon_url)
+			# await channel.send(embed=embed)
+			
+			while not self.cogs_ready.all_ready():
+				await sleep(0.5)
+
 			self.ready = True
-			self.guild = self.get_guild(727488027391426652)
-			print("bot ready")
-
-			channel = self.get_channel(734998277828771880)
-			await channel.send("Chimkin has been activated!")
-
-			# Embed example
-
-			embed = Embed(title="Nyes, it is I, teh mighty Chimkin", description="This isn't even my final form",
-						 colour=0xFF0000, timestamp=datetime.utcnow())
-			fields = [("Name", "Value", True),
-					  ("Another field", "This field is next to the other one.", True),
-					  ("A non-inline field", "This field will appear on it's own row.", False)]
-
-			for name, value, inline in fields:
-				embed.add_field(name=name, value=value, inline=inline)
-				embed.set_author(name="Butter", icon_url=self.guild.icon_url)
-				embed.set_footer(text="This is a footer")
-				embed.set_thumbnail(url=self.guild.icon_url)
-				embed.set_image(url=self.guild.icon_url)
-			await channel.send(embed=embed)
+			print(" bot ready")
 
 			# example for sending files
 
-			await channel.send(file=File("./data/images/fatcat.jpg"))
+			# await channel.send(file=File("./data/images/fatcat.jpg"))
 
 		else:
 			print("bot reconnected")
 
 	async def on_message(self, message):
-		pass
+		if not message.author.bot:
+			await self.process_commands(message)
 
 bot = Bot()
