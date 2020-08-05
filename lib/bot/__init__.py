@@ -3,7 +3,6 @@ from datetime import datetime
 from glob import glob
 
 import discord
-from itertools import cycle
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from discord import Embed, File
@@ -77,19 +76,7 @@ class Bot(BotBase):
 				await self.invoke(ctx)
 
 			else:
-				await ctx.send("Can you like wait for me to come online? :pepehiss:")
-
-
-	async def change_status(self):
-		status = cycle(['with Eggies', 'with Awies', 'Eggshell Simulator',
-					'Shining Moon RO', 'with Lunch', 'wtih Tsucci', 'with Nick',
-					'with Ashe', 'with Lunar'])
-		await bot.change_presence(activity=discord.Game(next(status)))
-
-
-	async def dailies_reminder(self): # example of a scheduled task
-		await self.botch.send("Remember to collect your dailies, dear citizens of Awie Village!")
-
+				await ctx.send("Can you like wait for me to come online? <:pepehiss:413283219040108554>")
 
 	async def on_connect(self):
 		print("bot connected")
@@ -102,7 +89,7 @@ class Bot(BotBase):
 			await args[0].send("Sora's code fucked up")
 
 		else:
-			await self.send("An error occured")
+			await self.testch.send("An error occured")
 
 		raise
 
@@ -133,10 +120,11 @@ class Bot(BotBase):
 	async def on_ready(self):
 		if not self.ready:
 			self.guild = self.get_guild(228966491628765185)
-			self.botch = self.get_channel(642347588107894815)
+			self.testch = self.get_channel(714141581308985414)
+			self.smch = self.get_channel(642347588107894815)
 			self.scheduler.start()
 
-			await self.botch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
+			await self.smch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
 
 			# embed = Embed(title="Nyes, it is I, teh mighty Chimkin", description="This isn't even my final form",
 			# 			  colour=0xFF0000, timestamp=datetime.utcnow())

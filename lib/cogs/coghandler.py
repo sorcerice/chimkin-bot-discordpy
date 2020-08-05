@@ -38,6 +38,17 @@ class cogHandler(Cog):
 		else:
 			await ctx.send(f'\n{cog} unloaded')
 
+	@command(name='reload', hidden=True)
+	@has_permissions(manage_guild=True)
+	async def _reload(self, ctx, *, cog):
+		module = f'lib.cogs.{cog}'
+		try:
+			self.bot.reload_extension(module)
+		except commands.ExtensionError as e:
+			await ctx.send(f'{e.__class__.__name__}: {e}')
+		else:
+			await ctx.send(f'\n{cog} reloaded')
+
 
 
 def setup(bot):

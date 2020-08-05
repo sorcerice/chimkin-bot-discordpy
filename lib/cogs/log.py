@@ -36,6 +36,7 @@ class Log(Cog):
 
 		if before.discriminator != after.discriminator:
 			embed = Embed(title="Tag Change",
+						  description=f"***{after.display_name}'s*** discord tag changed",
 						  colour=after.colour,
 						  timestamp=datetime.utcnow())
 
@@ -49,7 +50,7 @@ class Log(Cog):
 
 		if before.avatar_url != after.avatar_url:
 			embed = Embed(title="Avatar Change",
-						  description=f"{before.author.display_name}'s new image is below, old to the right",
+						  description=f"***{after.display_name}'s*** new image is below, old to the right",
 						  #colour=self.log_channel.guild.get_number(after.id)+after.colour,
 						  colour=after.colour,
 						  timestamp=datetime.utcnow())
@@ -78,6 +79,7 @@ class Log(Cog):
 
 		elif before.roles != after.roles:
 			embed = Embed(title="Role updates",
+						  description=f"***{after.display_name}'s*** role was updated",
 						  colour=after.colour,
 						  timestamp=datetime.utcnow())
 
