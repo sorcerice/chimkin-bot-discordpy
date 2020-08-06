@@ -29,7 +29,7 @@ class Reactions(Cog):
 				"🌙": self.bot.guild.get_role(646817958537986063),	# Adventure
 			}
 			self.reaction_message = await self.bot.get_channel(714141581308985414).fetch_message(740458093615382538)
-			self.kekboard_channel = self.bot.get_channel(714141581308985414)
+			self.starboard_channel = self.bot.get_channel(714141581308985414)
 			self.bot.cogs_ready.ready_up("reactions")
 
 
@@ -119,36 +119,36 @@ class Reactions(Cog):
 			await payload.member.add_roles(self.roles[payload.emoji.name], reason='SMRO Role Reaction')
 			await self.reaction_message.remove_reaction(payload.emoji, payload.member)
 
-		elif payload.emoji.name == "🌟":
-			message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
+		# elif payload.emoji.name == "🌟":
+		# 	message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
 
-			if not message.author.bot and payload.member.id != message.author.id:
-				msg_id, stars = db.record("SELECT StarMessageID, Stars FROM starboard WHERE RootMessageID = ?",
-										  message.id) or (None, 0)
+		# 	if not message.author.bot and payload.member.id != message.author.id:
+		# 		msg_id, stars = db.record("SELECT StarMessageID, Stars FROM starboard WHERE RootMessageID = ?",
+		# 								  message.id) or (None, 0)
 
-				embed = Embed(title="Starred message",
-							  colour=message.author.colour,
-							  timestamp=datetime.utcnow())
+		# 		embed = Embed(title="Starred message",
+		# 					  colour=message.author.colour,
+		# 					  timestamp=datetime.utcnow())
 
-				fields = [("Author", message.author.mention, False),
-						  ("Content", message.content or "See attachment", False),
-						  ("Stars", stars+1, False)]
+		# 		fields = [("Author", message.author.mention, False),
+		# 				  ("Content", message.content or "See attachment", False),
+		# 				  ("Stars", stars+1, False)]
 
-				for name, value, inline in fields:
-					embed.add_field(name=name, value=value, inline=inline)
+		# 		for name, value, inline in fields:
+		# 			embed.add_field(name=name, value=value, inline=inline)
 
-				if len(message.attachments):
-					embed.set_image(url=message.attachments[0].url)
+		# 		if len(message.attachments):
+		# 			embed.set_image(url=message.attachments[0].url)
 
-				if not stars:
-					star_message = await self.starboard_channel.send(embed=embed)
-					db.execute("INSERT INTO starboard (RootMessageID, StarMessageID) VALUES (?, ?)",
-							   message.id, star_message.id)
+		# 		if not stars:
+		# 			star_message = await self.starboard_channel.send(embed=embed)
+		# 			db.execute("INSERT INTO starboard (RootMessageID, StarMessageID) VALUES (?, ?)",
+		# 					   message.id, star_message.id)
 
-				else:
-					star_message = await self.starboard_channel.fetch_message(msg_id)
-					await star_message.edit(embed=embed)
-					db.execute("UPDATE starboard SET Stars = Stars + 1 WHERE RootMessageID = ?", message.id)
+		# 		else:
+		# 			star_message = await self.starboard_channel.fetch_message(msg_id)
+		# 			await star_message.edit(embed=embed)
+		# 			db.execute("UPDATE starboard SET Stars = Stars + 1 WHERE RootMessageID = ?", message.id)
 
 		elif payload.message_id in (poll[1] for poll in self.polls):
 			message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)

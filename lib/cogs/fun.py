@@ -2,10 +2,11 @@ from datetime import datetime as d
 from random import choice, randint
 from typing import Optional
 from itertools import cycle
-import random
+from glob import glob
 
 from aiohttp import request
 from discord import Member, Embed
+from discord import File
 from discord.ext import commands, tasks
 from discord.ext.commands import Cog, BucketType
 from discord.ext.commands import BadArgument
@@ -149,6 +150,15 @@ class Fun(Cog):
 		else:
 			await ctx.send("No facts are available for that animal.")
 
+
+
+	@command(name='meme',
+			 brief='Shows a random meme Sora stole from somewhere',
+			 description='Shows a random meme Sora stole from somewhere')
+	@cooldown(2, 20, BucketType.user)
+	async def pull_meme(self, ctx):
+		img = choice(glob('./data/smemes/*.jpg'))
+		await ctx.send(file=File(img))
 
 
 	@Cog.listener()
