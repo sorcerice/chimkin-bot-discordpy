@@ -1,5 +1,5 @@
 from lib.bot import bot
 
-VERSION = "0.0.15" #polls
+VERSION = "0.0.16" #kekboard
 
 bot.run(VERSION)

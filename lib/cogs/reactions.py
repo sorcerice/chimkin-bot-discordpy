@@ -17,8 +17,9 @@ numbers = ('1️⃣', '2⃣', '3⃣', '4⃣', '5⃣',
 
 class Reactions(Cog):
 	def __init__(self, bot):
-		self.polls = []
 		self.bot = bot
+		self.polls = []
+		self.giveaways = []
 
 	@Cog.listener()
 	async def on_ready(self):
@@ -28,6 +29,7 @@ class Reactions(Cog):
 				"🌙": self.bot.guild.get_role(646817958537986063),	# Adventure
 			}
 			self.reaction_message = await self.bot.get_channel(714141581308985414).fetch_message(740458093615382538)
+			self.kekboard_channel = self.bot.get_channel(714141581308985414)
 			self.bot.cogs_ready.ready_up("reactions")
 
 
@@ -60,6 +62,29 @@ class Reactions(Cog):
 									   args=[message.channel.id, message.id])
 
 
+
+	@command(name='giveaway')
+	@has_permissions(manage_guild=True)
+	async def create_giveaway(self, ctx, mins: int, *, description: str):
+		embed = Embed(title='Giveaway',
+					  description=description,
+					  colour=ctx.author.colour,
+					  timestamp=datetime.utcnow())
+
+		fields=[('End time', f'{datetime.utcnow()+timedelta(seconds=mins*60)} UTC', False)]
+		for name, value, inline in fields:
+			embed.add_field(name=name, value=value, inline=inline)
+
+		message = await ctx.send(embed=embed)
+		await message.add_reaction('✅')
+
+		self.giveaways.append((message.channel.id, message.id))
+
+		self.bot.scheduler.add_job(self.complete_giveaway, "date", run_date=datetime.now()+timedelta(seconds=mins),
+								   args=[message.channel.id, message.id])
+
+
+
 	async def complete_poll(self, channel_id, message_id):
 		message = await self.bot.get_channel(channel_id).fetch_message(message_id)
 
@@ -71,6 +96,21 @@ class Reactions(Cog):
 		self.polls.remove((message.channel.id, message.id))
 
 
+
+	async def complete_giveaway(self, channel_id, message_id):
+		message = await self.bot.get_channel(channel_id).fetch_message(message_id)
+
+		if len((entrants := [u for u in await message.reactions[0].users().flatten() if not u.bot])) > 0:
+			winner = choice(entrants)
+			await message.channel.send(f'🥳 Congratulations 🎉**{winner.mention}**🎉 - you won the giveaway!🥳')
+			self.giveaways.remove((message.channel.id, message.id))
+
+		else:
+			await message.channel.send(f'Giveaway ended - No one entered.... <:peeposad:633637989611864074>')
+			self.giveaways.remove((message.channel.id, message.id))
+
+
+
 	@Cog.listener()
 	async def on_raw_reaction_add(self, payload):
 		if self.bot.ready and payload.message_id == self.reaction_message.id:
@@ -78,6 +118,37 @@ class Reactions(Cog):
 			await payload.member.remove_roles(*current_roles, reason="SMRO Role Reaction")
 			await payload.member.add_roles(self.roles[payload.emoji.name], reason='SMRO Role Reaction')
 			await self.reaction_message.remove_reaction(payload.emoji, payload.member)
+
+		elif payload.emoji.name == "🌟":
+			message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
+
+			if not message.author.bot and payload.member.id != message.author.id:
+				msg_id, stars = db.record("SELECT StarMessageID, Stars FROM starboard WHERE RootMessageID = ?",
+										  message.id) or (None, 0)
+
+				embed = Embed(title="Starred message",
+							  colour=message.author.colour,
+							  timestamp=datetime.utcnow())
+
+				fields = [("Author", message.author.mention, False),
+						  ("Content", message.content or "See attachment", False),
+						  ("Stars", stars+1, False)]
+
+				for name, value, inline in fields:
+					embed.add_field(name=name, value=value, inline=inline)
+
+				if len(message.attachments):
+					embed.set_image(url=message.attachments[0].url)
+
+				if not stars:
+					star_message = await self.starboard_channel.send(embed=embed)
+					db.execute("INSERT INTO starboard (RootMessageID, StarMessageID) VALUES (?, ?)",
+							   message.id, star_message.id)
+
+				else:
+					star_message = await self.starboard_channel.fetch_message(msg_id)
+					await star_message.edit(embed=embed)
+					db.execute("UPDATE starboard SET Stars = Stars + 1 WHERE RootMessageID = ?", message.id)
 
 		elif payload.message_id in (poll[1] for poll in self.polls):
 			message = await self.bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
