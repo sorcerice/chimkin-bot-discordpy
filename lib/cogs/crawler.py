@@ -53,6 +53,8 @@ class Crawler(Cog):
 		embed.add_field(name = f'{race.text.strip()}', value='Race', inline=False)
 		embed.add_field(name = f'{elem.text.strip()}', value='Element', inline=False)
 		embed.set_thumbnail(url=spriteURL)
+		embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+		embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 
 		await ctx.send(embed=embed)
 
@@ -87,6 +89,8 @@ class Crawler(Cog):
 		embed.add_field(name = '----', value = f'**{name.text.strip()}**', inline=False)
 		embed.add_field(name = '----', value = f'{dTable.text.strip()}', inline=False)
 		embed.set_thumbnail(url=spriteURL)
+		embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+		embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 
 		await ctx.send(embed=embed)
 
@@ -118,6 +122,8 @@ class Crawler(Cog):
 						  description=f'```{df1}```',
 						  colour=ctx.author.colour,
 						  url=URL.replace(' ', '+'))
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 	
 			await ctx.send(embed=embed)
 
@@ -149,6 +155,8 @@ class Crawler(Cog):
 						  description=f'```{df1}```',
 						  colour=ctx.author.colour,
 						  url=URL.replace(' ', '+'))
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 	
 			await ctx.send(embed=embed)
 			
@@ -176,7 +184,8 @@ class Crawler(Cog):
 									  description=f"```{df1}```",
 									  colour=ctx.author.colour,
 									  url=f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}')
-						await ctx.send(f'{ctx.author.mention} make sure you pay your awie taxes <:duckknife:669212549194973204>')
+						embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+						embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 						await ctx.send(embed=embed)
 					except (KeyError, IndexError):
 						await ctx.send("Item is probably not on vend.")
@@ -226,7 +235,8 @@ class Crawler(Cog):
 					embed.add_field(name='Card 2', value=f'```{grabCard2.text.strip()}```', inline=False)
 					embed.add_field(name='Card 3', value=f'```{grabCard3.text.strip()}```', inline=False)
 					embed.add_field(name='Card 4', value=f'```{grabCard4.text.strip()}```', inline=False)
-					await ctx.send(f'{ctx.author.mention} make sure you pay your awie taxes <:duckknife:669212549194973204>')
+					embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+					embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 					await ctx.send(embed=embed)
 				
 				except AttributeError:
@@ -275,7 +285,8 @@ class Crawler(Cog):
 					embed.add_field(name='Card 2', value=f'```{grabCard2.text.strip()}```', inline=False)
 					embed.add_field(name='Card 3', value=f'```{grabCard3.text.strip()}```', inline=False)
 					embed.add_field(name='Card 4', value=f'```{grabCard4.text.strip()}```', inline=False)
-					await ctx.send(f'{ctx.author.mention} make sure you pay your awie taxes <:duckknife:669212549194973204>')
+					embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+					embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 					await ctx.send(embed=embed)
 				except AttributeError:
 					await ctx.send('There is likely no enchants for that item')
@@ -309,7 +320,8 @@ class Crawler(Cog):
 								  description=f"```{df1}```",
 								  colour=ctx.author.colour,
 								  url = f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}')
-					await ctx.send(f'{ctx.author.mention} make sure you pay your awie taxes <:duckknife:669212549194973204>')
+					embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+					embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 					await ctx.send(embed=embed)
 				except UnboundLocalError:
 					await ctx.send('Try again later.')
@@ -357,11 +369,49 @@ class Crawler(Cog):
 				embed.add_field(name = 'Map Name', value = f'{mapname}', inline = True)
 				embed.add_field(name = 'Amount', value = f'{amount}', inline = True)
 				embed.add_field(name = 'Respawn Time', value = f'{respawnTime}', inline = True)
+				embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+				embed.set_footer(text="Provided by Divine Pride API", icon_url=ctx.guild.icon_url)
 
 				await ctx.send(embed=embed)
 
 			else:
 				await ctx.send(f"Beep Boop\nError {response.status}. This doesn't exist in Divine Pride")
+
+
+	@command(name='news')
+	async def get_news(self, ctx):
+		URL = "https://www.shining-moon.com/"
+
+		async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
+			if response.status == 200:
+				page = await response.read()
+
+				soup = BeautifulSoup(page.decode('utf-8'), 'lxml')
+
+				links = []
+				for a in soup.find_all('a', href=True):
+					if a.text:
+						links.append(a['href'])
+
+				newsData0 = soup.find_all('div', class_='news-content')[0].text.strip()
+				newsData1 = soup.find_all('div', class_='news-item', recursive=True)[1].text.strip()
+				newsData2 = soup.find_all('div', class_='news-item', recursive=True)[2].text.strip()
+
+				embed=Embed(title="SMRO News",
+							colour=ctx.author.colour)
+
+				fields=[(f"{links[14]}", f"```{newsData0}```", False),
+						(f"{links[15]}", f"```{newsData1}```", False),
+						(f"{links[16]}", f"```{newsData2}```", False)]
+
+				for name, value, inline in fields:
+					embed.add_field(name=name, value=value, inline=inline)
+
+				embed.set_thumbnail(url='https://www.shining-moon.com/hel/themes/default/img/logo.gif')
+				embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+				embed.set_footer(text='Buttery Buns in Butter', icon_url=ctx.guild.icon_url)
+
+				await ctx.send(embed=embed)
 
 
 
