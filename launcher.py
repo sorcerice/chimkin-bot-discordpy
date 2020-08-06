@@ -1,5 +1,5 @@
 from lib.bot import bot
 
-VERSION = "0.0.14" #reactions
+VERSION = "0.0.15" #polls
 
 bot.run(VERSION)
