@@ -187,6 +187,30 @@ class Fun(Cog):
 		await ctx.send(f'{choice(responses)}')
 
 
+	@command(name='bless',
+			 aliases=['compliment'],
+			 description='Chimken compliments the person you mention')
+	@cooldown(1, 20, BucketType.user)
+	async def bless_command(self, ctx, member:Member):
+		responses = [f'{member.mention} is an awesome friend.',
+					 f'{member.mention} is a gift to those around them.',
+					 f'{member.mention} is a smart cookie.',
+					 f'{member.mention}, you are awesome.',
+					 f'''{ctx.author.display_name} likes {member.mention}'s style.''',
+					 f'{ctx.author.display_name} appreciates {member.mention}.',
+					 f'{member.mention} is the most perfect {member.mention} there is.',
+					 f'{ctx.author.display_name} is grateful to have known {member.mention}.',
+					 f'{member.mention} deserves a hug right now.',
+					 f'{member.mention} should be proud of themselves.',
+					 f'{member.mention} has a great sense of humour.',
+					 f'On a scale of 1 to 10, {member.mention} is an 11.',
+					 f'{member.mention} is like a ray of sunshine on a really dreary day.',
+					 f'{member.mention} is making a difference.',
+					 f'{member.mention} brings out the best in other people.']
+
+		await ctx.send(f'{choice(responses)}')
+
+
 
 	@Cog.listener()
 	async def on_ready(self):

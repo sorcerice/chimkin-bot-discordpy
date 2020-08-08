@@ -1,5 +1,5 @@
 from lib.bot import bot
 
-VERSION = "0.0.19" #roast
+VERSION = "0.0.20" #bless
 
 bot.run(VERSION)
