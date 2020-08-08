@@ -64,7 +64,7 @@ class Fun(Cog):
 					 'No, and you are never getting an MVP card.',
 					 'It is highly unlikely because Lunch said so.',
 					 'Nope, because Lunch is still a homophobe.']
-		await ctx.send(f'{random.choice(responses)}')
+		await ctx.send(f'{choice(responses)}')
 
 
 
@@ -90,7 +90,6 @@ class Fun(Cog):
 
 
 	@command(name="slap",
-			 aliases=["hit"],
 			 brief="Makes you slap someone",
 			 description="Makes you slap someone")
 	@cooldown(5, 10, BucketType.user)
@@ -161,11 +160,38 @@ class Fun(Cog):
 		await ctx.send(file=File(img))
 
 
+	@command(name='roast',
+			 brief='Roast someone',
+			 description='Roast someone')
+	@cooldown(1, 10, BucketType.user)
+	async def roast_command(self, ctx, member:Member):
+		responses = [f'''{member.mention} is as useless as the 'ueue' in 'queue'.''',
+					 f'''Mirrors can't talk. Lucky for {member.mention}, they can't laugh either.''',
+					 f'''{member.mention}, you have something on your chin...\nNo, the 3rd one down.''',
+					 f'''{member.mention} is the reason the gene pool needs a lifeguard.''',
+					 f'''If I had a face like {member.mention}'s I'd sue my parents.''',
+					 f'''{member.mention}'s only chance to get laid is to crawl up a chicken's butt and wait.''',
+					 f'''Some day {member.mention} will go far.\nAnd I hope you stay there.''',
+					 f'''{member.mention} must have been born on a highway, cuz that's where most of the accidents happen.''',
+					 f'''If laughter is the best medicine, {member.mention}'s face must be curing the world.''',
+					 f'''{member.mention}, is your ass jealous of the amount of shit that just came out of your mouth?''',
+					 f'''If {ctx.author.display_name} wanted to kill themselves, they'd climb up {member.mention}'s ego and jump to their IQ.''',
+					 f'''When {ctx.author.display_name} see's {member.mention}'s face, there's not a thing they would change....\nExcept the direction they were walking in.''',
+					 f'''If {ctx.author.display_name} had a dollar for everytime {member.mention} said something smart, they'd be broke.''',
+					 f'''When {member.mention} was born, the doctor threw them out of the window and the window threw them back.''',
+					 f'''I love what you've done with your hair, {member.mention}.\nHow do you get it to come out of the nostrils like that?''',
+					 f'''If rock bottom had a basement, {member.mention} would be it.''',
+					 f'''If {member.mention}'s brain was a dynamite, there wouldn't be enough to blow your hat off.''',
+					 f'''Light travels faster than sound.\nWhich is why {member.mention} seemed bright until they spoke.''']
+
+		await ctx.send(f'{choice(responses)}')
+
+
+
 	@Cog.listener()
 	async def on_ready(self):
 		if not self.bot.ready:
 			self.bot.cogs_ready.ready_up("fun")
-
 
 def setup(bot):
 	bot.add_cog(Fun(bot))

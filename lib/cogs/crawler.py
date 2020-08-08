@@ -397,12 +397,16 @@ class Crawler(Cog):
 				newsData1 = soup.find_all('div', class_='news-item', recursive=True)[1].text.strip()
 				newsData2 = soup.find_all('div', class_='news-item', recursive=True)[2].text.strip()
 
+				newsTitle0 = soup.find_all('div', class_='news-content')[0].find('a').text.strip()
+				newsTitle1 = soup.find_all('div', class_='news-content')[1].find('a').text.strip()
+				newsTitle2 = soup.find_all('div', class_='news-content')[2].find('a').text.strip()
+
 				embed=Embed(title="SMRO News",
 							colour=ctx.author.colour)
 
-				fields=[(f"{links[14]}", f"```{newsData0}```", False),
-						(f"{links[15]}", f"```{newsData1}```", False),
-						(f"{links[16]}", f"```{newsData2}```", False)]
+				fields=[(f"```{newsData0}```", f"[{newsTitle0}]({links[14]})<-Click to go to forum post", False),
+						(f"```{newsData1}```", f"[{newsTitle1}]({links[15]})<-Click to go to forum post", False),
+						(f"```{newsData2}```", f"[{newsTitle2}]({links[16]})<-Click to go to forum post", False)]
 
 				for name, value, inline in fields:
 					embed.add_field(name=name, value=value, inline=inline)
