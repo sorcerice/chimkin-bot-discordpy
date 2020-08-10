@@ -211,6 +211,32 @@ class Fun(Cog):
 		await ctx.send(f'{choice(responses)}')
 
 
+	@command(name='awie',
+			 description='Gives you an Awie picture and a bonus Awie Fact.',
+			 brief='Gives you an Awie picture and a bonus Awie Fact.')
+	async def awie_facts(self, ctx):
+		fact_url = f"https://some-random-api.ml/facts/cat"
+		image_url = f"https://some-random-api.ml/img/cat"
+
+		async with request("GET", image_url, headers={}) as response:
+			if response.status == 200:
+				data = await response.json()
+				image_link = data["link"]
+			else:
+				image_link = None
+		async with request("GET", fact_url, headers={}) as response:
+			if response.status == 200:
+				data = await response.json()
+				embed = Embed(title=f"Awie fact",
+							  description=data["fact"].replace('cat', 'awie'),
+							  colour=ctx.author.colour)
+				if image_link is not None:
+					embed.set_image(url=image_link)
+				await ctx.send(embed=embed)
+			else:
+				await ctx.send(f"API returned a {response.status} status.")
+
+
 
 	@Cog.listener()
 	async def on_ready(self):
