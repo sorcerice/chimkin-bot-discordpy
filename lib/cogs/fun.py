@@ -154,7 +154,7 @@ class Fun(Cog):
 	@command(name='meme',
 			 brief='Shows a random meme Sora stole from somewhere',
 			 description='Shows a random meme Sora stole from somewhere')
-	@cooldown(2, 20, BucketType.user)
+	@cooldown(3, 30, BucketType.guild)
 	async def pull_meme(self, ctx):
 		img = choice(glob('./data/smemes/*.jpg'))
 		await ctx.send(file=File(img))
@@ -163,7 +163,7 @@ class Fun(Cog):
 	@command(name='roast',
 			 brief='Roast someone',
 			 description='Roast someone')
-	@cooldown(1, 10, BucketType.user)
+	@cooldown(1, 20, BucketType.user)
 	async def roast_command(self, ctx, member:Member):
 		responses = [f'''{member.mention} is as useless as the 'ueue' in 'queue'.''',
 					 f'''Mirrors can't talk. Lucky for {member.mention}, they can't laugh either.''',
@@ -190,7 +190,7 @@ class Fun(Cog):
 	@command(name='bless',
 			 aliases=['compliment'],
 			 description='Chimken compliments the person you mention')
-	@cooldown(1, 20, BucketType.user)
+	@cooldown(1, 20, BucketType.guild)
 	async def bless_command(self, ctx, member:Member):
 		responses = [f'{member.mention} is an awesome friend.',
 					 f'{member.mention} is a gift to those around them.',
