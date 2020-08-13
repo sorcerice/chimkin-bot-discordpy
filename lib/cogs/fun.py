@@ -228,8 +228,13 @@ class Fun(Cog):
 		async with request("GET", fact_url, headers={}) as response:
 			if response.status == 200:
 				data = await response.json()
+
+				catFact = data['fact']
+				pattern = re.compile('cat', re.IGNORECASE)
+				awieFact = pattern.sub(f'awie', catFact)
+
 				embed = Embed(title=f"Awie fact",
-							  description=data["fact"].replace('cat', 'awie'),
+							  description=awieFact,
 							  colour=ctx.author.colour)
 				if image_link is not None:
 					embed.set_image(url=image_link)
