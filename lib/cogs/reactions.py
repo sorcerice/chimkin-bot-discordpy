@@ -38,7 +38,7 @@ class Reactions(Cog):
 			 description='Usage: .mkpoll <time limit in seconds> "<Poll Question - quotes are needed>" <option1-10>.',
 			 brief='Usage: .mkpoll <time limit in seconds> "<Poll Question - quotes are needed>" <option1-10>.')
 	# @has_permissions(manage_guild=True)
-	async def create_poll(self, ctx, hours: int, question: str, *options):
+	async def create_poll(self, ctx, secs: int, question: str, *options):
 		if len(options) > 10:
 			await ctx.send('You can only have a maximum of 10 options.')
 
@@ -61,21 +61,22 @@ class Reactions(Cog):
 
 			self.polls.append((message.channel.id, message.id))
 
-			self.bot.scheduler.add_job(self.complete_poll, "date", run_date=datetime.now()+timedelta(seconds=hours),
+			self.bot.scheduler.add_job(self.complete_poll, "date", run_date=datetime.now()+timedelta(seconds=secs),
 									   args=[message.channel.id, message.id])
 
 
 
 	@command(name='giveaway',
-			 desciption='Usage: .giveaway <time limit in seconds for> <Title of giveaway>')
+			 desciption='Usage: .giveaway <time limit in seconds for> <Title of giveaway>',
+			 brief='Usage: .giveaway <time limit in seconds for> <Title of giveaway>')
 	# @has_permissions(manage_guild=True)
-	async def create_giveaway(self, ctx, mins: int, *, description: str):
+	async def create_giveaway(self, ctx, secs: int, *, description: str):
 		embed = Embed(title='Giveaway',
 					  description=description,
 					  colour=ctx.author.colour,
 					  timestamp=datetime.utcnow())
 
-		fields=[('End time', f'{datetime.utcnow()+timedelta(seconds=mins*60)} UTC', False)]
+		fields=[('End time', f'{datetime.utcnow()+timedelta(seconds=secs*60)} UTC', False)]
 		for name, value, inline in fields:
 			embed.add_field(name=name, value=value, inline=inline)
 
@@ -84,7 +85,7 @@ class Reactions(Cog):
 
 		self.giveaways.append((message.channel.id, message.id))
 
-		self.bot.scheduler.add_job(self.complete_giveaway, "date", run_date=datetime.now()+timedelta(seconds=mins),
+		self.bot.scheduler.add_job(self.complete_giveaway, "date", run_date=datetime.now()+timedelta(seconds=secs),
 								   args=[message.channel.id, message.id])
 
 

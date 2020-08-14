@@ -15,7 +15,10 @@ class cogHandler(Cog):
 
 
 
-	@command(name='load', hidden=True)
+	@command(name='load',
+			 hidden=True,
+			 description='Used for debugging',
+			 brief='Used for debugging')
 	@has_permissions(manage_guild=True)
 	async def _load(self, ctx, *, cog):
 		module = f'lib.cogs.{cog}'
@@ -27,7 +30,10 @@ class cogHandler(Cog):
 			await ctx.send(f'\n{cog} loaded')
 
 
-	@command(name='unload', hidden=True)
+	@command(name='unload',
+			 hidden=True,
+			 description='Used for debugging',
+			 brief='Used for debugging')
 	@has_permissions(manage_guild=True)
 	async def _unload(self, ctx, *, cog):
 		module = f'lib.cogs.{cog}'
@@ -38,7 +44,10 @@ class cogHandler(Cog):
 		else:
 			await ctx.send(f'\n{cog} unloaded')
 
-	@command(name='reload', hidden=True)
+	@command(name='reload',
+			 hidden=True,
+			 description='Used for debugging',
+			 brief='Used for debugging')
 	@has_permissions(manage_guild=True)
 	async def _reload(self, ctx, *, cog):
 		module = f'lib.cogs.{cog}'

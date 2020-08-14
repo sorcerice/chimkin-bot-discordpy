@@ -378,7 +378,9 @@ class Crawler(Cog):
 				await ctx.send(f"Beep Boop\nError {response.status}. This doesn't exist in Divine Pride")
 
 
-	@command(name='news')
+	@command(name='news',
+			 description='Latest News from SMRO',
+			 brief='Latest News from SMRO')
 	async def get_news(self, ctx):
 		URL = "https://www.shining-moon.com/"
 
