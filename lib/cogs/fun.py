@@ -158,7 +158,7 @@ class Fun(Cog):
 		 brief='Roast someone',
 		 description='Roast someone')
 	# @cooldown(1, 20, BucketType.user)
-	async def roast_command(self, ctx, target):
+	async def roast_command(self, ctx):
 		URL = f'https://evilinsult.com/generate_insult.php?lang=en&type=text'
 
 		async with request("GET", URL, headers={}) as response:
@@ -168,10 +168,8 @@ class Fun(Cog):
 				soup = BeautifulSoup(data.decode('utf-8'), 'lxml')
 
 				insult = soup.find('body').text
-				pattern = re.compile('your', re.IGNORECASE)
-				insultEdit = pattern.sub(f'''{target}'s''', insult)
 
-				await ctx.send(insultEdit)
+				await ctx.send(insult)
 
 			else:
 				await ctx.send(f'API returned a {response.status} status.')
@@ -181,7 +179,7 @@ class Fun(Cog):
 	@command(name='meme',
 			 brief='Shows a random meme Sora stole from somewhere',
 			 description='Shows a random meme Sora stole from somewhere')
-	@cooldown(3, 30, BucketType.guild)
+	# @cooldown(3, 30, BucketType.guild)
 	async def pull_meme(self, ctx):
 		img = choice(glob('./data/smemes/*.jpg'))
 		await ctx.send(file=File(img))
