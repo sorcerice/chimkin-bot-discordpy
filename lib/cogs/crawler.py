@@ -436,8 +436,8 @@ class Crawler(Cog):
 		linkName = charName.replace(' ', '%20')
 		URL = f'http://51.161.117.101/char/index.php/characterhel/{linkName}'
 
-		embed = Embed(title='SMRO Sig',
-					  description=f'Sig for {charName}')
+		embed = Embed(title='Shining Moon - Helheim',
+					  description=f'Sprite for {charName}')
 
 		embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
 		embed.set_thumbnail(url='https://www.shining-moon.com/hel/themes/default/img/logo.gif')

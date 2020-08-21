@@ -98,17 +98,17 @@ class Bot(BotBase):
 			pass
 
 		elif isinstance(exc, MissingRequiredArgument):
-			await ctx.send("One or more required arguments are missing.")
+			await ctx.send("One or more required arguments are missing, idiot!")
 
 		elif isinstance(exc, CommandOnCooldown):
-			await ctx.send(f"That command is on {str(exc.cooldown.type).split('.')[-1]} cooldown. Try again in {exc.retry_after:,.2f} secs.")
+			await ctx.send(f"That command is on {str(exc.cooldown.type).split('.')[-1]} cooldown. Try again in {exc.retry_after:,.2f} secs, fuckface.")
 
 		elif hasattr(exc, "original"):
 			if isinstance(exc.original, HTTPException):
-				await ctx.send("Unable to send message.")
+				await ctx.send("Ugh. What did you break, stupid!")
 
 			elif isinstance(exc.original, Forbidden):
-				await ctx.send("I do not have permission to do that.")
+				await ctx.send("I do not have permission to do that, blame the damned server owner.")
 
 			else:
 				raise exc.original
