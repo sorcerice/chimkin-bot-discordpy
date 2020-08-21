@@ -70,6 +70,77 @@ class Info(Cog):
 
 		await ctx.send(embed=embed)
 
+	@command(name='faq',
+			 description='To help out with support questions',
+			 brief='To help out with support questions')
+	async def faq_command(self, ctx, faq_tag: str):
+		if faq_tag == 'ip':
+			embed=Embed(title='FAQ',
+						description='SMRO Server Host Information',
+						colour=0x4dfc32)
+
+			embed.add_field(name='Server Location', value='Beauharnois,Quebec,Canada', inline=False)
+			embed.add_field(name='Helheim IP:', value='142.44.212.59', inline=False)
+			embed.add_field(name='Niflheim IP:', value='192.99.66.84', inline=False)
+
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_thumbnail(url='https://www.shining-moon.com/hel/themes/default/img/logo.gif')
+			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+
+			await ctx.send(embed=embed)
+
+		elif faq_tag == 'init':
+			embed=Embed(title='ERROR : Cannot init d3d OR grf file has problem.',
+						description='''```a) can be cause of resolution - try starting at lowest\nb) can be cause of graphic device\nc) can be cause of access violation - restart sometimes solves it\nd) can be cause of outdated direct x\ne) can be cause of outdated graphic card driver\nf) Install the latest c++ / framework might  help as well\ng) Try running shining.exe straight as admin, have fixed it for some people previously\nh) If previous don't work, restart your PC.```''',
+						colour=0x4dfc32)
+
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+
+			await ctx.send(embed=embed)
+
+		elif faq_tag == 'replay':
+			await ctx.send(f'{ctx.author.mention}\n**How To Play Replays:**\nhttps://cdn.discordapp.com/attachments/546255961992724481/673116241526915072/replay.mp4')
+
+		elif faq_tag == 'shadow':
+			await ctx.send(f'{ctx.author.mention}\nShadow Equipment List:\nhttps://www.shining-moon.com/helheim/index.php/Shadow_Equipment')
+
+		elif faq_tag == 'helnif':
+			embed=Embed(title='Difference between Helheim and Niflheim',
+						description='''**TL;DR:**\n```**Helheim** = kRO only balance and progressions, newer server, more players.\n*``````*Niflheim** = A mix of kRO, jRO and iRO balance and progressions, older server, less players, more build possibilities, more competitively viable endgame builds, better endgame damage potentials due to gears and easier refines.```''',
+						colour=0x4dfc32)
+			embed.set_image(url='https://cdn.discordapp.com/attachments/605132888265981962/605135987890192393/unknown.png')
+
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+
+			await ctx.send(embed=embed)
+
+		elif faq_tag == 'aspd':
+			embed=Embed(title='ASPD Golden Numbers',
+						description='```193 ASPD = up to 7 attacks/sec\n192 ASPD = up to 6 attacks/sec\n190 ASPD = up to 5 attacks/sec\n188 ASPD = up to 4 attacks/sec```',
+						colour=0x4dfc32)
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+
+			await ctx.send(embed=embed)
+
+		elif faq_tag == 'enchants':
+			embed=Embed(title='Lapine Enchants - Click Me',
+						url='https://www.shining-moon.com/helheim/index.php/Lapine_Enchanting',
+						colour=0x4dfc32)
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+
+			await ctx.send(embed=embed)
+
+		elif faq_tag == 'resolution':
+			await ctx.send(f'{ctx.author.mention}\n**Having resolution problems?**\nCheck this link out:\nhttps://www.shining-moon.com/w/index.php/Resolution')
+
+		else:
+			await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution')
+
+
 
 	@Cog.listener()
 	async def on_ready(self):
