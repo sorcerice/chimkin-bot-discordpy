@@ -23,7 +23,7 @@ class Welcome(Cog):
 	@Cog.listener()
 	async def on_member_remove(self, member):
 		db.execute("DELETE FROM exp WHERE UserID = ?", member.id)
-		await self.bot.get_channel(598539329320648897).send(f"**{member.display_name}** has left **{member.guild.name}** <:pepemeltdown:609067100417294339>")
+		await self.bot.get_channel(598539329320648897).send(f"**{member.display_name}** has left **{member.guild.name}** <:pepemeltdown:609067100417294339>\n\nIt was nice having you around <:peepoblush:633637992090697739>")
 
 
 def setup(bot):

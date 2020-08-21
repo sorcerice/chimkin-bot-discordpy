@@ -43,6 +43,7 @@ class cogHandler(Cog):
 			await ctx.send(f'{e.__class__.__name__}: {e}')
 		else:
 			await ctx.send(f'\n{cog} unloaded')
+			
 
 	@command(name='reload',
 			 hidden=True,

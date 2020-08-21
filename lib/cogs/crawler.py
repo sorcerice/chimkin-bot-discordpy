@@ -101,31 +101,27 @@ class Crawler(Cog):
 			 brief='Looks for mob IDs',
 			 description='Looks for mob IDs')
 	async def mobID_search(self, ctx, *, mobName: str):
-		URL = f'https://www.shining-moon.com/?module=monster&name={mobName}'
+		URL = f'https://www.shining-moon.com/hel/?module=monster&action=index&monster_id=&name={mobName}&mvp=all&size=-1&race=-1&element=-1&card_id=&custom='
 
 		async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
 				page = await response.read()
 			else:
 				await ctx.send(f'Beep Boop\n{response.status} status')
-
-		soup = BeautifulSoup(page.decode('utf-8'), 'lxml')
-		tableCheck = soup.find('div', class_='content').find_all('p')[4]
-
-		if tableCheck.text.strip() == 'No monsters found. Go back.':
-			await ctx.send('No monsters found. Check for typos, stupid.')
-		else:
+		try:
 			dfs = pd.read_html(page)
 			df1 = dfs[0][['Monster ID ▲', 'kRO Name']]
-	
+
 			embed = Embed(title='Click here to go this page',
 						  description=f'```{df1}```',
 						  colour=ctx.author.colour,
 						  url=URL.replace(' ', '+'))
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
 			embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
-	
+
 			await ctx.send(embed=embed)
+		except ValueError:
+			await ctx.send("This monster doesn't seem to exist. Check for typos, stupid.")
 
 
 
@@ -134,7 +130,7 @@ class Crawler(Cog):
 			  brief="Looks for item IDs",
 			  description="Looks for item IDs")
 	async def itemID_search(self, ctx, *, itemName: str):
-		URL = f'https://www.shining-moon.com/?module=item&name={itemName}'
+		URL = f'https://www.shining-moon.com/hel/?module=item&action=index&item_id=&name={itemName}&script=&type=-1&equip_loc=-1&npc_buy_op=eq&npc_buy=&npc_sell_op=eq&npc_sell=&weight_op=eq&weight=&range_op=eq&range=&slots_op=eq&slots=&defense_op=eq&defense=&attack_op=eq&attack=&matk_op=eq&matk=&refineable=&for_sale=&custom='
 
 		async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
@@ -142,12 +138,7 @@ class Crawler(Cog):
 			else:
 				await ctx.send(f'Beep Boop\n{response.status} status')
 
-		soup = BeautifulSoup(page.decode('utf-8'), 'lxml')
-		tableCheck = soup.find('div', class_='content').find_all('p')[5]
-		
-		if tableCheck.text.strip() == 'No items found. Go back.':
-			await ctx.send('No items found. Check for typos, stupid.')
-		else:
+		try:
 			dfs = pd.read_html(page)
 			df1 = dfs[0][['Item ID ▲', 'Name.1']]
 
@@ -157,8 +148,10 @@ class Crawler(Cog):
 						  url=URL.replace(' ', '+'))
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
 			embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
-	
+
 			await ctx.send(embed=embed)
+		except ValueError:
+			await ctx.send("This item doesn't seem to exist. Check for typos, stupid.")
 			
 
 
