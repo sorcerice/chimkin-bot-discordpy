@@ -1,9 +1,13 @@
 from random import randint
+from io import BytesIO
+from array import array
 
-from discord import Embed
+from discord import Embed, File
 from discord.ext.commands import Cog
 from discord.ext.commands import command
-from PIL import Image, ImageDraw, ImageFilter
+
+from PIL import Image, ImageDraw, ImageFont, ImageOps
+from aiohttp import request
 
 class Sigs(Cog):
 	def __init__(self, bot):
@@ -23,42 +27,88 @@ class Sigs(Cog):
 		await ctx.send(URL)
 
 	@command(name='hsig',
-			 aliases=['hsig'],
-			 description='Get a picture of your SMRO char',
-			 brief='Get a picture of your SMRO char')
+			 aliases=['helsig'],
+			 description='Get a picture of your Shining Moon(Helheim) char',
+			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_helsig(self, ctx, *, charName: str):
+		bg = Image.open('./data/images/sigbg/1.png')
+
 		linkName = charName.replace(' ', '%20')
-		URL = f'http://51.161.117.101/char/index.php/characterhel/{linkName}'
+		spriteURL = f'http://51.161.117.101/char/index.php/characterhel/{linkName}'
 
-		bg=Image.open('data/images/sigbg')
+		async with request("GET", spriteURL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
+			if response.status == 200:
+				sprBytes = await response.read()
+			else:
+				await ctx.send(f'Beep Boop\n{response.status} status')
 
-		embed = Embed(title='Shining Moon - Helheim',
-					  description=f'Sprite for {charName}')
+		sprite = Image.open(BytesIO(sprBytes))
 
-		embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-		embed.set_thumbnail(url='https://www.shining-moon.com/hel/themes/default/img/logo.gif')
-		embed.set_image(url=URL)
-		embed.set_footer(text='Nice char you got there', icon_url=ctx.guild.icon_url)
+		bg_copy = bg.copy()
+		bg_copy.paste(sprite, (0, 0), sprite.convert('RGBA'))
+		draw = ImageDraw.Draw(bg_copy)
 
-		await ctx.send(embed=embed)
+		fontCharName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Xtnd.ttf', "rb").read()), size=10)
+		fontRealmName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Bold.ttf', "rb").read()), size=7)
+
+		(x, y) = (130, 155)
+		CHARNAME = f'{charName}'
+		color = 'rgb(255, 255, 255)'
+		draw.text((x, y), CHARNAME, fill=color, font=fontCharName)
+
+		(x, y) = (130, 170)
+		REALMNAME = 'HELHEIM'
+		color = 'rgb(255, 255, 255)'
+		draw.text((x, y), REALMNAME, fill=color, font=fontRealmName)
+
+		arr = BytesIO()
+		bg_copy.save(arr, format='PNG')
+		arr.seek(0)
+		file = File(arr, f'''{charName}'s sig - Helheim.png''')
+
+		await ctx.send(file=file)
 
 	@command(name='nsig',
-			 aliases=['nsig'],
-			 description='Get a picture of your SMRO char',
-			 brief='Get a picture of your SMRO char')
+			 aliases=['nifsig'],
+			 description='Get a picture of your Shining Moon(Helheim) char',
+			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_nifsig(self, ctx, *, charName: str):
+		bg = Image.open('./data/images/sigbg/1.png')
+
 		linkName = charName.replace(' ', '%20')
-		URL = f'http://51.161.117.101/char/index.php/characternif/{linkName}'
+		spriteURL = f'http://51.161.117.101/char/index.php/characternif/{linkName}'
 
-		embed = Embed(title='Shining Moon - Helheim',
-					  description=f'Sprite for {charName}')
+		async with request("GET", spriteURL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
+			if response.status == 200:
+				sprBytes = await response.read()
+			else:
+				await ctx.send(f'Beep Boop\n{response.status} status')
 
-		embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-		embed.set_thumbnail(url='https://www.shining-moon.com/hel/themes/default/img/logo.gif')
-		embed.set_image(url=URL)
-		embed.set_footer(text='Nice char you got there', icon_url=ctx.guild.icon_url)
+		sprite = Image.open(BytesIO(sprBytes))
 
-		await ctx.send(embed=embed)
+		bg_copy = bg.copy()
+		bg_copy.paste(sprite, (0, 0), sprite.convert('RGBA'))
+		draw = ImageDraw.Draw(bg_copy)
+
+		fontCharName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular.ttf', "rb").read()), size=8)
+		fontRealmName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Bold.ttf', "rb").read()), size=6)
+
+		(x, y) = (130, 155)
+		CHARNAME = f'{charName}'
+		color = 'rgb(255, 255, 255)'
+		draw.text((x, y), CHARNAME, fill=color, font=fontCharName)
+
+		(x, y) = (130, 170)
+		REALMNAME = 'NIFLHEIM'
+		color = 'rgb(255, 255, 255)'
+		draw.text((x, y), REALMNAME, fill=color, font=fontRealmName)
+
+		arr = BytesIO()
+		bg_copy.save(arr, format='PNG')
+		arr.seek(0)
+		file = File(arr, f'''{charName}'s sig - Helheim.png''')
+
+		await ctx.send(file=file)
 
 
 	@Cog.listener()
