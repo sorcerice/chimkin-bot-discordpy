@@ -416,7 +416,7 @@ class Crawler(Cog):
 				await ctx.send(embed=embed)
 
 
-	@command(name='nsig',
+	@command(name='novasig',
 			 aliases=['poop'],
 			 description='Gives a dirty signature of your stinky noba character.',
 			 brief='Gives a dirty signature of your stinky noba character.')
@@ -428,13 +428,31 @@ class Crawler(Cog):
 
 		await ctx.send(URL)
 
-	@command(name='sig',
-			 aliases=['helsig'],
+	@command(name='hsig',
+			 aliases=['hsig'],
 			 description='Get a picture of your SMRO char',
 			 brief='Get a picture of your SMRO char')
 	async def get_helsig(self, ctx, *, charName: str):
 		linkName = charName.replace(' ', '%20')
 		URL = f'http://51.161.117.101/char/index.php/characterhel/{linkName}'
+
+		embed = Embed(title='Shining Moon - Helheim',
+					  description=f'Sprite for {charName}')
+
+		embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+		embed.set_thumbnail(url='https://www.shining-moon.com/hel/themes/default/img/logo.gif')
+		embed.set_image(url=URL)
+		embed.set_footer(text='Nice char you got there', icon_url=ctx.guild.icon_url)
+
+		await ctx.send(embed=embed)
+
+	@command(name='nsig',
+			 aliases=['nsig'],
+			 description='Get a picture of your SMRO char',
+			 brief='Get a picture of your SMRO char')
+	async def get_nifsig(self, ctx, *, charName: str):
+		linkName = charName.replace(' ', '%20')
+		URL = f'http://51.161.117.101/char/index.php/characternif/{linkName}'
 
 		embed = Embed(title='Shining Moon - Helheim',
 					  description=f'Sprite for {charName}')

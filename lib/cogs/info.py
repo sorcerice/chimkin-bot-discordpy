@@ -85,7 +85,7 @@ class Info(Cog):
 
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
 			embed.set_thumbnail(url='https://www.shining-moon.com/hel/themes/default/img/logo.gif')
-			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord', icon_url=ctx.guild.icon_url)
 
 			await ctx.send(embed=embed)
 
@@ -95,7 +95,7 @@ class Info(Cog):
 						colour=0x4dfc32)
 
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord', icon_url=ctx.guild.icon_url)
 
 			await ctx.send(embed=embed)
 
@@ -112,7 +112,7 @@ class Info(Cog):
 			embed.set_image(url='https://cdn.discordapp.com/attachments/605132888265981962/605135987890192393/unknown.png')
 
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord', icon_url=ctx.guild.icon_url)
 
 			await ctx.send(embed=embed)
 
@@ -121,7 +121,7 @@ class Info(Cog):
 						description='```193 ASPD = up to 7 attacks/sec\n192 ASPD = up to 6 attacks/sec\n190 ASPD = up to 5 attacks/sec\n188 ASPD = up to 4 attacks/sec```',
 						colour=0x4dfc32)
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord', icon_url=ctx.guild.icon_url)
 
 			await ctx.send(embed=embed)
 
@@ -130,7 +130,7 @@ class Info(Cog):
 						url='https://www.shining-moon.com/helheim/index.php/Lapine_Enchanting',
 						colour=0x4dfc32)
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-			embed.set_footer(text='This FAQ was stolen from SMRO discord <:pepefeelsevil:679339391985909772>', icon_url=ctx.guild.icon_url)
+			embed.set_footer(text='This FAQ was stolen from SMRO discord', icon_url=ctx.guild.icon_url)
 
 			await ctx.send(embed=embed)
 
