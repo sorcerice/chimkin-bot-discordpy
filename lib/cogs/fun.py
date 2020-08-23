@@ -241,6 +241,13 @@ class Fun(Cog):
 				await ctx.send(f"API returned a {response.status} status.")
 
 
+	@Cog.listener()
+	async def on_message(self, message):
+		if not message.author.bot:
+			if message.content.startswith('henyo'):
+				await message.channel.send(f'Henyo {message.author.mention}')
+				
+
 
 	@Cog.listener()
 	async def on_ready(self):

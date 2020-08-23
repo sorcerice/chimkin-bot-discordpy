@@ -2,12 +2,15 @@ from asyncio import sleep
 from datetime import datetime, timedelta
 from typing import Optional
 
+from better_profanity import profanity
 from discord import Embed, Member
 from discord.ext.commands import Cog, Greedy
 from discord.ext.commands import CheckFailure
 from discord.ext.commands import command, has_permissions, bot_has_permissions
 
 from ..db import db
+
+profanity.load_censor_words_from_file("./data/profanity.txt")
 
 class Mod(Cog):
 	def __init__(self, bot):
@@ -206,6 +209,46 @@ class Mod(Cog):
 
 		else:
 			await self.unmute(ctx.guild, targets, reason=reason)
+	@mute_members.error
+	async def unmute_members_error(self, ctx, exc):
+		if isinstance(exc, CheckFailure):
+			await ctx.send('Insufficient permissions to perform that task.')
+
+
+	@command(name='addbadword',
+			 aliases=['addswears', 'addcurses'],
+			 description='Provide a list of bad words for chimkin to get angy at',
+			 brief='Provide a list of bad words for chimkin to get angy at')
+	@has_permissions(manage_guild=True)
+	async def add_profanity(self, ctx, *words):
+		with open('./data/profanity.txt', 'a', encoding='utf-8') as f:
+			f.write(''.join([f'{w}\n' for w in words]))
+
+		profanity.load_censor_words_from_file('./data/profanity.txt')
+		await ctx.send('Words added to baddie file. Nyehehe! <:pepefeelsevil:679339391985909772>')
+	@add_profanity.error
+	async def add_profanity_error(self, ctx, exc):
+		if isinstance(exc, CheckFailure):
+			await ctx.send('Insufficient permissions to perform that task.')
+
+	@command(name='delswears',
+			 aliases=['delbadwords', 'delcurses'],
+			 description='Provide a list of bad words for chimkin to get angy at',
+			 brief='Provide a list of bad words for chimkin to get angy at')
+	@has_permissions(manage_guild=True)
+	async def remove_profanity(self, ctx, *words):
+		with open('./data/profanity.txt', 'r', encoding='utf-8') as f:
+			stored = [w.strip() for w in f.readlines()]
+
+		with open('./data/profanity.txt', 'w', encoding='utf-8') as f:
+			f.write(''.join([f'{w}\n' for w in stored if w not in words]))
+
+		profanity.load_censor_words_from_file('./data/profanity.txt')
+		await ctx.send('Words removed from baddie file <:sadkitty:633639713588379668>')
+	@add_profanity.error
+	async def unmute_members_error(self, ctx, exc):
+		if isinstance(exc, CheckFailure):
+			await ctx.send('Insufficient permissions to perform that task.')
 
 
 	@Cog.listener()
@@ -213,6 +256,16 @@ class Mod(Cog):
 		self.log_channel = self.bot.get_channel(739388066048770118)
 		self.mute_role = self.bot.guild.get_role(746577162273816636)
 		self.bot.cogs_ready.ready_up("mod")
+
+	@Cog.listener()
+	async def on_message(self, message):
+		if not message.author.bot:
+			if profanity.contains_profanity(message.content):
+				await message.add_reaction("🇸")
+				await message.add_reaction("🇹")
+				await message.add_reaction("🇴")
+				await message.add_reaction("🇵")
+				await message.add_reaction("<:pepeangry:599852722379816971>")
 
 
 def setup(bot):
