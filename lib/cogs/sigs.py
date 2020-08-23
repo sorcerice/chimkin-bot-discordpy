@@ -31,7 +31,8 @@ class Sigs(Cog):
 			 description='Get a picture of your Shining Moon(Helheim) char',
 			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_helsig(self, ctx, *, charName: str):
-		bg = Image.open('./data/images/sigbg/1.png')
+		bgchoice = randint(1,30)
+		bg = Image.open(f'./data/images/sigbg/{bgchoice}.png')
 
 		linkName = charName.replace(' ', '%20')
 		spriteURL = f'http://51.161.117.101/char/index.php/characterhel/{linkName}'
@@ -48,8 +49,8 @@ class Sigs(Cog):
 		bg_copy.paste(sprite, (0, 0), sprite.convert('RGBA'))
 		draw = ImageDraw.Draw(bg_copy)
 
-		fontCharName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Xtnd.ttf', "rb").read()), size=10)
-		fontRealmName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Bold.ttf', "rb").read()), size=7)
+		fontCharName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Bold.ttf', "rb").read()), size=8)
+		fontRealmName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular.ttf', "rb").read()), size=6)
 
 		(x, y) = (130, 155)
 		CHARNAME = f'{charName}'
@@ -73,7 +74,8 @@ class Sigs(Cog):
 			 description='Get a picture of your Shining Moon(Helheim) char',
 			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_nifsig(self, ctx, *, charName: str):
-		bg = Image.open('./data/images/sigbg/1.png')
+		bgchoice = randint(1,30)
+		bg = Image.open(f'./data/images/sigbg/{bgchoice}.png')
 
 		linkName = charName.replace(' ', '%20')
 		spriteURL = f'http://51.161.117.101/char/index.php/characternif/{linkName}'
@@ -90,8 +92,8 @@ class Sigs(Cog):
 		bg_copy.paste(sprite, (0, 0), sprite.convert('RGBA'))
 		draw = ImageDraw.Draw(bg_copy)
 
-		fontCharName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular.ttf', "rb").read()), size=8)
-		fontRealmName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Bold.ttf', "rb").read()), size=6)
+		fontCharName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Bold.ttf', "rb").read()), size=8)
+		fontRealmName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular.ttf', "rb").read()), size=6)
 
 		(x, y) = (130, 155)
 		CHARNAME = f'{charName}'
