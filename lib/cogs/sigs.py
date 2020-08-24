@@ -34,8 +34,10 @@ class Sigs(Cog):
 		bgchoice = randint(1,30)
 		bg = Image.open(f'./data/images/sigbg/{bgchoice}.png')
 
+		posNum = randint(0,5)
+
 		linkName = charName.replace(' ', '%20')
-		spriteURL = f'http://51.161.117.101/char/index.php/characterhel/{linkName}'
+		spriteURL = f'http://51.161.117.101/char/index.php/characterhel/{linkName}/{posNum}/7'
 
 		async with request("GET", spriteURL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
@@ -77,8 +79,10 @@ class Sigs(Cog):
 		bgchoice = randint(1,30)
 		bg = Image.open(f'./data/images/sigbg/{bgchoice}.png')
 
+		posNum = randint(0,5)
+
 		linkName = charName.replace(' ', '%20')
-		spriteURL = f'http://51.161.117.101/char/index.php/characternif/{linkName}'
+		spriteURL = f'http://51.161.117.101/char/index.php/characternif/{linkName}/{posNum}/7'
 
 		async with request("GET", spriteURL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
