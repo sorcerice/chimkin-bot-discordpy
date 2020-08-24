@@ -31,7 +31,7 @@ class Sigs(Cog):
 			 description='Get a picture of your Shining Moon(Helheim) char',
 			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_helsig(self, ctx, *, charName: str):
-		bgchoice = randint(1,30)
+		bgchoice = randint(1,51)
 		bg = Image.open(f'./data/images/sigbg/{bgchoice}.png')
 
 		posNum = randint(0,5)
@@ -76,7 +76,7 @@ class Sigs(Cog):
 			 description='Get a picture of your Shining Moon(Helheim) char',
 			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_nifsig(self, ctx, *, charName: str):
-		bgchoice = randint(1,30)
+		bgchoice = randint(1,51)
 		bg = Image.open(f'./data/images/sigbg/{bgchoice}.png')
 
 		posNum = randint(0,5)

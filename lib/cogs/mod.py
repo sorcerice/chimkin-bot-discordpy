@@ -118,8 +118,8 @@ class Mod(Cog):
 
 
 	@command(name='mute',
-			 description='Used to mute people who are spamming.',
-			 brief='Used to mute people who are spamming.')
+			 description='Used to mute people.',
+			 brief='Used to mute people.')
 	@bot_has_permissions(manage_roles=True)
 	@has_permissions(manage_roles=True, manage_guild=True)
 	async def mute_members(self, ctx, targets: Greedy[Member], secs: Optional[int], *,

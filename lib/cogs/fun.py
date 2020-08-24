@@ -10,10 +10,9 @@ from discord import File
 from discord.ext import commands, tasks
 from discord.ext.commands import Cog, BucketType
 from discord.ext.commands import BadArgument
-from discord.ext.commands import command, cooldown
+from discord.ext.commands import command, cooldown, bot_has_role, BotMissingRole
 
 from bs4 import BeautifulSoup
-import re
 
 
 class Fun(Cog):
@@ -46,6 +45,7 @@ class Fun(Cog):
 			 aliases=["predict", "foresee", "noodleme"],
 			 brief="Ask Chimkin yes or no questions",
 			 description="Ask Chimkin yes or no questions")
+	@bot_has_role(286937446611156992)
 	async def _8ball(self, ctx, *, question):
 		responses = ['Awie council says yes.',
 					 'Council of eggs says yes.',
@@ -95,6 +95,7 @@ class Fun(Cog):
 	@command(name="slap",
 			 brief="Makes you slap someone",
 			 description="Makes you slap someone")
+	@bot_has_role(286937446611156992)
 	@cooldown(5, 10, BucketType.user)
 	async def slap_member(self, ctx, member:Member, *, reason: Optional[str] = "for no reason"):
 		await ctx.send(f"{ctx.author.display_name} slapped {member.mention} {reason}")
@@ -110,6 +111,7 @@ class Fun(Cog):
 			 aliases=["echo", "repeat"],
 			 brief="Chimkin repeats anything you want to say",
 			 description="Chimkin repeats anything you want to say")
+	@bot_has_role(286937446611156992)
 	@cooldown(5, 60, BucketType.user)
 	async def echo_message(self, ctx, *, message):
 		await ctx.message.delete()
@@ -157,6 +159,7 @@ class Fun(Cog):
 	@command(name='roast',
 		 brief='Roast someone',
 		 description='Roast someone')
+	@bot_has_role(286937446611156992)
 	# @cooldown(1, 20, BucketType.user)
 	async def roast_command(self, ctx):
 		URL = f'https://evilinsult.com/generate_insult.php?lang=en&type=text'
@@ -179,6 +182,7 @@ class Fun(Cog):
 	@command(name='meme',
 			 brief='Shows a random meme Sora stole from somewhere',
 			 description='Shows a random meme Sora stole from somewhere')
+	@bot_has_role(286937446611156992)
 	# @cooldown(3, 30, BucketType.guild)
 	async def pull_meme(self, ctx):
 		img = choice(glob('./data/smemes/*.jpg'))
@@ -247,7 +251,7 @@ class Fun(Cog):
 			if message.content.startswith('henyo'):
 				await message.channel.send(f'Henyo {message.author.mention}')
 				
-
+				
 
 	@Cog.listener()
 	async def on_ready(self):

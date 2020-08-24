@@ -10,7 +10,7 @@ from discord.errors import HTTPException, Forbidden
 from discord.ext.commands import Bot as BotBase
 from discord.ext.commands import Context
 from discord.ext.commands import (CommandNotFound, BadArgument, MissingRequiredArgument,
-								  CommandOnCooldown)
+								  CommandOnCooldown, BotMissingRole)
 from apscheduler.triggers.cron import CronTrigger
 from discord.ext.commands import when_mentioned_or, command, has_permissions
 
@@ -18,7 +18,7 @@ from ..db import db
 
 OWNER_IDS = [611941774373683210, 218807000115445760]
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
-IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument)
+IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument, BotMissingRole)
 
 
 def get_prefix(bot, message):
@@ -124,7 +124,7 @@ class Bot(BotBase):
 			self.smch = self.get_channel(642347588107894815)
 			self.scheduler.start()
 
-			await self.smch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
+			# await self.smch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
 
 			# embed = Embed(title="Nyes, it is I, teh mighty Chimkin", description="This isn't even my final form",
 			# 			  colour=0xFF0000, timestamp=datetime.utcnow())
