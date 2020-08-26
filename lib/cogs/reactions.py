@@ -25,8 +25,8 @@ class Reactions(Cog):
 	async def on_ready(self):
 		if not self.bot.ready:
 			self.roles = {
-				"⭐": self.bot.guild.get_role(685137322727047189),	# Casual
-				"🌙": self.bot.guild.get_role(646817958537986063),	# Adventure
+				"⭐": self.bot.butter.get_role(685137322727047189),	# Casual
+				"🌙": self.bot.butter.get_role(646817958537986063),	# Adventure
 			}
 			self.reaction_message = await self.bot.get_channel(714141581308985414).fetch_message(740458093615382538)
 			self.starboard_channel = self.bot.get_channel(714141581308985414)

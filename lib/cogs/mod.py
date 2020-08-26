@@ -1,5 +1,6 @@
 from asyncio import sleep
 from datetime import datetime, timedelta
+from re import search
 from typing import Optional
 
 from better_profanity import profanity
@@ -254,7 +255,7 @@ class Mod(Cog):
 	@Cog.listener()
 	async def on_ready(self):
 		self.log_channel = self.bot.get_channel(739388066048770118)
-		self.mute_role = self.bot.guild.get_role(746577162273816636)
+		self.mute_role = self.bot.butter.get_role(746577162273816636)
 		self.bot.cogs_ready.ready_up("mod")
 
 	@Cog.listener()
@@ -266,6 +267,8 @@ class Mod(Cog):
 				await message.add_reaction("🇴")
 				await message.add_reaction("🇵")
 				await message.add_reaction("<:pepeangry:599852722379816971>")
+				await sleep(5)
+				await message.clear_reactions()
 
 
 def setup(bot):

@@ -119,6 +119,8 @@ class Fun(Cog):
 			await ctx.send("NO U <:peepogiggle:633637995865571328>")
 		elif message == "An error occured":
 			await ctx.send("How about no?")
+		elif message.startswith("/tts"):
+			await ctx.send("I don't think so buster")
 		else:
 			await ctx.message.delete()
 			await ctx.send(message)
