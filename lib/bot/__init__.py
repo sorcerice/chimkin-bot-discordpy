@@ -6,7 +6,7 @@ import discord
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from discord import Embed, File, DMChannel
-from discord.errors import HTTPException, Forbidden
+from discord.errors import HTTPException, Forbidden, NotFound
 from discord.ext.commands import Bot as BotBase
 from discord.ext.commands import Context
 from discord.ext.commands import (CommandNotFound, BadArgument, MissingRequiredArgument,
@@ -18,7 +18,7 @@ from ..db import db
 
 OWNER_IDS = [611941774373683210, 218807000115445760]
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
-IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument, BotMissingRole)
+IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument, BotMissingRole, NotFound, HTTPException)
 
 
 def get_prefix(bot, message):

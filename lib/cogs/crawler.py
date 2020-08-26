@@ -68,7 +68,7 @@ class Crawler(Cog):
 			 description='Provides item info from SMRO')
 	async def item_search(self, ctx, itemID: int):
 		spriteURL = f'https://www.shining-moon.com/hel/data/items/images/{itemID}.png'
-		URL = f'https://www.shining-moon.com/?module=item&action=view&id={itemID}'
+		URL = f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}'
 		async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
 				page = await response.read()

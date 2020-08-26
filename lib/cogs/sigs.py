@@ -116,6 +116,15 @@ class Sigs(Cog):
 
 		await ctx.send(file=file)
 
+	@command(name="navatar",
+			 aliases=["niftar"],
+			 description="Creates avatar for Niflheim character",
+			 brief="Creates avatar for Niflheim character")
+	async def get_nif_avatar(self, ctx, *, charName: str):
+		linkName = charName.replace(' ', '%20')
+		URL = f"http://51.161.117.101/char/index.php/avatar/{linkName}"
+		await ctx.send(URL)
+
 
 	@Cog.listener()
 	async def on_ready(self):

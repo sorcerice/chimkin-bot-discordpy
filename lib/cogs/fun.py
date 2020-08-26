@@ -3,6 +3,7 @@ from random import choice, randint
 from typing import Optional
 from itertools import cycle
 from glob import glob
+import re
 
 from aiohttp import request
 from discord import Member, Embed
@@ -114,8 +115,13 @@ class Fun(Cog):
 	@bot_has_role(286937446611156992)
 	@cooldown(5, 60, BucketType.user)
 	async def echo_message(self, ctx, *, message):
-		await ctx.message.delete()
-		await ctx.send(message)
+		if message == "Sora's code fucked up":
+			await ctx.send("NO U <:peepogiggle:633637995865571328>")
+		elif message == "An error occured":
+			await ctx.send("How about no?")
+		else:
+			await ctx.message.delete()
+			await ctx.send(message)
 
 
 
