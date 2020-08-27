@@ -31,45 +31,27 @@ class Sigs(Cog):
 			 description='Get a picture of your Shining Moon(Helheim) char',
 			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_helsig(self, ctx, *, charName: str):
-		bgchoice = randint(1,51)
-		bg = Image.open(f'./data/images/sigbg/{bgchoice}.png')
-
-		posNum = randint(0,5)
-
 		linkName = charName.replace(' ', '%20')
-		spriteURL = f'http://51.161.117.101/char/index.php/characterhel/{linkName}/{posNum}/7'
+		sigURL = f'http://51.161.117.101/char/index.php/helsig/{linkName}'
 
-		async with request("GET", spriteURL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
+		async with request("GET", sigURL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
-				sprBytes = await response.read()
+				sigBytes = await response.read()
 			else:
 				await ctx.send(f'Beep Boop\n{response.status} status')
+		try:
+			sig = Image.open(BytesIO(sigBytes))
 
-		sprite = Image.open(BytesIO(sprBytes))
+			arr = BytesIO()
+			sig.save(arr, format='PNG')
+			arr.seek(0)
 
-		bg_copy = bg.copy()
-		bg_copy.paste(sprite, (0, 0), sprite.convert('RGBA'))
-		draw = ImageDraw.Draw(bg_copy)
+			file = File(arr, f'{charName} - Helheim.png')
 
-		fontCharName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Bold.ttf', "rb").read()), size=8)
-		fontRealmName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular.ttf', "rb").read()), size=6)
-
-		(x, y) = (130, 155)
-		CHARNAME = f'{charName}'
-		color = 'rgb(255, 255, 255)'
-		draw.text((x, y), CHARNAME, fill=color, font=fontCharName)
-
-		(x, y) = (130, 170)
-		REALMNAME = 'HELHEIM'
-		color = 'rgb(255, 255, 255)'
-		draw.text((x, y), REALMNAME, fill=color, font=fontRealmName)
-
-		arr = BytesIO()
-		bg_copy.save(arr, format='PNG')
-		arr.seek(0)
-		file = File(arr, f'''{charName}'s sig - Helheim.png''')
-
-		await ctx.send(file=file)
+			await ctx.send(file=file)
+		except Exception as err:
+			exception_type = type(err).__name__
+			await ctx.send(exception_type)
 
 	@command(name='nsig',
 			 aliases=['nifsig'],
@@ -77,14 +59,12 @@ class Sigs(Cog):
 			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_nifsig(self, ctx, *, charName: str):
 		bgchoice = randint(1,51)
-		bg = Image.open(f'./data/images/sigbg/{bgchoice}.png')
 
 		posNum = randint(0,5)
-
 		linkName = charName.replace(' ', '%20')
 		spriteURL = f'http://51.161.117.101/char/index.php/characternif/{linkName}/{posNum}/7'
+		sigURL = f'http://51.161.117.101/char/index.php/nifsig/{linkName}'
 
-		async with request("GET", spriteURL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
 				sprBytes = await response.read()
 			else:
@@ -92,29 +72,18 @@ class Sigs(Cog):
 
 		sprite = Image.open(BytesIO(sprBytes))
 
-		bg_copy = bg.copy()
 		bg_copy.paste(sprite, (0, 0), sprite.convert('RGBA'))
 		draw = ImageDraw.Draw(bg_copy)
+			arr = BytesIO()
+			sig.save(arr, format='PNG')
+			arr.seek(0)
 
-		fontCharName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular_Bold.ttf', "rb").read()), size=8)
-		fontRealmName = ImageFont.truetype(font=BytesIO(open('./data/fonts/Kyrou_9_Regular.ttf', "rb").read()), size=6)
+			file = File(arr, f'{charName} - Niflheim.png')
 
-		(x, y) = (130, 155)
-		CHARNAME = f'{charName}'
-		color = 'rgb(255, 255, 255)'
-		draw.text((x, y), CHARNAME, fill=color, font=fontCharName)
-
-		(x, y) = (130, 170)
-		REALMNAME = 'NIFLHEIM'
-		color = 'rgb(255, 255, 255)'
-		draw.text((x, y), REALMNAME, fill=color, font=fontRealmName)
-
-		arr = BytesIO()
-		bg_copy.save(arr, format='PNG')
-		arr.seek(0)
-		file = File(arr, f'''{charName}'s sig - Helheim.png''')
-
-		await ctx.send(file=file)
+			await ctx.send(file=file)
+		except Exception as err:
+			exception_type = type(err).__name__
+			await ctx.send(exception_type)
 
 	@command(name="navatar",
 			 aliases=["niftar"],

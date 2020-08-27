@@ -10,7 +10,7 @@ from discord.errors import HTTPException, Forbidden, NotFound
 from discord.ext.commands import Bot as BotBase
 from discord.ext.commands import Context
 from discord.ext.commands import (CommandNotFound, BadArgument, MissingRequiredArgument,
-								  CommandOnCooldown, BotMissingRole)
+								  CommandOnCooldown, BotMissingRole, MissingPermissions)
 from apscheduler.triggers.cron import CronTrigger
 from discord.ext.commands import when_mentioned_or, command, has_permissions
 
@@ -18,7 +18,7 @@ from ..db import db
 
 OWNER_IDS = [611941774373683210, 218807000115445760]
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
-IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument, BotMissingRole, NotFound, HTTPException)
+IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument, BotMissingRole, NotFound, HTTPException, MissingPermissions)
 
 
 def get_prefix(bot, message):
@@ -131,10 +131,10 @@ class Bot(BotBase):
 			self.test = self.get_guild(727488027391426652)
 			self.testch = self.get_channel(734998277828771880)
 
-			await self.butterch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
-			await self.smch.send("I am online! Rejoice citizens of Shining Moon!")
-			await self.royalsch.send("I am now awake and here to service the followers of Zill!")
-			await self.testch.send("Chimkin is now online!")
+			# await self.butterch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
+			# await self.smch.send("I am online! Rejoice citizens of Shining Moon!")
+			# await self.royalsch.send("I am now awake and here to service the followers of Zill!")
+			# await self.testch.send("Chimkin is now online!")
 
 			# embed = Embed(title="Nyes, it is I, teh mighty Chimkin", description="This isn't even my final form",
 			# 			  colour=0xFF0000, timestamp=datetime.utcnow())
@@ -170,7 +170,7 @@ class Bot(BotBase):
 					await message.channel.send("Your message should be atleast 50 characters in length.")
 
 				else:
-					member = self.guild.get_member(message.author.id)
+					member = self.butter.get_member(message.author.id)
 					embed = Embed(title=f'''{member.display_name} slid into Chimkin's DMs''',
 								  colour=member.colour,
 								  timestamp=datetime.utcnow())
