@@ -58,22 +58,17 @@ class Sigs(Cog):
 			 description='Get a picture of your Shining Moon(Helheim) char',
 			 brief='Get a picture of your Shining Moon(Helheim) char')
 	async def get_nifsig(self, ctx, *, charName: str):
-		bgchoice = randint(1,51)
-
-		posNum = randint(0,5)
 		linkName = charName.replace(' ', '%20')
-		spriteURL = f'http://51.161.117.101/char/index.php/characternif/{linkName}/{posNum}/7'
 		sigURL = f'http://51.161.117.101/char/index.php/nifsig/{linkName}'
 
+		async with request("GET", sigURL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
-				sprBytes = await response.read()
+				sigBytes = await response.read()
 			else:
 				await ctx.send(f'Beep Boop\n{response.status} status')
+		try:
+			sig = Image.open(BytesIO(sigBytes))
 
-		sprite = Image.open(BytesIO(sprBytes))
-
-		bg_copy.paste(sprite, (0, 0), sprite.convert('RGBA'))
-		draw = ImageDraw.Draw(bg_copy)
 			arr = BytesIO()
 			sig.save(arr, format='PNG')
 			arr.seek(0)

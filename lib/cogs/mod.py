@@ -269,7 +269,7 @@ class Mod(Cog):
 				unmutes = await self.mute_members(message, [message.author], 3600, reason="Spam tagging people")
 
 				if len(unmutes):
-					await sleep(secs)
+					await sleep(3600)
 					await self.unmute_members(message.guild, [message.author])
 
 			elif profanity.contains_profanity(message.content):
