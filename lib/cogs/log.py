@@ -65,7 +65,7 @@ class Log(Cog):
 	@Cog.listener()
 	async def on_member_update(self, before, after):
 		if before.display_name != after.display_name:
-			embed = Embed(title="Nickname Change",
+			embed = Embed(title=f"Nickname Change **({after.guild.name})**",
 						  colour=after.colour,
 						  timestamp=datetime.utcnow())
 
@@ -78,8 +78,8 @@ class Log(Cog):
 			await self.log_channel.send(embed=embed)
 
 		elif before.roles != after.roles:
-			embed = Embed(title="Role updates",
-						  description=f"***{after.display_name}'s*** role was updated",
+			embed = Embed(title=f"Role updates **({after.guild.name})**",
+						  description=f"**{after.display_name}'s** role was updated",
 						  colour=after.colour,
 						  timestamp=datetime.utcnow())
 
@@ -97,8 +97,8 @@ class Log(Cog):
 	async def on_message_edit(self, before, after):
 		if not after.author.bot:
 			if before.content != after.content:
-				embed = Embed(title="Message Edit",
-							  description=f"Edit by {after.author.display_name}",
+				embed = Embed(title=f"Message Edit **({after.guild.name})**",
+							  description=f"Edit by **{after.author.display_name}**",
 							  colour=after.author.colour,
 							  timestamp=datetime.utcnow())
 
@@ -115,8 +115,8 @@ class Log(Cog):
 	@Cog.listener()
 	async def on_message_delete(self, message):
 		if not message.author.bot:
-			embed = Embed(title="Message Deletions",
-						  description=f"Deleted by {message.author.display_name}",
+			embed = Embed(title=f"Message Deletions **({message.guild.name})**",
+						  description=f"Deleted by **{message.author.display_name}***",
 						  colour=message.author.colour,
 						  timestamp=datetime.utcnow())
 

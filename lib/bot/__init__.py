@@ -131,10 +131,10 @@ class Bot(BotBase):
 			self.test = self.get_guild(727488027391426652)
 			self.testch = self.get_channel(734998277828771880)
 
-			# await self.butterch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
-			# await self.smch.send("I am online! Rejoice citizens of Shining Moon!")
-			# await self.royalsch.send("I am now awake and here to service the followers of Zill!")
-			# await self.testch.send("Chimkin is now online!")
+			await self.butterch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
+			await self.smch.send("I am online! Rejoice citizens of Shining Moon!")
+			await self.royalsch.send("I am now awake and here to service the followers of Zill!")
+			await self.testch.send("Chimkin is now online!")
 
 			# embed = Embed(title="Nyes, it is I, teh mighty Chimkin", description="This isn't even my final form",
 			# 			  colour=0xFF0000, timestamp=datetime.utcnow())
