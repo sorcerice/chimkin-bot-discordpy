@@ -21,27 +21,6 @@ class Fun(Cog):
 		self.bot = bot
 
 
-	@command(name="henyo",
-			 aliases=["hi", "hello"],
-			 brief="Say henyo to Chimkin",
-			 description="Say henyo to Chimkin")
-	async def say_hello(self, ctx):
-		await ctx.send(f"Henyo {ctx.author.mention}!")
-
-
-	@command(name="ping",
-			 aliases=["peng", "pingy"],
-			 brief="Chimkin's ping",
-			 description="Chimkin's ping")
-	async def ping(self, ctx):
-		start = d.timestamp(d.now()) #gets the timestamp of when the command was used
-
-		msg = await ctx.send("Pinging")
-		#grabs previous start and subtracts from current time to provide the ping
-		await msg.edit(content=f"Pong! {round((d.timestamp(d.now()) - start)*1000)}ms")
-		return
-
-
 	@command(name="8ball",
 			 aliases=["predict", "foresee", "noodleme"],
 			 brief="Ask Chimkin yes or no questions",
@@ -256,7 +235,7 @@ class Fun(Cog):
 	@Cog.listener()
 	async def on_message(self, message):
 		if not message.author.bot:
-			if message.content.startswith('henyo'):
+			if message.content.startswith('Henyo'):
 				await message.channel.send(f'Henyo {message.author.mention}')
 				
 				
