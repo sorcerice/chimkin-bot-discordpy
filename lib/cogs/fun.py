@@ -112,34 +112,21 @@ class Fun(Cog):
 			 description='''Has random facts and images of cats, dogs, pandas, foxes, birds and koalas''')
 	@cooldown(5, 20, BucketType.user)
 	async def animal_fact(self, ctx, animal: str):
-		if (animal := animal.lower()) in ("dog", "cat", "panda", "fox", "bird", "koala"):
-			fact_url = f"https://some-random-api.ml/facts/{animal}"
-			image_url = f"https://some-random-api.ml/img/{'birb' if animal == 'bird' else animal}"
+		fact_url = f"https://some-random-api.ml/animal/{animal}"
 
-			async with request("GET", image_url, headers={}) as response:
-				if response.status == 200:
-					data = await response.json()
-					image_link = data["link"]
+		async with request("GET", fact_url, headers={}) as response:
+			if response.status == 200:
+				data = await response.json()
 
-				else:
-					image_link = None
+				embed = Embed(title=f"{animal.title()} fact",
+							  description=data["fact"],
+							  colour=ctx.author.colour)
+				embed.set_image(url=data["image"])
+				await ctx.send(embed=embed)
 
-			async with request("GET", fact_url, headers={}) as response:
-				if response.status == 200:
-					data = await response.json()
-
-					embed = Embed(title=f"{animal.title()} fact",
-								  description=data["fact"],
-								  colour=ctx.author.colour)
-					if image_link is not None:
-						embed.set_image(url=image_link)
-					await ctx.send(embed=embed)
-
-				else:
-					await ctx.send(f"API returned a {response.status} status.")
-
-		else:
-			await ctx.send("No facts are available for that animal.")
+			else:
+				await ctx.send(f'''No facts are available for that animal.
+								\nKnown animals: dog, cat, panda, fox, birb, koala, kangaroo, racoon, red_panda''')
 
 
 
@@ -230,6 +217,33 @@ class Fun(Cog):
 				await ctx.send(embed=embed)
 			else:
 				await ctx.send(f"API returned a {response.status} status.")
+
+	@command(name="choose",
+			 aliases=["decide"],
+			 description="Need help choosing between things? Ask Chimkin!",
+			 brief="Need help choosing between things? Ask Chimkin!")
+	async def choose_command(self, ctx, *, options: str):
+		randomOption = options.split()
+
+		await ctx.send(f"Chimkin chooses :{choice(randomOption)}") 
+
+	@command(name="chat",
+			 aliases=["c"],
+			 description="Chat with Chimkin",
+			 brief="Chat with Chimkin")
+	async def chat_command(self, ctx, *, message: str):
+		spaceReplacedMessage = message.replace(" ", "%20")
+		replyLink = f"https://some-random-api.ml/chatbot/?message={spaceReplacedMessage}"
+
+		async with request("GET", replyLink, headers={}) as response:
+			if response.status == 200:
+				data = await response.json()
+
+				reply = data["response"]
+
+				await ctx.send(reply)
+			else:
+				await ctx.send(f"{ctx.author.mention}, I'm sorry.\nI think I might be broken for a while.")
 
 
 	@Cog.listener()

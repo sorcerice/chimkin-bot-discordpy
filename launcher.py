@@ -1,5 +1,5 @@
 from lib.bot import bot
 
-VERSION = "0.0.26" #setting activities, stats and shutting down bot
+VERSION = "0.1.0" #added .chat/.c
 
 bot.run(VERSION)
