@@ -263,7 +263,7 @@ class Mod(Cog):
 					and len(m.mentions)
 					and (datetime.utcnow()-m.created_at).seconds < 60)
 
-		if not message.author.bot:
+		if not message.author.bot and message.guild.id == 228966491628765185:
 			if len(list(filter(lambda m: _check(m), self.bot.cached_messages))) >= 3:
 				await message.channel.send(f"Lol! {message.author.mention} got muted for 420s <:kekw:675005062938099722>", delete_after=60)
 				unmutes = await self.mute_members(message, [message.author], 420, reason="Spam tagging people")

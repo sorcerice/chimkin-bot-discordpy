@@ -1,5 +1,5 @@
 from lib.bot import bot
 
-VERSION = "0.1.0" #added .chat/.c
+VERSION = "0.1.0a" #added .lyrics command
 
 bot.run(VERSION)

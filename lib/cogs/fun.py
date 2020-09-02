@@ -246,6 +246,35 @@ class Fun(Cog):
 				await ctx.send(f"{ctx.author.mention}, I'm sorry.\nI think I might be broken for a while.")
 
 
+	@command(name="lyrics",
+			 description="Gets lyrics if you give a song and title",
+			 brief="Gives lyrics if you give a song and title")
+	async def get_lyrics(self, ctx, *, query: str):
+		spaceReplacedQuery = query.replace(" ", "%20")
+		lyricsLink = f"https://some-random-api.ml/lyrics/?title={spaceReplacedQuery}"
+		async with request("GET", lyricsLink, headers={}) as response:
+			if response.status == 200:
+				data = await response.json()
+
+				thumbnail = data["thumbnail"]["genius"]
+				link = data["links"]["genius"]
+
+				author = data["author"]
+				title = data["title"]
+
+				embed = Embed(title=f"{author} - {title}",
+							  description=data["lyrics"],
+							  url=link)
+				embed.set_thumbnail(url=thumbnail)
+				embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+				embed.set_footer(text="Such lyrics! Such Moods!", icon_url=ctx.guild.icon_url)
+
+				await ctx.send(embed=embed)
+			else:
+				await ctx.send(f"{ctx.author.mention}, something went wrong!")
+
+
+
 	@Cog.listener()
 	async def on_message(self, message):
 		if not message.author.bot:
