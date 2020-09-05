@@ -283,6 +283,37 @@ class Crawler(Cog):
 					embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
 					embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
 					await ctx.send(embed=embed)
+				except IndexError:
+					grabName = soup.find_all('table', class_='vertical-table')[1].find('tbody').find_all('tr')[index].find_all('td')[1]
+					grabEnchants = soup.find_all('table', class_='vertical-table')[1].find('tbody').find_all('tr')[index].find('ul')
+					grabCard1 = soup.find_all('table', class_='vertical-table')[1].find('tbody').find_all('tr')[index].find_all('td')[2]
+					grabCard2 = soup.find_all('table', class_='vertical-table')[1].find('tbody').find_all('tr')[index].find_all('td')[3]
+					grabCard3 = soup.find_all('table', class_='vertical-table')[1].find('tbody').find_all('tr')[index].find_all('td')[4]
+					grabCard4 = soup.find_all('table', class_='vertical-table')[1].find('tbody').find_all('tr')[index].find_all('td')[5]
+					
+					try:
+						i = 0
+						strEnchants = ''
+						for enchants in grabEnchants:
+							enchant = grabEnchants.find_all('li')[i]
+							enchants = enchant.text.strip()
+							strEnchants += str(enchants) + '\n'
+							i += 1
+					except TypeError:
+						strEnchants = 'No random enchants'
+
+					embed = Embed(title='Cards and Enchants from Vending History',
+								  description=f'```{grabName.text.strip()}```',
+								  colour=ctx.author.colour)
+					embed.add_field(name='Enchants', value=f'```{strEnchants}```')
+					embed.add_field(name='Card 1', value=f'```{grabCard1.text.strip()}```', inline=False)
+					embed.add_field(name='Card 2', value=f'```{grabCard2.text.strip()}```', inline=False)
+					embed.add_field(name='Card 3', value=f'```{grabCard3.text.strip()}```', inline=False)
+					embed.add_field(name='Card 4', value=f'```{grabCard4.text.strip()}```', inline=False)
+					embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+					embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
+					await ctx.send(embed=embed)
+
 				except AttributeError:
 					await ctx.send('There is likely no enchants for that item')
 			else:
@@ -305,12 +336,19 @@ class Crawler(Cog):
 				try:
 					dfs = pd.read_html(page)
 					df1 = dfs[3][['Date ▼', 'Price', 'Amount Sold']]
-				except (IndexError, ValueError):
+				except (IndexError, ValueError, KeyError):
 					try:
 						dfs = pd.read_html(page)
 						df1 = dfs[2][['Date ▼', 'Price', 'Amount Sold']]
-					except (ValueError, IndexError):
-						await ctx.send('Item was probably never on sale.')
+					except IndexError:
+						dfs = pd.read_html(page)
+						df1 = dfs[1][['Date ▼', 'Price', 'Amount Sold']]
+					except KeyError:
+						try:
+							dfs = pd.read_html(page)
+							df1 = dfs[4][['Date ▼', 'Price', 'Amount Sold']]						
+						except (ValueError, IndexError):
+							await ctx.send('Item was probably never on sale.')
 				try:
 					embed = Embed(title='Awie Market(Click here to go this page)',
 								  description=f"```{df1}```",

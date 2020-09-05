@@ -65,31 +65,6 @@ class Reactions(Cog):
 									   args=[message.channel.id, message.id])
 
 
-
-	@command(name='giveaway',
-			 desciption='Usage: .giveaway <time limit in seconds for> <Title of giveaway>',
-			 brief='Usage: .giveaway <time limit in seconds for> <Title of giveaway>')
-	# @has_permissions(manage_guild=True)
-	async def create_giveaway(self, ctx, secs: int, *, description: str):
-		embed = Embed(title='Giveaway',
-					  description=description,
-					  colour=ctx.author.colour,
-					  timestamp=datetime.utcnow())
-
-		fields=[('End time', f'{datetime.utcnow()+timedelta(seconds=secs*60)} UTC', False)]
-		for name, value, inline in fields:
-			embed.add_field(name=name, value=value, inline=inline)
-
-		message = await ctx.send(embed=embed)
-		await message.add_reaction('✅')
-
-		self.giveaways.append((message.channel.id, message.id))
-
-		self.bot.scheduler.add_job(self.complete_giveaway, "date", run_date=datetime.now()+timedelta(seconds=secs),
-								   args=[message.channel.id, message.id])
-
-
-
 	async def complete_poll(self, channel_id, message_id):
 		message = await self.bot.get_channel(channel_id).fetch_message(message_id)
 
@@ -99,21 +74,6 @@ class Reactions(Cog):
 									\nNyes, results are in and option **{most_voted.emoji}** was the most popular with **{most_voted.count-1}** votes <:detectivepeepo:713457722221396072>
 									\nTook me ages to count the votes <:tiredcat:707960228960010270>''')
 		self.polls.remove((message.channel.id, message.id))
-
-
-
-	async def complete_giveaway(self, channel_id, message_id):
-		message = await self.bot.get_channel(channel_id).fetch_message(message_id)
-
-		if len((entrants := [u for u in await message.reactions[0].users().flatten() if not u.bot])) > 0:
-			winner = choice(entrants)
-			await message.channel.send(f'🥳 Congratulations 🎉**{winner.mention}**🎉 - you won the giveaway!🥳')
-			self.giveaways.remove((message.channel.id, message.id))
-
-		else:
-			await message.channel.send(f'Giveaway ended - No one entered.... <:peeposad:633637989611864074>')
-			self.giveaways.remove((message.channel.id, message.id))
-
 
 
 	@Cog.listener()
@@ -137,7 +97,7 @@ class Reactions(Cog):
 
 		# 		fields = [("Author", message.author.mention, False),
 		# 				  ("Content", message.content or "See attachment", False),
-		# 				  ("Stars", stars+1, False)]
+		# 				  ("Keks", stars+1, False)]
 
 		# 		for name, value, inline in fields:
 		# 			embed.add_field(name=name, value=value, inline=inline)
