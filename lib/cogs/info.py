@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from discord import Embed, Member
+from discord import Embed, Member, File
 from discord.ext.commands import Cog
 from discord.ext.commands import command
 
@@ -137,8 +137,11 @@ class Info(Cog):
 		elif faq_tag == 'resolution':
 			await ctx.send(f'{ctx.author.mention}\n**Having resolution problems?**\nCheck this link out:\nhttps://www.shining-moon.com/w/index.php/Resolution')
 
+		elif faq_tag == 'boostermaps':
+			await ctx.send(content="Credits to @Tom#3331 and @Melon Bun#1508",file=File("./data/faq/boostermaps.png", filename="Booster Maps.png"))
+
 		else:
-			await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution')
+			await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps')
 
 
 
