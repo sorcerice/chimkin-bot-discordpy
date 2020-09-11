@@ -6,6 +6,7 @@ from discord.ext.commands import Cog
 from discord.ext.commands import command
 from discord.errors import HTTPException
 
+from libneko import pag
 from bs4 import BeautifulSoup
 from aiohttp import request
 import pandas as pd
@@ -71,11 +72,11 @@ class Crawler(Cog):
 		URL = f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}'
 		async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
 			if response.status == 200:
-				page = await response.read()
+				html = await response.read()
 			else:
 				await ctx.send(f'Beep Boop\n{response.status} status')
 
-		soup = BeautifulSoup(page.decode('utf-8'), 'lxml')
+		soup = BeautifulSoup(html.decode('utf-8'), 'lxml')
 
 		table = soup.find_all('table', class_='vertical-table')[0]
 
@@ -84,17 +85,23 @@ class Crawler(Cog):
 
 		dDiv = soup.find_all('div', class_='inner')[0]
 		dTable = dDiv.find('table')
+		descString = dTable.text.strip()
 
-		embed = Embed(title='Click here to go this page',
-					  colour=ctx.author.colour,
-					  url=URL)
-		embed.add_field(name = '----', value = f'**{name.text.strip()}**', inline=False)
-		embed.add_field(name = '----', value = f'{dTable.text.strip()}', inline=False)
-		embed.set_thumbnail(url=spriteURL)
-		embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-		embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
+		@pag.embed_generator(max_chars=2048)
+		def cooler_embed(paginator, page, page_index):
+			embed = Embed(title=f'**{name.text.strip()}**',
+						  description=page,
+						  colour=ctx.author.colour,
+						  url=URL)
+			embed.set_thumbnail(url=spriteURL)
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
+			return embed
 
-		await ctx.send(embed=embed)
+		nav = pag.EmbedNavigatorFactory(factory=cooler_embed, max_lines=20)
+		nav += descString
+
+		nav.start(ctx)
 
 
 
@@ -341,8 +348,11 @@ class Crawler(Cog):
 						dfs = pd.read_html(page)
 						df1 = dfs[2][['Date ▼', 'Price', 'Amount Sold']]
 					except IndexError:
-						dfs = pd.read_html(page)
-						df1 = dfs[1][['Date ▼', 'Price', 'Amount Sold']]
+						try:
+							dfs = pd.read_html(page)
+							df1 = dfs[1][['Date ▼', 'Price', 'Amount Sold']]
+						except IndexError:
+							await ctx.send('That item was probably never on vend.')
 					except KeyError:
 						try:
 							dfs = pd.read_html(page)

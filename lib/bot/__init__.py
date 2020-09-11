@@ -169,8 +169,8 @@ class Bot(BotBase):
 	async def on_message(self, message):
 		if not message.author.bot:
 			if isinstance(message.channel, DMChannel):
-				if len(message.content) < 50:
-					await message.channel.send("Your message should be atleast 50 characters in length.")
+				if len(message.content) < 10:
+					await message.channel.send("Your message should be atleast 10 characters in length.")
 
 				else:
 					member = self.butter.get_member(message.author.id)
@@ -187,7 +187,7 @@ class Bot(BotBase):
 					embed.add_field(name=name, value=value, inline=inline)
 
 				mod = self.get_cog('Mod')
-				await mod.log_channel.send(embed=embed)
+				await mod.butterch.send(embed=embed)
 				await message.channel.send("Message relayed to Awie Government")
 
 			else:

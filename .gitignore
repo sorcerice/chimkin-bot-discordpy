@@ -4,4 +4,5 @@ __pycache__
 lib/bot/token.0
 lib/bot/dpapikey.0
 lib/bot/twitterapikeys.json
+lib/bot/currencyconvertapikey.0
 requirements.txt

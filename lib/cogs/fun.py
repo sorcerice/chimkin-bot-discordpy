@@ -5,6 +5,7 @@ from itertools import cycle
 from glob import glob
 import re
 
+from libneko import pag
 from aiohttp import request
 from discord import Member, Embed
 from discord import File
@@ -46,7 +47,8 @@ class Fun(Cog):
 					 'Eggsassins will prevent it.',
 					 'No, and you are never getting an MVP card.',
 					 'It is highly unlikely because Lunch said so.',
-					 'Nope, because Lunch is still a homophobe.']
+					 'Nope, because Lunch is still a homophobe.',
+					 "Roam's big PP blocked the view"]
 		await ctx.send(f'{choice(responses)}')
 
 
@@ -56,7 +58,7 @@ class Fun(Cog):
 			 brief="Rolls a dice and sums the output (useful if we ever want to play D&D)",
 			 description=f'''Rolls a dice and sums the output
 			 \nType the number of rolls followed by 'd' followed by the number of sides on the dice
-			 \n<number of rolls>d<sides on dice>
+			 \ndie_string = <number of rolls>d<sides on dice>
 			 \nExample: For rolling a 6 sided dice 4 times
 			 \n.dice 4d6''')
 	@cooldown(5, 30, BucketType.user)
@@ -262,14 +264,23 @@ class Fun(Cog):
 				author = data["author"]
 				title = data["title"]
 
-				embed = Embed(title=f"{author} - {title}",
-							  description=data["lyrics"],
-							  url=link)
-				embed.set_thumbnail(url=thumbnail)
-				embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-				embed.set_footer(text="Such lyrics! Such Moods!", icon_url=ctx.guild.icon_url)
+				@pag.embed_generator(max_chars=2048)
+				def cooler_embed(paginator, page, page_index):
+					embed = Embed(title=f"{author} - {title}",
+								  description=page,
+								  url=link,
+								  colour=ctx.author.colour)
+					embed.set_thumbnail(url=thumbnail)
+					embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+					embed.set_footer(text="Such lyrics! Such Moods!", icon_url=ctx.guild.icon_url)
+					return embed
 
-				await ctx.send(embed=embed)
+				nav = pag.EmbedNavigatorFactory(factory=cooler_embed, max_lines=20)
+				nav += data['lyrics']
+
+				nav.start(ctx)
+
+				
 			else:
 				await ctx.send(f"{ctx.author.mention}, something went wrong!")
 
