@@ -187,7 +187,8 @@ class Bot(BotBase):
 					embed.add_field(name=name, value=value, inline=inline)
 
 				mod = self.get_cog('Mod')
-				await mod.butterch.send(embed=embed)
+				self.butterBotCh = self.get_channel(714141581308985414)
+				await self.butterBotCh.send(embed=embed)
 				await message.channel.send("Message relayed to Awie Government")
 
 			else:

@@ -90,6 +90,7 @@ class Sigs(Cog):
 		await ctx.send(URL)
 
 
+
 	@Cog.listener()
 	async def on_ready(self):
 		if not self.bot.ready:

@@ -5,6 +5,8 @@ from discord import Embed, Member, File
 from discord.ext.commands import Cog
 from discord.ext.commands import command
 
+currentTags = ''
+
 class Info(Cog):
 	def __init__(self, bot):
 		self.bot = bot
@@ -73,14 +75,14 @@ class Info(Cog):
 	@command(name='faq',
 			 description='To help out with support questions',
 			 brief='To help out with support questions')
-	async def faq_command(self, ctx, faq_tag: str):
+	async def faq_command(self, ctx, *, faq_tag: str):
 		if faq_tag == 'ip':
 			embed=Embed(title='FAQ',
 						description='SMRO Server Host Information',
 						colour=0x4dfc32)
 
 			embed.add_field(name='Server Location', value='Beauharnois,Quebec,Canada', inline=False)
-			embed.add_field(name='Helheim IP:', value='142.44.212.59', inline=False)
+			embed.add_field(name='Helheim IP:', value='51.161.117.101', inline=False)
 			embed.add_field(name='Niflheim IP:', value='192.99.66.84', inline=False)
 
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
@@ -137,11 +139,38 @@ class Info(Cog):
 		elif faq_tag == 'resolution':
 			await ctx.send(f'{ctx.author.mention}\n**Having resolution problems?**\nCheck this link out:\nhttps://www.shining-moon.com/w/index.php/Resolution')
 
-		elif faq_tag == 'boostermaps':
-			await ctx.send(content="Credits to @Tom#3331 and @Melon Bun#1508",file=File("./data/faq/boostermaps.png", filename="Booster Maps.png"))
+		elif faq_tag == 'booster maps' or faq_tag == 'boostermaps':
+			embed=Embed(title='Maps used for booster leveling',
+						description='''```@warp prt_fild06 Fabre\n@warp pay_fild06 Snake, Spore Wormtail\n@warp mjolnir_06 Poison Spore\n@warp mjo_dun02 Martin, Giearth\n@warp mjo_dun03 Skeleton Worker\n@warp iz_dun03 Swordfish\n@warp iz_dun04 Swordfish (less), Merman, Strouf\n@warp pay_dun02 Munak, Bongun\n@warp pay_dun03 Sohee\n@warp c_tower1 Rideword\n@warp c_tower3 Alarm\n@warp c_tower4 Clock\n@warp tur_dun02 Permeter, Freezer\n@warp tur_dun03 Permeter, Freezer, Heater\n@warp tur_dun04 Permeter, Freezer, Heater \n@warp ice_dun03 Gazeti, Ice Titan, Snowier, Iceicle\n@warp ma_fild02 Bungisngis\n@warp dic_dun01 Scaraba (Small Insect 130-145)\n@warp abbey01 Banshee (Dark 130-145)\n@warp lasa_dun03 Combat Basilisk, Fruits Pom Spider (Earth Medium 145-160)\n@warp ein_d02_i (Small 145-160)\n@warp c_tower3_ Big Bell, Owl Viscount, Owl Marquis```''',
+						color = ctx.author.color)
+			embed.set_footer(text='Credits to @Tom#3331 and @Melon Bun#1508', icon_url=ctx.guild.icon_url)
+
+			await ctx.send(embed=embed)
+
+		elif faq_tag == '4th alt ticket' or faq_tag == '4th' or faq_tag == '4th alt':
+			embed = Embed(title='4th Class Outfit Ticket',
+						  description='```15x Darkgreen Dyestuff ID: 979\n15x Orange Dyestuff ID: 980\n5x Costume Treasure ID: 51010\n1x Alternate Outfit Ticket ID: 51022\n50x Frozen Rose ID: 749\n50x Ancient Hero Souls ID: 1900000008\n250x Greater Fortessa Emblem ID: 1900000003```',
+						  colour=ctx.author.color)
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text='Have fun farming!', icon_url=ctx.guild.icon_url)
+
+			await ctx.send(embed=embed)
+
+		elif faq_tag == 'pde' or faq_tag == 'power dim essence':
+			embed = Embed(title='Powerful Dimensional Essence',
+						  description='```5x Temporal Metal ID: 190000011\n10x Temporal Crystal ID: 6607\n250x Chivalry Emblem ID: 1004\n5x Will of Red Darkness ID: 7566\n25x Blade Lost in Darkness ID: 7023```',
+						  colour=ctx.author.color)
+			embed.set_thumbnail(url='https://www.divine-pride.net/img/items/item/kROM/7925')
+			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text='Have fun farming!', icon_url=ctx.guild.icon_url)
+			
+			await ctx.send(embed=embed)
+
+		elif(faq_tag == 'class rebalance'):
+			await ctx.send('https://www.divine-pride.net/forum/index.php?/topic/4203-kro-skill-adjustment-timeline/')
 
 		else:
-			await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps')
+			await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance')
 
 
 

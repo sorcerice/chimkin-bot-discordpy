@@ -6,6 +6,7 @@ from discord.ext.commands import Cog
 from discord.ext.commands import command
 from discord.errors import HTTPException
 
+from urllib import parse
 from libneko import pag
 from bs4 import BeautifulSoup
 from aiohttp import request
@@ -351,7 +352,7 @@ class Crawler(Cog):
 						try:
 							dfs = pd.read_html(page)
 							df1 = dfs[1][['Date ▼', 'Price', 'Amount Sold']]
-						except IndexError:
+						except (IndexError, KeyError):
 							await ctx.send('That item was probably never on vend.')
 					except KeyError:
 						try:

@@ -17,7 +17,7 @@ class Meta(Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
-		self._message = "watching .help | {users:,} awies in {guilds:,} servers"
+		self._message = "playing with {users:,} awies in {guilds:,} servers | use .help"
 
 		bot.scheduler.add_job(self.set, CronTrigger(second=0))
 
