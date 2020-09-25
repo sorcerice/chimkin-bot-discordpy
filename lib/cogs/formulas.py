@@ -89,17 +89,20 @@ class Formulas(Cog):
 			 description='Calculates how much ACD you need for spamming a skill')
 	async def get_acd(self, ctx, aspd: int, skillDelay: float, coolDown: Optional[float] = 0):
 		try:
-			atkSpd = (200-aspd)/50
+			if aspd <= 193:
+				atkSpd = (200-aspd)/50
 
-			acdReduction = round((1-((atkSpd if coolDown < atkSpd else coolDown)/skillDelay))*100)
+				acdReduction = round((1-((atkSpd if coolDown < atkSpd else coolDown)/skillDelay))*100)
 
-			embed = Embed(title='Looks like you want to spam skills huh?',
-						  description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**',
-						  color=ctx.author.color)
-			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-			embed.set_footer(text='Note: Skills with hard animation or non-reduceable cooldowns are not spammable', icon_url=ctx.guild.icon_url)
+				embed = Embed(title='Looks like you want to spam skills huh?',
+							  description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\nTo see how many times you can spam the skill per second with **{aspd} ASPD**, type `.faq aspd`',
+							  color=ctx.author.color)
+				embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+				embed.set_footer(text='Note: Skills with hard animation or non-reduceable cooldowns are not spammable', icon_url=ctx.guild.icon_url)
 
-			await ctx.send(embed=embed)
+				await ctx.send(embed=embed)
+			else:
+				await ctx.send(f"The maximum ASPD is 193 on Shining Moon RO.\n{aspd} ASPD is not attainable *yet*")
 		except ZeroDivisionError:
 			await ctx.send('TO INFINITY AND BEYOND\nP.S: Please don\'t use zero.')
 

@@ -359,7 +359,7 @@ class Crawler(Cog):
 							dfs = pd.read_html(page)
 							df1 = dfs[4][['Date ▼', 'Price', 'Amount Sold']]						
 						except (ValueError, IndexError):
-							await ctx.send('Item was probably never on sale.')
+							await ctx.send('Item was probably never on sale or removed from vending history.')
 				try:
 					embed = Embed(title='Awie Market(Click here to go this page)',
 								  description=f"```{df1}```",

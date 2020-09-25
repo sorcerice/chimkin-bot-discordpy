@@ -253,7 +253,13 @@ class Fun(Cog):
 			 brief="Gives lyrics if you give a song and title")
 	async def get_lyrics(self, ctx, *, query: str):
 		spaceReplacedQuery = query.replace(" ", "%20")
-		lyricsLink = f"https://some-random-api.ml/lyrics/?title={spaceReplacedQuery}"
+		if randint(0, 100) == 100:
+			owoCheck = True
+		else:
+			owoCheck = False
+
+		lyricsLink = f"https://some-random-api.ml/lyrics/?title={spaceReplacedQuery}&cancer={owoCheck}"
+
 		async with request("GET", lyricsLink, headers={}) as response:
 			if response.status == 200:
 				data = await response.json()
@@ -289,8 +295,10 @@ class Fun(Cog):
 	@Cog.listener()
 	async def on_message(self, message):
 		if not message.author.bot:
-			if message.content.startswith('Henyo'):
+			if message.content.startswith(('Henyo', 'henyo', 'hello', 'Hello')):
 				await message.channel.send(f'Henyo {message.author.mention}')
+			if message.content.startswith(('bye', 'bai', 'Bai', 'Bye')):
+				await message.channel.send(f'Bye {message.author.mention}~~~')
 				
 				
 

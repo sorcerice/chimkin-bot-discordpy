@@ -256,30 +256,30 @@ class Mod(Cog):
 			self.mute_role = self.bot.butter.get_role(746577162273816636)
 			self.bot.cogs_ready.ready_up("mod")
 
-	# @Cog.listener()
-	# async def on_message(self, message):
-	# 	def _check(m):
-	# 		return (m.author == message.author
-	# 				and len(m.mentions)
-	# 				and (datetime.utcnow()-m.created_at).seconds < 60)
+	@Cog.listener()
+	async def on_message(self, message):
+		def _check(m):
+			return (m.author == message.author
+					and len(m.mentions)
+					and (datetime.utcnow()-m.created_at).seconds < 60)
 
-	# 	if not message.author.bot and message.guild.id == 228966491628765185:
-	# 		if len(list(filter(lambda m: _check(m), self.bot.cached_messages))) >= 3:
-	# 			await message.channel.send(f"Lol! {message.author.mention} got muted for 420s <:kekw:675005062938099722>", delete_after=60)
-	# 			unmutes = await self.mute_members(message, [message.author], 420, reason="Spam tagging people")
+		if not message.author.bot and message.guild.id == 228966491628765185:
+			if len(list(filter(lambda m: _check(m), self.bot.cached_messages))) >= 9:
+				await message.channel.send(f"Lol! {message.author.mention} got muted for 420s <:kekw:675005062938099722>", delete_after=60)
+				unmutes = await self.mute_members(message, [message.author], 420, reason="Spam tagging people")
 
-	# 			if len(unmutes):
-	# 				await sleep(420)
-	# 				await self.unmute_members(message.guild, [message.author])
+				if len(unmutes):
+					await sleep(420)
+					await self.unmute_members(message.guild, [message.author])
 
-	# 		elif profanity.contains_profanity(message.content):
-	# 			await message.add_reaction("🇸")
-	# 			await message.add_reaction("🇹")
-	# 			await message.add_reaction("🇴")
-	# 			await message.add_reaction("🇵")
-	# 			await message.add_reaction("<:pepeangry:599852722379816971>")
-	# 			await sleep(30)
-	# 			await message.clear_reactions()
+			# elif profanity.contains_profanity(message.content):
+			# 	await message.add_reaction("🇸")
+			# 	await message.add_reaction("🇹")
+			# 	await message.add_reaction("🇴")
+			# 	await message.add_reaction("🇵")
+			# 	await message.add_reaction("<:pepeangry:599852722379816971>")
+			# 	await sleep(30)
+			# 	await message.clear_reactions()
 
 
 def setup(bot):
