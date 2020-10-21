@@ -4,6 +4,7 @@ from typing import Optional
 from itertools import cycle
 from glob import glob
 import re
+from io import BytesIO
 
 from libneko import pag
 from aiohttp import request
@@ -16,6 +17,7 @@ from discord.ext.commands import command, cooldown, bot_has_role, BotMissingRole
 
 from bs4 import BeautifulSoup
 
+andreID = 468021052128231434
 
 class Fun(Cog):
 	def __init__(self, bot):
@@ -290,6 +292,33 @@ class Fun(Cog):
 			else:
 				await ctx.send(f"{ctx.author.mention}, something went wrong!")
 
+# fake nitro commands
+	@command(name='cjam',
+			 aliases=['catjam'])
+	async def send_cjam(self, ctx):
+		URL = 'https://cdn.discordapp.com/attachments/674592975270969344/758992722677465138/catJAM.gif'
+		async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+			if resp.status == 200:
+				img = BytesIO(await resp.read())
+				await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'catJAM.gif'))
+
+	@command(name='xd',
+			 aliases=['exdee'])
+	async def send_cxd(self, ctx):
+		URL = 'https://media.discordapp.net/attachments/313985990765182986/737457432669716480/XD.gif'
+		async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+			if resp.status == 200:
+				img = BytesIO(await resp.read())
+				await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'XD.gif'))
+
+	@command(name='djam',
+			 aliases=['dogjam'])
+	async def send_djam(self, ctx):
+		URL = 'https://cdn.discordapp.com/attachments/642347588107894815/759352440851136532/1596771065419.gif'
+		async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+			if resp.status == 200:
+				img = BytesIO(await resp.read())
+				await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'XD.gif'))
 
 
 	@Cog.listener()
@@ -299,6 +328,8 @@ class Fun(Cog):
 				await message.channel.send(f'Henyo {message.author.mention}')
 			if message.content.startswith(('bye', 'bai', 'Bai', 'Bye')):
 				await message.channel.send(f'Bye {message.author.mention}~~~')
+			if message.content == 'REVOLUTION!':
+				await message.channel.send(content='RISE UP BROTHERS!!',file=File('./data/images/deuxvultchimkin.png'))
 				
 				
 
