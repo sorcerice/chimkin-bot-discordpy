@@ -12,7 +12,7 @@ certifi==2020.6.20
 chardet==3.0.4
 colorama==0.4.4
 coverage==5.3
-discord-ext-menus==1.0.0a26+g84caae8
+git+https://github.com/Rapptz/discord-ext-menus@84caae8038d0d
 discord.py==1.5.1
 docutils==0.16
 idna==2.10
