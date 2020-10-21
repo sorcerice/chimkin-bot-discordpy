@@ -79,7 +79,7 @@ class Help(Cog):
 				await self.cmd_help(ctx, command)
 
 			else:
-				await ctx.send("That command doesn't exist")
+				await ctx.send("That command doesn't exist.\nYou probably used an alias, maybe?\nUse `.help` to cycle through commands and find the true name of the command.")
 
 	@Cog.listener()
 	async def on_ready(self):
