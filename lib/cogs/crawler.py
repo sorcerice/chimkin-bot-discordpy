@@ -385,7 +385,7 @@ class Crawler(Cog):
 		# with open("./lib/bot/dpapikey.0", "r", encoding="utf-8") as dp:
 		# 	APIKEY = dp.read()
 		
-		APIKEY = os.getenv(DP_APIKEY)
+		APIKEY = os.getenv('DP_APIKEY')
 
 		URL = f'https://divine-pride.net/api/database/Monster/{mobID}?apiKey={APIKEY}'
 

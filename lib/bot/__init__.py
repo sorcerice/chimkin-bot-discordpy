@@ -52,7 +52,7 @@ class Bot(BotBase):
 
 	def setup(self):
 		# for cog in COGS:
-		# 	self.load_extension(f"{cog}.py")
+		# 	self.load_extension(f"lib.cogs.{cog}")
 		# 	print(f" {cog} cog loaded")
 
 		print("setup complete")
@@ -66,7 +66,7 @@ class Bot(BotBase):
 		# with open("./lib/bot/token.0", "r", encoding="utf-8") as tf:
 		# 	self.TOKEN = tf.read()
 
-		self.TOKEN = os.getenv(BOT_TOKEN)
+		self.TOKEN = os.getenv('BOT_TOKEN')
 
 		print("running bot...")
 		super().run(self.TOKEN, reconnect=True)

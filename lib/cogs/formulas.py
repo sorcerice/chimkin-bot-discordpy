@@ -13,7 +13,7 @@ supportedUnits = '\n1)celcius-fahrenheit\n2)fahrenheit-celcius'
 
 # with open("./lib/bot/currencyconvertapikey.0", "r", encoding="utf-8") as f:
 # 	APIKEY = f.read()
-APIKEY = os.getenv(CCONV_APIKEY)
+APIKEY = os.getenv('CCONV_APIKEY')
 
 class Formulas(Cog):
 	def __init__(self, bot):
