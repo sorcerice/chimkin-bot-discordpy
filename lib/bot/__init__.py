@@ -51,7 +51,7 @@ class Bot(BotBase):
 
 	def setup(self):
 		for cog in COGS:
-			self.load_extension(f"{cog}")
+			self.load_extension(f"{cog}.py")
 			print(f" {cog} cog loaded")
 
 		print("setup complete")
