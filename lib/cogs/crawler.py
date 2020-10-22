@@ -1,5 +1,6 @@
 from datetime import datetime
 from random import randint
+import os
 
 from discord import Embed
 from discord.ext.commands import Cog
@@ -381,8 +382,10 @@ class Crawler(Cog):
 			 description='Look for mob location Divine Pride API')
 	async def mob_location(self, ctx, mobID: int):
 		
-		with open("./lib/bot/dpapikey.0", "r", encoding="utf-8") as dp:
-			APIKEY = dp.read()
+		# with open("./lib/bot/dpapikey.0", "r", encoding="utf-8") as dp:
+		# 	APIKEY = dp.read()
+		
+		APIKEY = os.getenv(DP_APIKEY)
 
 		URL = f'https://divine-pride.net/api/database/Monster/{mobID}?apiKey={APIKEY}'
 

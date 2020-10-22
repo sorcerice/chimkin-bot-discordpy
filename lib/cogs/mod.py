@@ -207,7 +207,7 @@ class Mod(Cog):
 
 		else:
 			await self.unmute_members(ctx.guild, targets, reason=reason)
-	@mute_command.error
+	@unmute_command.error
 	async def unmute_command_error(self, ctx, exc):
 		if isinstance(exc, CheckFailure):
 			await ctx.send('Insufficient permissions to perform that task.')
@@ -243,8 +243,8 @@ class Mod(Cog):
 
 		profanity.load_censor_words_from_file('./data/profanity.txt')
 		await ctx.send('Words removed from baddie file <:sadkitty:633639713588379668>')
-	@add_profanity.error
-	async def unmute_command_error(self, ctx, exc):
+	@remove_profanity.error
+	async def remove_profanity_error(self, ctx, exc):
 		if isinstance(exc, CheckFailure):
 			await ctx.send('Insufficient permissions to perform that task.')
 
