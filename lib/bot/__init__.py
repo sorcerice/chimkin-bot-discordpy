@@ -18,7 +18,7 @@ from discord.ext.commands import when_mentioned_or, command, has_permissions
 from ..db import db
 
 OWNER_IDS = [611941774373683210, 218807000115445760]
-COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
+COGS = [path.split(os.sep)[-1][:-3] for path in glob("./lib/cogs/*.py")]
 IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument, BotMissingRole, NotFound, HTTPException, MissingPermissions)
 
 
@@ -52,9 +52,8 @@ class Bot(BotBase):
 
 	def setup(self):
 		for cog in COGS:
-			print(cog)
-			# self.load_extension(f"lib.cogs.{cog}")
-			# print(f" {cog} cog loaded")
+			self.load_extension(f"lib.cogs.{cog}")
+			print(f" {cog} cog loaded")
 
 		print("setup complete")
 
