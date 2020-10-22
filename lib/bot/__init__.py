@@ -49,12 +49,12 @@ class Bot(BotBase):
 		db.autosave(self.scheduler)
 		super().__init__(command_prefix=get_prefix, owner_ids=OWNER_IDS)
 
-	def setup(self):
-		for cog in COGS:
-			self.load_extension(f"{cog}.py")
-			print(f" {cog} cog loaded")
+	# def setup(self):
+	# 	for cog in COGS:
+	# 		self.load_extension(f"{cog}.py")
+	# 		print(f" {cog} cog loaded")
 
-		print("setup complete")
+	# 	print("setup complete")
 
 	def run(self, version):
 		self.VERSION = version
