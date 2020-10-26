@@ -44,7 +44,7 @@ class Formulas(Cog):
 			await ctx.send(embed=embed)
 
 	@command(name='currencyconvert',
-			 aliases=['cconvert'],
+			 aliases=['cconvert', 'cconv'],
 			 description='Converts X currency to Y currency',
 			 brief='Converts X currency to Y currency')
 	async def convert_currency(self, ctx, amount: float, fromCurrency : str, to : Optional[str], toCurrency: str):
