@@ -149,7 +149,7 @@ class Info(Cog):
 
 		elif faq_tag == '4th alt ticket' or faq_tag == '4th' or faq_tag == '4th alt':
 			embed = Embed(title='4th Class Outfit Ticket',
-						  description='```15x Darkgreen Dyestuff ID: 979\n15x Orange Dyestuff ID: 980\n5x Costume Treasure ID: 51010\n1x Alternate Outfit Ticket ID: 51022\n50x Frozen Rose ID: 749\n50x Ancient Hero Souls ID: 1900000008\n250x Greater Fortessa Emblem ID: 1900000003```',
+						  description='```15x Darkgreen Dyestuff ID: 979\n15x Orange Dyestuff ID: 980\n5x Costume Treasure ID: 51010\n1x Alternate Outfit Ticket ID: 51022\n50x Frozen Rose ID: 749\n50x Ancient Hero Souls ID: 1900000008\n100x Greater Fortessa Emblem ID: 1900000003```',
 						  colour=ctx.author.color)
 			embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
 			embed.set_footer(text='Have fun farming!', icon_url=ctx.guild.icon_url)
