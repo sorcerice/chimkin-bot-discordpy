@@ -339,7 +339,7 @@ class Fun(Cog):
                 await message.channel.send(f'Henyo {message.author.mention}')
             if message.content.lower().startswith('bye'):
                 await message.channel.send(f'Bye {message.author.mention}~~~')
-            if message.content.lower.startswith('revolution'):
+            if message.content.lower().startswith('revolution'):
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
     @Cog.listener()
