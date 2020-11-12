@@ -341,9 +341,9 @@ class Fun(Cog):
                 hiGreetings = ['henyo', 'hi', 'hello']
                 for greeting in hiGreetings:
                     if messageConverter == greeting:
-                        return await message.channel.send(f'Henyo {message.author.mention}')
+                        await message.channel.send(f'Henyo {message.author.mention}')
 
-            hiGreetCheck(message, messageConverter)
+            await hiGreetCheck(message, messageConverter)
 
             if messageConverter == 'bye':
                 await message.channel.send(f'Bye {message.author.mention}~~~')
