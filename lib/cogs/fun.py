@@ -335,11 +335,12 @@ class Fun(Cog):
     @Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:
-            if message.content.split()[0].lower() == ('henyo' or 'hi' or 'hello'):
+            messageConverter = message.content.split()[0].lower()
+            if ['henyo' or 'hi' or 'hello'] in messageConverter:
                 await message.channel.send(f'Henyo {message.author.mention}')
-            if message.content.split()[0].lower() == 'bye':
+            if 'bye' in messageConverter:
                 await message.channel.send(f'Bye {message.author.mention}~~~')
-            if message.content.split()[0].lower() == 'revolution':
+            if 'revolution' in messageConverter:
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
     @Cog.listener()
