@@ -75,7 +75,7 @@ class Formulas(Cog):
              aliases=['ms'],
              description='Gives total amount of mindslots and castable warlock book spells',
              brief='Gives total amount of mindslots and castable warlock book spells',
-             help='ves total amount of mindslots and castable warlock book spells',
+             help='Gives total amount of mindslots and castable warlock book spells',
              usage='`.ms <Freezing Spell Level> <Base Level> <Total Int>`\nEg: `.ms 10 200 150`\nInt shown ingame is INT XX+XX - Total int is the sum of that')
     async def mindSlots(self, ctx, freezingSpellLevel: int, baseLevel: int, totalInt: int):
         totalMindSlots = (freezingSpellLevel*8)+(baseLevel//10)+(totalInt//10)
