@@ -337,7 +337,7 @@ class Fun(Cog):
         if not message.author.bot:
             messageConverter = message.content.split()[0].lower()
 
-            def hiGreetCheck(message, messageConverter):
+            async def hiGreetCheck(message, messageConverter):
                 hiGreetings = ['henyo', 'hi', 'hello']
                 for greeting in hiGreetings:
                     if messageConverter == greeting:
