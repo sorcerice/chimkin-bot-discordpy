@@ -335,8 +335,13 @@ class Fun(Cog):
     @Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:
+            def loopHiGreets():
+                hiGreetings = ['henyo', 'hi', 'hello']
+                for greeting in hiGreetings:
+                    return greeting
+
             messageConverter = message.content.split()[0].lower()
-            if ['henyo', 'hi', 'hello'] in messageConverter:
+            if loopHiGreets() in messageConverter:
                 await message.channel.send(f'Henyo {message.author.mention}')
             if 'bye' in messageConverter:
                 await message.channel.send(f'Bye {message.author.mention}~~~')
