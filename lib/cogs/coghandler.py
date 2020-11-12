@@ -5,61 +5,59 @@ from glob import glob
 
 
 class cogHandler(Cog):
-	def __init__(self, bot):
-		self.bot = bot
+    def __init__(self, bot):
+        self.bot = bot
 
-	@Cog.listener()
-	async def on_ready(self):
-		if not self.bot.ready:
-			self.bot.cogs_ready.ready_up("coghandler")
+    @Cog.listener()
+    async def on_ready(self):
+        if not self.bot.ready:
+            self.bot.cogs_ready.ready_up("coghandler")
 
+    @command(name='load',
+             hidden=True,
+             description='Used for debugging',
+             brief='Used for debugging',
+             help='Used for debugging')
+    @has_permissions(manage_guild=True)
+    async def _load(self, ctx, *, cog):
+        module = f'lib.cogs.{cog}'
+        try:
+            self.bot.load_extension(module)
+        except commands.ExtensionError as e:
+            await ctx.send(f'{e.__class__.__name__}: {e}')
+        else:
+            await ctx.send(f'\n{cog} loaded')
 
+    @command(name='unload',
+             hidden=True,
+             description='Used for debugging',
+             brief='Used for debugging',
+             help='Used for debugging')
+    @has_permissions(manage_guild=True)
+    async def _unload(self, ctx, *, cog):
+        module = f'lib.cogs.{cog}'
+        try:
+            self.bot.unload_extension(module)
+        except commands.ExtensionError as e:
+            await ctx.send(f'{e.__class__.__name__}: {e}')
+        else:
+            await ctx.send(f'\n{cog} unloaded')
 
-	@command(name='load',
-			 hidden=True,
-			 description='Used for debugging',
-			 brief='Used for debugging')
-	@has_permissions(manage_guild=True)
-	async def _load(self, ctx, *, cog):
-		module = f'lib.cogs.{cog}'
-		try:
-			self.bot.load_extension(module)
-		except commands.ExtensionError as e:
-			await ctx.send(f'{e.__class__.__name__}: {e}')
-		else:
-			await ctx.send(f'\n{cog} loaded')
-
-
-	@command(name='unload',
-			 hidden=True,
-			 description='Used for debugging',
-			 brief='Used for debugging')
-	@has_permissions(manage_guild=True)
-	async def _unload(self, ctx, *, cog):
-		module = f'lib.cogs.{cog}'
-		try:
-			self.bot.unload_extension(module)
-		except commands.ExtensionError as e:
-			await ctx.send(f'{e.__class__.__name__}: {e}')
-		else:
-			await ctx.send(f'\n{cog} unloaded')
-			
-
-	@command(name='reload',
-			 hidden=True,
-			 description='Used for debugging',
-			 brief='Used for debugging')
-	@has_permissions(manage_guild=True)
-	async def _reload(self, ctx, *, cog):
-		module = f'lib.cogs.{cog}'
-		try:
-			self.bot.reload_extension(module)
-		except commands.ExtensionError as e:
-			await ctx.send(f'{e.__class__.__name__}: {e}')
-		else:
-			await ctx.send(f'\n{cog} reloaded')
-
+    @command(name='reload',
+             hidden=True,
+             description='Used for debugging',
+             brief='Used for debugging',
+             help='Used for debugging')
+    @has_permissions(manage_guild=True)
+    async def _reload(self, ctx, *, cog):
+        module = f'lib.cogs.{cog}'
+        try:
+            self.bot.reload_extension(module)
+        except commands.ExtensionError as e:
+            await ctx.send(f'{e.__class__.__name__}: {e}')
+        else:
+            await ctx.send(f'\n{cog} reloaded')
 
 
 def setup(bot):
-	bot.add_cog(cogHandler(bot))
+    bot.add_cog(cogHandler(bot))

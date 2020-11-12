@@ -13,7 +13,10 @@ class Info(Cog):
         self.bot = bot
 
     @command(name='userinfo',
-             aliases=['memberinfo', 'ui'])
+             aliases=['memberinfo', 'ui'],
+             description='Provides info about your discord account or the tagged persons discord account',
+             brief='Provides info about your discord account or the tagged persons discord account',
+             help='Provides info about your discord account or the tagged persons discord account')
     async def user_info(self, ctx, target: Optional[Member]):
         target = target or ctx.author
 
@@ -42,7 +45,10 @@ class Info(Cog):
         await ctx.send(embed=embed)
 
     @command(name='serverinfo',
-             aliases=['guildinfo', 'si', 'gi'])
+             aliases=['guildinfo', 'si', 'gi'],
+             brief='Provides information about the server',
+             description='Provides information about the server',
+             help='Provides information about the server')
     async def server_info(self, ctx):
         embed = Embed(title='Server Information',
                       colour=ctx.guild.owner.colour,
