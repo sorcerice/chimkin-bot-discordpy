@@ -336,6 +336,7 @@ class Fun(Cog):
     async def on_message(self, message):
         if not message.author.bot:
             messageConverter = message.content.split()[0].lower()
+            print(messageConverter)
             if ['henyo' or 'hi' or 'hello'] in messageConverter:
                 await message.channel.send(f'Henyo {message.author.mention}')
             if 'bye' in messageConverter:
