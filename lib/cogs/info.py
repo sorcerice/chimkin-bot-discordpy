@@ -81,7 +81,8 @@ class Info(Cog):
 
     @command(name='faq',
              description='To help out with support questions',
-             brief='To help out with support questions')
+             brief='To help out with support questions',
+             help='You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance')
     async def faq_command(self, ctx, *, faq_tag: str = 'list'):
         if faq_tag == 'ip':
             embed = Embed(title='FAQ',
