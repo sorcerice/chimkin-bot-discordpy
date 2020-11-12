@@ -335,7 +335,7 @@ class Fun(Cog):
     @Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:
-            if message.content.split()[0].lower() == (('henyo', 'hi', 'hello')):
+            if message.content.split()[0].lower() == ('henyo', 'hi', 'hello'):
                 await message.channel.send(f'Henyo {message.author.mention}')
             if message.content.split()[0].lower() == 'bye':
                 await message.channel.send(f'Bye {message.author.mention}~~~')
