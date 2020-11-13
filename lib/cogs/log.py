@@ -110,7 +110,7 @@ class Log(Cog):
                           colour=message.author.colour,
                           timestamp=datetime.utcnow())
 
-            if len(message.content != 0):
+            if len(message.content) != 0:
                 fields = [("Content", message.content, False)]
             else:
                 fields = [('Content', 'an image was deleted', False)]
