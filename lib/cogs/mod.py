@@ -62,7 +62,7 @@ class Mod(Cog):
         for target in targets:
             if (message.guild.me.top_role.position > target.top_role.position
                     and not target.guild_permissions.administrator):
-                await target.ban(reason=reason)
+                await target.ban(reason=reason, delete_message_days=7)
 
                 embed = Embed(title='Member banned',
                               colour=0xDD2222,
