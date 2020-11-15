@@ -112,9 +112,13 @@ class Log(Cog):
 
             if len(message.content) != 0:
                 fields = [("Content", message.content, False)]
+            elif len(message.attachments) != 0:
+                attachments = message.attachments
+                for attachment in attachments:
+                    proxyUrl = attachment.proxy_url
+                fields = [('Content', proxyUrl, False)]
             else:
-                fields = [('Content', 'an image was deleted', False)]
-                print(message.attachments[0].proxy_url)
+                fields = [('Content', 'Deleted message couldn\'t be logged')]
 
             for name, value, inline in fields:
                 embed.add_field(name=name, value=value, inline=inline)
