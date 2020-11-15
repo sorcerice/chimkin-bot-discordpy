@@ -114,7 +114,7 @@ class Log(Cog):
                 fields = [("Content", message.content, False)]
             else:
                 fields = [('Content', 'an image was deleted', False)]
-                print(message.attachments)
+                print(message.attachments[proxy_url])
 
             for name, value, inline in fields:
                 embed.add_field(name=name, value=value, inline=inline)
