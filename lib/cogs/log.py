@@ -114,6 +114,7 @@ class Log(Cog):
                 fields = [("Content", message.content, False)]
             else:
                 fields = [('Content', 'an image was deleted', False)]
+                print(message.attachments)
 
             for name, value, inline in fields:
                 embed.add_field(name=name, value=value, inline=inline)
