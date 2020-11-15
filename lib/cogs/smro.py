@@ -50,13 +50,22 @@ class SMRO(Cog):
         if not message.author.bot and message.guild.id == 285121209027264512:
             embed = Embed(title=f"Message Deleted!",
                           description=f"Deleted by **{message.author.display_name}** in **{message.channel.name}**",
-                                      colour=0xe74c3c,  # Red
-                          timestam=datetime.utcnow())
-            fields = [("Deleted Content", message.content, False)]
+                          colour=0xe74c3c,  # Red
+                          timestamp=datetime.utcnow())
+            if len(message.content) != 0:
+                fields = [("Content", message.content, False)]
+            elif len(message.attachments) != 0:
+                attachments = message.attachments
+                for attachment in attachments:
+                    proxyUrl = attachment.proxy_url
+                fields = [('Content', proxyUrl, False)]
+            else:
+                fields = [('Content', 'Deleted message couldn\'t be logged')]
 
             for name, value, inline in fields:
                 embed.add_field(name=name, value=value, inline=inline)
-            await self.smro_log.send(embed=embed)
+
+                await self.smro_log.send(embed=embed)
 
     @Cog.listener()
     async def on_user_update(self, before, after):
