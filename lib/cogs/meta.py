@@ -20,7 +20,7 @@ class Meta(Cog):
 
         self._message = "playing in {guilds:,} servers. Use .help for help with my commands. Use .help <command name> for specific commands."
 
-        bot.scheduler.add_job(self.set, CronTrigger(second=0))
+        bot.scheduler.add_job(self.set, CronTrigger(second=10))
 
     @property
     def message(self):

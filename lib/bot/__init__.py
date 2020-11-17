@@ -12,6 +12,7 @@ from discord.ext.commands import Bot as BotBase
 from discord.ext.commands import Context
 from discord.ext.commands import (CommandNotFound, BadArgument, MissingRequiredArgument,
                                   CommandOnCooldown, BotMissingRole, MissingPermissions)
+from discord import Intents
 from apscheduler.triggers.cron import CronTrigger
 from discord.ext.commands import when_mentioned_or, command, has_permissions
 from pretty_help import PrettyHelp
@@ -52,7 +53,10 @@ class Bot(BotBase):
 
         db.autosave(self.scheduler)
         super().__init__(command_prefix=get_prefix,
-                         owner_ids=OWNER_IDS, help_command=PrettyHelp(color=discord.Color.green()))
+                         owner_ids=OWNER_IDS,
+                         help_command=PrettyHelp(color=discord.Color.green()),
+                         intents=Intents.all()
+                         )
 
     def setup(self):
         for cog in COGS:
