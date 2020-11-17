@@ -18,7 +18,7 @@ class Meta(Cog):
     def __init__(self, bot):
         self.bot = bot
 
-        self._message = "playing in {guilds:,} servers. Use .help for help with my commands. Use .help <command name> for specific commands."
+        self._message = "playing in {guilds:,} servers with {users:,} awies. Use .help for help with my commands. Use .help <command name> for specific commands."
 
         bot.scheduler.add_job(self.set, CronTrigger(second=10))
 
@@ -101,7 +101,8 @@ class Meta(Cog):
     @command(name="die",
              description='Kills Chimkin',
              brief='Kills Chimkin',
-             help='Kills Chimkin')
+             help='Kills Chimkin',
+             hidden=True)
     @has_permissions(manage_guild=True)
     async def shutdown(self, ctx):
         await ctx.send("I'm dying before Cheese. Hell yeah!")
