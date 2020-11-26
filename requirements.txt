@@ -29,6 +29,7 @@ Pillow==8.0.0
 psutil==5.7.2
 pylint==2.6.0
 python-dateutil==2.8.1
+python-dotenv==0.15.0
 pytz==2020.1
 requests==2.24.0
 six==1.15.0

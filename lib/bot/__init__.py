@@ -2,6 +2,7 @@ from asyncio import sleep
 from datetime import datetime
 from glob import glob
 import os
+from dotenv import load_dotenv
 
 import discord
 
@@ -23,6 +24,9 @@ OWNER_IDS = [611941774373683210, 218807000115445760]
 COGS = [path.split(os.sep)[-1][:-3] for path in glob("./lib/cogs/*.py")]
 IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument, BotMissingRole,
                      NotFound, HTTPException, MissingPermissions)
+
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 
 def get_prefix(bot, message):

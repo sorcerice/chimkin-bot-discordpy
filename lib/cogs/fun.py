@@ -335,18 +335,19 @@ class Fun(Cog):
     @Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:
-            if len(message.content) != 0:
-                messageConverter = message.content.split()[0].lower()
-            else:
-                return
+            if message.author.id == 105416043521957888:
+                if len(message.content) != 0:
+                    messageConverter = message.content.split()[0].lower()
+                else:
+                    return
 
-            async def hiGreetCheck(message, messageConverter):
-                hiGreetings = ['henyo', 'hi', 'hello']
-                for greeting in hiGreetings:
-                    if messageConverter == greeting:
-                        await message.channel.send(f'Henyo {message.author.mention}')
+                async def hiGreetCheck(message, messageConverter):
+                    hiGreetings = ['henyo', 'hi', 'hello']
+                    for greeting in hiGreetings:
+                        if messageConverter == greeting:
+                            await message.channel.send(f'Henyo {message.author.mention}')
 
-            await hiGreetCheck(message, messageConverter)
+                await hiGreetCheck(message, messageConverter)
 
             if messageConverter == 'bye':
                 await message.channel.send(f'Bye {message.author.mention}~~~')
