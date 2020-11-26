@@ -335,11 +335,11 @@ class Fun(Cog):
     @Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:
-            if message.author.id == 105416043521957888:
-                if len(message.content) != 0:
+            if len(message.content) != 0:
                     messageConverter = message.content.split()[0].lower()
                 else:
                     return
+            if message.author.id == 105416043521957888:
 
                 async def hiGreetCheck(message, messageConverter):
                     hiGreetings = ['henyo', 'hi', 'hello']
