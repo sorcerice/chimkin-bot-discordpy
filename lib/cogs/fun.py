@@ -61,7 +61,7 @@ class Fun(Cog):
              description=f'Rolls a dice and sums the output',
              help='Type the number of rolls followed by \'d\' followed by the number of sides on the dice',
              usage='`.dice 3d6`\n3 is the number of rolls\n6 is the number of sides on the dice')
-    @cooldown(5, 30, BucketType.user)
+    # @cooldown(5, 30, BucketType.user)
     async def roll_dice(self, ctx, die_string: str):
         dice, value = (int(term) for term in die_string.split("d"))
 
