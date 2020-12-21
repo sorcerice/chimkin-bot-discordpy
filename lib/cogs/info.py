@@ -90,7 +90,7 @@ class Info(Cog):
              brief='To help out with support questions',
              help='You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance')
     async def faq_command(self, ctx, *, faq_tag: str = 'list'):
-        if faq_tag == 'ip':
+        if faq_tag.lower() == 'ip':
             embed = Embed(title='FAQ',
                           description='SMRO Server Host Information',
                           colour=0x4dfc32)
@@ -111,7 +111,7 @@ class Info(Cog):
 
             await ctx.send(embed=embed)
 
-        elif faq_tag == 'init':
+        elif faq_tag.lower() == 'init':
             embed = Embed(title='ERROR : Cannot init d3d OR grf file has problem.',
                           description='''```a) can be cause of resolution - try starting at lowest\nb) can be cause of graphic device\nc) can be cause of access violation - restart sometimes solves it\nd) can be cause of outdated direct x\ne) can be cause of outdated graphic card driver\nf) Install the latest c++ / framework might  help as well\ng) Try running shining.exe straight as admin, have fixed it for some people previously\nh) If previous don't work, restart your PC.```''',
                           colour=0x4dfc32)
@@ -123,13 +123,13 @@ class Info(Cog):
 
             await ctx.send(embed=embed)
 
-        elif faq_tag == 'replay':
+        elif faq_tag.lower() == 'replay':
             await ctx.send(f'{ctx.author.mention}\n**How To Play Replays:**\nhttps://cdn.discordapp.com/attachments/546255961992724481/673116241526915072/replay.mp4')
 
-        elif faq_tag == 'shadow':
+        elif faq_tag.lower() == 'shadow':
             await ctx.send(f'{ctx.author.mention}\nShadow Equipment List:\nhttps://www.shining-moon.com/helheim/index.php/Shadow_Equipment')
 
-        elif faq_tag == 'helnif':
+        elif faq_tag.lower() == 'helnif':
             embed = Embed(title='Difference between Helheim and Niflheim',
                           description='''**TL;DR:**\n```**Helheim** = kRO only balance and progressions, newer server, more players.\n*``````*Niflheim** = A mix of kRO, jRO and iRO balance and progressions, older server, less players, more build possibilities, more competitively viable endgame builds, better endgame damage potentials due to gears and easier refines.```''',
                           colour=0x4dfc32)
@@ -143,7 +143,7 @@ class Info(Cog):
 
             await ctx.send(embed=embed)
 
-        elif faq_tag == 'aspd':
+        elif faq_tag.lower() == 'aspd':
             embed = Embed(title='ASPD Golden Numbers',
                           description='```193 ASPD = up to 7 attacks/sec\n192 ASPD = up to 6 attacks/sec\n190 ASPD = up to 5 attacks/sec\n188 ASPD = up to 4 attacks/sec```',
                           colour=0x4dfc32)
@@ -154,7 +154,7 @@ class Info(Cog):
 
             await ctx.send(embed=embed)
 
-        elif faq_tag == 'enchants':
+        elif faq_tag.lower() == 'enchants':
             embed = Embed(title='Lapine Enchants - Click Me',
                           url='https://www.shining-moon.com/helheim/index.php/Lapine_Enchanting',
                           colour=0x4dfc32)
@@ -165,10 +165,10 @@ class Info(Cog):
 
             await ctx.send(embed=embed)
 
-        elif faq_tag == 'resolution':
+        elif faq_tag.lower() == 'resolution':
             await ctx.send(f'{ctx.author.mention}\n**Having resolution problems?**\nCheck this link out:\nhttps://www.shining-moon.com/w/index.php/Resolution')
 
-        elif faq_tag == 'booster maps' or faq_tag == 'boostermaps':
+        elif faq_tag.lower() == 'booster maps' or faq_tag.lower() == 'boostermaps':
             embed = Embed(title='Maps used for booster leveling',
                           description='''```@warp prt_fild06 Fabre\n@warp pay_fild06 Snake, Spore Wormtail\n@warp mjolnir_06 Poison Spore\n@warp mjo_dun02 Martin, Giearth\n@warp mjo_dun03 Skeleton Worker\n@warp iz_dun03 Swordfish\n@warp iz_dun04 Swordfish (less), Merman, Strouf\n@warp pay_dun02 Munak, Bongun\n@warp pay_dun03 Sohee\n@warp c_tower1 Rideword\n@warp c_tower3 Alarm\n@warp c_tower4 Clock\n@warp tur_dun02 Permeter, Freezer\n@warp tur_dun03 Permeter, Freezer, Heater\n@warp tur_dun04 Permeter, Freezer, Heater \n@warp ice_dun03 Gazeti, Ice Titan, Snowier, Iceicle\n@warp ma_fild02 Bungisngis\n@warp dic_dun01 Scaraba (Small Insect 130-145)\n@warp abbey01 Banshee (Dark 130-145)\n@warp lasa_dun03 Combat Basilisk, Fruits Pom Spider (Earth Medium 145-160)\n@warp ein_d02_i (Small 145-160)\n@warp c_tower3_ Big Bell, Owl Viscount, Owl Marquis```''',
                           color=ctx.author.color)
@@ -177,7 +177,7 @@ class Info(Cog):
 
             await ctx.send(embed=embed)
 
-        elif faq_tag == '4th alt ticket' or faq_tag == '4th' or faq_tag == '4th alt':
+        elif faq_tag.lower() == '4th alt ticket' or faq_tag.lower() == '4th' or faq_tag.lower() == '4th alt':
             embed = Embed(title='4th Class Outfit Ticket',
                           description='```15x Darkgreen Dyestuff ID: 979\n15x Orange Dyestuff ID: 980\n5x Costume Treasure ID: 51010\n1x Alternate Outfit Ticket ID: 51022\n50x Frozen Rose ID: 749\n50x Ancient Hero Souls ID: 1900000008\n100x Greater Fortessa Emblem ID: 1900000003```',
                           colour=ctx.author.color)
@@ -188,7 +188,7 @@ class Info(Cog):
 
             await ctx.send(embed=embed)
 
-        elif faq_tag == 'pde' or faq_tag == 'power dim essence':
+        elif faq_tag.lower() == 'pde' or faq_tag.lower() == 'power dim essence':
             embed = Embed(title='Powerful Dimensional Essence',
                           description='```5x Temporal Metal ID: 190000011\n10x Temporal Crystal ID: 6607\n250x Chivalry Emblem ID: 1004\n5x Will of Red Darkness ID: 7566\n25x Blade Lost in Darkness ID: 7023```',
                           colour=ctx.author.color)
@@ -203,6 +203,9 @@ class Info(Cog):
 
         elif(faq_tag == 'class rebalance'):
             await ctx.send('https://www.divine-pride.net/forum/index.php?/topic/4203-kro-skill-adjustment-timeline/')
+
+        elif(faq_tag.lower() == 'melon bun'):
+            await ctx.send('Meow Bwun Nyun')
 
         else:
             await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance')
