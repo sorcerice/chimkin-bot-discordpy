@@ -398,13 +398,13 @@ class Crawler(Cog):
                     try:
                         dfs = pd.read_html(page)
                         df1 = dfs[2][['Date ▼', 'Price', 'Amount Sold']]
-                    except IndexError:
+                    except (IndexError, ValueError):
                         try:
                             dfs = pd.read_html(page)
                             df1 = dfs[1][['Date ▼', 'Price', 'Amount Sold']]
                         except (IndexError, KeyError):
                             await ctx.send('That item was probably never on vend.')
-                    except KeyError:
+                    except (KeyError, ValueError):
                         try:
                             dfs = pd.read_html(page)
                             df1 = dfs[4][['Date ▼', 'Price', 'Amount Sold']]
