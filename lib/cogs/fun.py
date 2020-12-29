@@ -332,6 +332,18 @@ class Fun(Cog):
                 img = BytesIO(await resp.read())
                 await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'XD.gif'))
 
+    @command(name='rjam',
+             aliases=['ratjam'],
+             description='RAT JAM!!!',
+             brief='RAT JAM!!!',
+             help='RAT JAM!!!')
+    async def send_djam(self, ctx):
+        URL = 'https://cdn.betterttv.net/emote/5f43037db2efd65d77e8a88f/3x'
+        async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+            if resp.status == 200:
+                img = BytesIO(await resp.read())
+                await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'ratJAM.gif'))
+
     @Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:
