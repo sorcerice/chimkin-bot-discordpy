@@ -337,7 +337,7 @@ class Fun(Cog):
              description='RAT JAM!!!',
              brief='RAT JAM!!!',
              help='RAT JAM!!!')
-    async def send_djam(self, ctx):
+    async def send_rjam(self, ctx):
         URL = 'https://cdn.betterttv.net/emote/5f43037db2efd65d77e8a88f/3x'
         async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
             if resp.status == 200:
