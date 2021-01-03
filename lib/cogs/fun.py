@@ -5,6 +5,8 @@ from itertools import cycle
 from glob import glob
 import re
 from io import BytesIO
+import os
+from dotenv import load_dotenv
 
 from libneko import pag
 from aiohttp import request
@@ -344,7 +346,30 @@ class Fun(Cog):
                 img = BytesIO(await resp.read())
                 await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'ratJAM.gif'))
 
-    @Cog.listener()
+    @command(name='petpet',
+             aliases=['pet'],
+             description='Pet person',
+             brief='Tag a person to pet them or pet yourself!',
+             help='.petpet @Lunch')
+    async def petpet_command(self, ctx, member: Member):
+        APIKEY = os.getenv('SRA_KEY')
+        memberAvatarUrl = member.avatar_url_as(format='png')
+        print(memberAvatarUrl)
+        URL = f"https://some-random-api.ml/premium/petpet?avatar={memberAvatarUrl}&key={APIKEY}"
+
+        async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+            if resp.status == 200:
+                img = BytesIO(await resp.read())
+                await ctx.send(file=File(img, f'{member.display_name}_petpet.gif'))
+            else:
+                await ctx.send(f'Error Code: {resp.status}')
+
+    @petpet_command.error
+    async def petpet_command_error(self, ctx, exc):
+        if isinstance(exc, BadArgument):
+            await ctx.send("You need to mention someone to pet!")
+
+    @ Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:
             if len(message.content) != 0:
@@ -366,7 +391,7 @@ class Fun(Cog):
             if messageConverter == 'revolution':
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
-    @Cog.listener()
+    @ Cog.listener()
     async def on_ready(self):
         if not self.bot.ready:
             self.bot.cogs_ready.ready_up("fun")
