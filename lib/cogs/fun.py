@@ -354,7 +354,6 @@ class Fun(Cog):
     async def petpet_command(self, ctx, member: Member):
         APIKEY = os.getenv('SRA_KEY')
         memberAvatarUrl = member.avatar_url_as(format='png')
-        print(memberAvatarUrl)
         URL = f"https://some-random-api.ml/premium/petpet?avatar={memberAvatarUrl}&key={APIKEY}"
 
         async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
