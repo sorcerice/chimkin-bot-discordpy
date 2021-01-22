@@ -135,7 +135,31 @@ class Formulas(Cog):
         vctRemaining = 100 - vctReduction
 
         embed = Embed(title='VCT Calculation? But why? OK Fine I\'ll do it...',
-                      description=f'You have a total of **{vctReduction:.0f}% VCT Reduction** and **{vctRemaining:.0f}% VCT left**',
+                      description=f'\n\nYou have a total of **{vctReduction:.0f}% VCT Reduction** and **{vctRemaining:.0f}% VCT left**\n\n',
+                      color=ctx.author.color)
+        embed.set_author(name=ctx.author.display_name,
+                         icon_url=ctx.author.avatar_url)
+        embed.set_footer(
+            text=f'Why would you make me do this {ctx.author.display_name}.... *sigh*', icon_url=ctx.guild.icon_url)
+
+        await ctx.send(embed=embed)
+
+    @command(name='vctcount',
+             brief='Calculates VCT reduction based on total DEX and INT',
+             description='Provide the total DEX followed by total INT to get VCT Reduction % and the remaining VCT %',
+             help='When using the command please provide total DEX and then the total INT in that order only',
+             usage='`.vctstat <TOTAL DEX> <TOTAL INT>\nTotal of any stat means the sum of the stat shown in your ALT+A window ingame\nEx: DEX 120+30 will be shown ingame so the Total DEX will be 150`')
+    async def get_vctcount(self, ctx, totalDex: int, totalInt: int):
+        vctReduction = ((totalDex*2 + totalInt)/530) * 100
+        vctRemaining = 100 - vctReduction
+
+        if vctReduction > 100:
+            vctReduction = 100
+        if vctRemaining < 0:
+            vctRemaining = 0
+
+        embed = Embed(title='VCT Calculation? But why? OK Fine I\'ll do it...',
+                      description=f'\n\nYou have a total of **{vctReduction:.0f}% VCT Reduction** and **{vctRemaining:.0f}% VCT left**\n\n',
                       color=ctx.author.color)
         embed.set_author(name=ctx.author.display_name,
                          icon_url=ctx.author.avatar_url)
