@@ -134,25 +134,6 @@ class Formulas(Cog):
         vctReduction = ((totalDex*2 + totalInt)/530) * 100
         vctRemaining = 100 - vctReduction
 
-        embed = Embed(title='VCT Calculation? But why? OK Fine I\'ll do it...',
-                      description=f'\n\nYou have a total of **{vctReduction:.0f}% VCT Reduction** and **{vctRemaining:.0f}% VCT left**\n\n',
-                      color=ctx.author.color)
-        embed.set_author(name=ctx.author.display_name,
-                         icon_url=ctx.author.avatar_url)
-        embed.set_footer(
-            text=f'Why would you make me do this {ctx.author.display_name}.... *sigh*', icon_url=ctx.guild.icon_url)
-
-        await ctx.send(embed=embed)
-
-    @command(name='vctcount',
-             brief='Calculates VCT reduction based on total DEX and INT',
-             description='Provide the total DEX followed by total INT to get VCT Reduction % and the remaining VCT %',
-             help='When using the command please provide total DEX and then the total INT in that order only',
-             usage='`.vctstat <TOTAL DEX> <TOTAL INT>\nTotal of any stat means the sum of the stat shown in your ALT+A window ingame\nEx: DEX 120+30 will be shown ingame so the Total DEX will be 150`')
-    async def get_vctcount(self, ctx, totalDex: int, totalInt: int):
-        vctReduction = ((totalDex*2 + totalInt)/530) * 100
-        vctRemaining = 100 - vctReduction
-
         if vctReduction > 100:
             vctReduction = 100
         if vctRemaining < 0:
@@ -165,6 +146,24 @@ class Formulas(Cog):
                          icon_url=ctx.author.avatar_url)
         embed.set_footer(
             text=f'Why would you make me do this {ctx.author.display_name}.... *sigh*', icon_url=ctx.guild.icon_url)
+
+        await ctx.send(embed=embed)
+
+    @command(name='vctcount',
+             brief='Calculates how many seconds of VCT remains based on total DEX, INT and skill VCT',
+             description='Provide the total DEX, total INT and skill VCT to get the VCT remaining in seconds',
+             help='When using the command please provide total DEX, total INT and then skill VCT in that order only',
+             usage='`.vctcount <TOTAL DEX> <TOTAL INT> <SKILL VCT>\nTotal of any stat means the sum of the stat shown in your ALT+A window ingame\nEx: DEX 120+30 will be shown ingame so the Total DEX will be 150`\nTo get the skill VCT count hover over the skill ingame')
+    async def get_vctcount(self, ctx, totalDex: int, totalInt: int, skillVCT: int):
+        vctRemainingSeconds = skillVCT * (1 - ((totalDex*2 + totalInt)/530))
+
+        embed = Embed(title='VCT Calculation for the seconds of VCT remaining',
+                      description=f'\n\nYou have a total of **{vctRemainingSeconds} seconds** of VCT remaining for a skill with **{skillVCT}s** VCT\n **Total DEX = {totalDex}** || **Total INT = {totalInt}**\n\n',
+                      color=ctx.author.color)
+        embed.set_author(name=ctx.author.display_name,
+                         icon_url=ctx.author.avatar_url)
+        embed.set_footer(
+            text=f'My brain hurts after doing this... *sigh*', icon_url=ctx.guild.icon_url)
 
         await ctx.send(embed=embed)
 
