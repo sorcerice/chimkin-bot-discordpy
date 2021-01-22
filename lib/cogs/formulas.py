@@ -140,7 +140,7 @@ class Formulas(Cog):
             vctRemaining = 0
 
         embed = Embed(title='VCT Calculation? But why? OK Fine I\'ll do it...',
-                      description=f'\n\nYou have a total of **{vctReduction:.0f}% VCT Reduction** and **{vctRemaining:.0f}% VCT left**\n\n',
+                      description=f'\n\nYou have a total of **{vctReduction:.1f}% VCT Reduction** and **{vctRemaining:.0f}% VCT left**\n\n',
                       color=ctx.author.color)
         embed.set_author(name=ctx.author.display_name,
                          icon_url=ctx.author.avatar_url)
@@ -158,7 +158,7 @@ class Formulas(Cog):
         vctRemainingSeconds = skillVCT * (1 - ((totalDex*2 + totalInt)/530))
 
         embed = Embed(title='VCT Calculation for the seconds of VCT remaining',
-                      description=f'\n\nYou have a total of **{vctRemainingSeconds} seconds** of VCT remaining for a skill with **{skillVCT}s** VCT\n **Total DEX = {totalDex}** || **Total INT = {totalInt}**\n\n',
+                      description=f'\n\nYou have a total of **{vctRemainingSeconds:.2f} seconds** of VCT remaining for a skill with **{skillVCT}s** VCT\n **Total DEX = {totalDex}** || **Total INT = {totalInt}**\n\n',
                       color=ctx.author.color)
         embed.set_author(name=ctx.author.display_name,
                          icon_url=ctx.author.avatar_url)
