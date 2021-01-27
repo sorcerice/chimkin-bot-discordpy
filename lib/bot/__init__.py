@@ -192,13 +192,13 @@ class Bot(BotBase):
                                   colour=member.colour,
                                   timestamp=datetime.utcnow())
 
-                embed.set_thumbnail(url=member.avatar_url)
+                    embed.set_thumbnail(url=member.avatar_url)
 
-                fields = [('Member', member.display_name, False),
-                          ('Message', message.content, False)]
+                    fields = [('Member', member.display_name, False),
+                              ('Message', message.content, False)]
 
-                for name, value, inline in fields:
-                    embed.add_field(name=name, value=value, inline=inline)
+                    for name, value, inline in fields:
+                        embed.add_field(name=name, value=value, inline=inline)
 
                 mod = self.get_cog('Mod')
                 self.butterBotCh = self.get_channel(714141581308985414)
