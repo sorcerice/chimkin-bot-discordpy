@@ -1,5 +1,5 @@
 from lib.bot import bot
 
-VERSION = "0.1.9"  # added intents
+VERSION = "0.2"  # new formulas and bug fixes
 
 bot.run(VERSION)
