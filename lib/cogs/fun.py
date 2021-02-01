@@ -346,6 +346,42 @@ class Fun(Cog):
                 img = BytesIO(await resp.read())
                 await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'ratJAM.gif'))
 
+    @command(name='gjam',
+             aliases=['ogjam', 'gandalfjam'],
+             description='OG GANDALF!!!',
+             brief='GANDALF!!!',
+             help='GANDALF!!!')
+    async def send_gjam(self, ctx):
+        URL = 'https://cdn.betterttv.net/emote/5fc63c950adab74618587f93/3x'
+        async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+            if resp.status == 200:
+                img = BytesIO(await resp.read())
+                await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'gandalfJAM.gif'))
+
+    @command(name='pepejam',
+             aliases=['pjam'],
+             description='OG GANDALF!!!',
+             brief='GANDALF!!!',
+             help='GANDALF!!!')
+    async def send_pepejam(self, ctx):
+        URL = 'https://cdn.betterttv.net/emote/5b77ac3af7bddc567b1d5fb2/3x'
+        async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+            if resp.status == 200:
+                img = BytesIO(await resp.read())
+                await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'pepeJAM.gif'))
+
+    @command(name='popcat',
+             aliases=['pcat'],
+             description='OG GANDALF!!!',
+             brief='GANDALF!!!',
+             help='GANDALF!!!')
+    async def send_popcat(self, ctx):
+        URL = 'https://cdn.betterttv.net/emote/5fa8f232eca18f6455c2b2e1/3x'
+        async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+            if resp.status == 200:
+                img = BytesIO(await resp.read())
+                await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'popcat.gif'))
+
     @command(name='petpet',
              aliases=['pet'],
              description='Pet person',
