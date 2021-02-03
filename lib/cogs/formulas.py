@@ -108,6 +108,8 @@ class Formulas(Cog):
             # attacks per second
             aps = 50/(200-aspd)
 
+            apsComment = f'You will be able to spam the skill at **{aps:.2f} attacks/second**'
+
             if aspd <= 193:
                 atkSpd = (200-aspd)/50
 
@@ -117,9 +119,11 @@ class Formulas(Cog):
                 if coolDown > skillDelay:
                     await ctx.send('The provided cooldown was greater than the skill delay\nYou won\'t be able to spam the skill even if you reduce ACD')
                 else:
+                    if acdReduction < 0:
+                        acdReduction = 0
                     embed = Embed(
                         title='Looks like you want to spam skills huh?',
-                        description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\nYou will be able to spam the skill at **{aps:.2f} attacks/second**\n**Note:** *People usually target 7 attacks/s*',
+                        description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\n{apsComment}\n**Note:** *People usually target 7 attacks/s*',
                         color=ctx.author.color)
 
                     embed.set_author(name=ctx.author.display_name,
