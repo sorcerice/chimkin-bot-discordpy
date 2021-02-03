@@ -114,43 +114,24 @@ class Formulas(Cog):
                 acdReduction = round(
                     (1-((atkSpd if coolDown < atkSpd else coolDown)/skillDelay))*100)
 
-                embed = Embed(
-                    title='Looks like you want to spam skills huh?',
-                    description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\nYou will be able to spam the skill at **{aps:.2f} attacks/second**',
-                    color=ctx.author.color)
-                embed.set_author(name=ctx.author.display_name,
-                                 icon_url=ctx.author.avatar_url)
-                embed.set_footer(
-                    text='Note: Skills with hard animation or non-reduceable cooldowns are not spammable', icon_url=ctx.guild.icon_url)
+                if coolDown > skillDelay:
+                    await ctx.send('The provided cooldown was greater than the skill delay\nYou won\'t be able to spam the skill even if you reduce ACD')
+                else:
+                    embed = Embed(
+                        title='Looks like you want to spam skills huh?',
+                        description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\nYou will be able to spam the skill at **{aps:.2f} attacks/second**',
+                        color=ctx.author.color)
 
-                await ctx.send(embed=embed)
+                    embed.set_author(name=ctx.author.display_name,
+                                     icon_url=ctx.author.avatar_url)
+                    embed.set_footer(
+                        text='Note: Skills with hard animation or non-reduceable cooldowns are not spammable', icon_url=ctx.guild.icon_url)
+
+                    await ctx.send(embed=embed)
             else:
                 await ctx.send(f"The maximum ASPD is 193 on Shining Moon RO.\n{aspd} ASPD is not attainable *yet*")
         except ZeroDivisionError:
             await ctx.send('TO INFINITY AND BEYOND\nP.S: Please don\'t use zero.')
-
-    @command(
-        name='attackspersecond',
-        alias=['aps'],
-        brief='Calculates the number of attacks per second based on your aspd',
-        description='Use the ASPD value from your ALT+A to and input it in the command',
-        help='Calculated the number of attacks per second based on your aspd',
-        usage='<ASPD>')
-    async def get_aps(self, ctx, aspd: int):
-        aps = 50/(200-aspd)
-
-        embed = Embed(
-            title='Attacks per second',
-            description=f'At {aspd} ASPD you will be doing {aps:.2f} attacks/second',
-            color=ctx.author.color
-        )
-        embed.set_author(
-            name=ctx.author.display_name,
-            icon_url=ctx.author.avatar_url
-        )
-        embed.set_footer(
-            text='For golden aspd numbers try `.faq aspd`'
-        )
 
     @command(name='vctstat',
              brief='Calculates VCT reduction based on total DEX and INT',
