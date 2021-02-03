@@ -1,7 +1,6 @@
 from datetime import datetime as d
 from random import choice, randint
 from typing import Optional
-from itertools import cycle
 from glob import glob
 import re
 from io import BytesIO

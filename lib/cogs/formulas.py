@@ -105,15 +105,19 @@ class Formulas(Cog):
              usage='`.acd <ASPD> <Skill Delay> <Skill Cooldown>`\nYou can get your ASPD from your stat info ingame pressing Alt+A\nFor the Skill Delay and Skill Cooldown hover over the skill ingame')
     async def get_acd(self, ctx, aspd: int, skillDelay: float, coolDown: Optional[float] = 0):
         try:
+            # attacks per second
+            aps = 50/(200-aspd)
+
             if aspd <= 193:
                 atkSpd = (200-aspd)/50
 
                 acdReduction = round(
                     (1-((atkSpd if coolDown < atkSpd else coolDown)/skillDelay))*100)
 
-                embed = Embed(title='Looks like you want to spam skills huh?',
-                              description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\nTo see how many times you can spam the skill per second with **{aspd} ASPD**, type `.faq aspd`',
-                              color=ctx.author.color)
+                embed = Embed(
+                    title='Looks like you want to spam skills huh?',
+                    description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\nYou will be able to spam the skill at {aps:2f} attacks/second',
+                    color=ctx.author.color)
                 embed.set_author(name=ctx.author.display_name,
                                  icon_url=ctx.author.avatar_url)
                 embed.set_footer(
@@ -124,6 +128,29 @@ class Formulas(Cog):
                 await ctx.send(f"The maximum ASPD is 193 on Shining Moon RO.\n{aspd} ASPD is not attainable *yet*")
         except ZeroDivisionError:
             await ctx.send('TO INFINITY AND BEYOND\nP.S: Please don\'t use zero.')
+
+    @command(
+        name='attackspersecond',
+        alias=['aps'],
+        brief='Calculates the number of attacks per second based on your aspd',
+        description='Use the ASPD value from your ALT+A to and input it in the command',
+        help='Calculated the number of attacks per second based on your aspd',
+        usage='<ASPD>')
+    async def get_aps(self, ctx, aspd: int):
+        aps = 50/(200-aspd)
+
+        embed = Embed(
+            title='Attacks per second',
+            description=f'At {aspd} ASPD you will be doing {aps:.2f} attacks/second',
+            color=ctx.author.color
+        )
+        embed.set_author(
+            name=ctx.author.display_name,
+            icon_url=ctx.author.avatar_url
+        )
+        embed.set_footer(
+            text='For golden aspd numbers try `.faq aspd`'
+        )
 
     @command(name='vctstat',
              brief='Calculates VCT reduction based on total DEX and INT',

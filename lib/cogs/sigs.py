@@ -6,7 +6,7 @@ from discord import Embed, File
 from discord.ext.commands import Cog
 from discord.ext.commands import command
 
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image
 from aiohttp import request
 
 
