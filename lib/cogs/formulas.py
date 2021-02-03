@@ -116,7 +116,7 @@ class Formulas(Cog):
 
                 embed = Embed(
                     title='Looks like you want to spam skills huh?',
-                    description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\nYou will be able to spam the skill at {aps:2f} attacks/second',
+                    description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\nYou will be able to spam the skill at **{aps:.2f} attacks/second**',
                     color=ctx.author.color)
                 embed.set_author(name=ctx.author.display_name,
                                  icon_url=ctx.author.avatar_url)
