@@ -106,7 +106,10 @@ class Formulas(Cog):
     async def get_acd(self, ctx, aspd: int, skillDelay: float, coolDown: Optional[float] = 0):
         try:
             # attacks per second
-            aps = 50/(200-aspd)
+            if coolDown == 0:
+                aps = round(50/(200-aspd))
+            elif coolDown > 0.14:
+                aps = round(1/coolDown)
 
             apsComment = f'You will be able to spam the skill at **{aps:.2f} attacks/second**'
 
