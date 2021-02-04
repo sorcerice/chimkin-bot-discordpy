@@ -129,7 +129,7 @@ class Formulas(Cog):
                         description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\n{apsComment}',
                         color=ctx.author.color)
 
-                    embed.add_filed(
+                    embed.add_field(
                         name='Note:', value='*People usually target 7 attacks/s*\n*For 0s CD skill, people usually target 7 attacks/second*\nSkills with hard animation or non-reduceable cooldowns are not spammable')
 
                     embed.set_footer(
