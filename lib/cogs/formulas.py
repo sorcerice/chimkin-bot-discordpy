@@ -130,7 +130,7 @@ class Formulas(Cog):
                         color=ctx.author.color)
 
                     embed.add_field(
-                        name='Note:', value='*People usually target 7 attacks/s*\n*For 0s CD skill, people usually target 7 attacks/second*\nSkills with hard animation or non-reduceable cooldowns are not spammable')
+                        name='Note:', value='*For 0s CD skill, people usually target 7 attacks/second*\nSkills with hard animation or non-reduceable cooldowns are not spammable')
 
                     embed.set_footer(
                         text='Formulas provided by Melon Bun#1508', icon_url=ctx.guild.icon_url)
