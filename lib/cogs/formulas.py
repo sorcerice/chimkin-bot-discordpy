@@ -126,13 +126,17 @@ class Formulas(Cog):
                         acdReduction = 0
                     embed = Embed(
                         title='Looks like you want to spam skills huh?',
-                        description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\n{apsComment}\n\n**Note:** *People usually target 7 attacks/s*\nFor 0s CD skill, people usually target 7 attacks/second',
+                        description=f'You will need **{acdReduction:.0f}% ACD reduction** to spam a skill with **{skillDelay}s Skill Delay** and **{coolDown}s CD** at **{aspd} ASPD**\n{apsComment}',
                         color=ctx.author.color)
+
+                    embed.add_filed(
+                        name='Note:', value='*People usually target 7 attacks/s*\n*For 0s CD skill, people usually target 7 attacks/second*\nSkills with hard animation or non-reduceable cooldowns are not spammable')
+
+                    embed.set_footer(
+                        text='Formulas provided by Melon Bun#1508', icon_url=ctx.guild.icon_url)
 
                     embed.set_author(name=ctx.author.display_name,
                                      icon_url=ctx.author.avatar_url)
-                    embed.set_footer(
-                        text='Note: Skills with hard animation or non-reduceable cooldowns are not spammable', icon_url=ctx.guild.icon_url)
 
                     await ctx.send(embed=embed)
             else:
@@ -160,7 +164,7 @@ class Formulas(Cog):
         embed.set_author(name=ctx.author.display_name,
                          icon_url=ctx.author.avatar_url)
         embed.set_footer(
-            text=f'Why would you make me do this {ctx.author.display_name}.... *sigh*', icon_url=ctx.guild.icon_url)
+            text='Formulas provided by Melon Bun#1508', icon_url=ctx.guild.icon_url)
 
         await ctx.send(embed=embed)
 
@@ -178,7 +182,7 @@ class Formulas(Cog):
         embed.set_author(name=ctx.author.display_name,
                          icon_url=ctx.author.avatar_url)
         embed.set_footer(
-            text=f'My brain hurts after doing this... *sigh*', icon_url=ctx.guild.icon_url)
+            text='Formulas provided by Melon Bun#1508', icon_url=ctx.guild.icon_url)
 
         await ctx.send(embed=embed)
 
