@@ -381,6 +381,18 @@ class Fun(Cog):
                 img = BytesIO(await resp.read())
                 await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'popcat.gif'))
 
+    @command(name='bongocat',
+             aliases=['bcat'],
+             description='BONGO CAT!!!',
+             brief='BONGO CAT!!!',
+             help='BONGO CAT!!!')
+    async def send_bongocat(self, ctx):
+        URL = 'https://cdn.betterttv.net/emote/5ba6d5ba6ee0c23989d52b10/3x'
+        async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as resp:
+            if resp.status == 200:
+                img = BytesIO(await resp.read())
+                await ctx.send(content=f'Request by {ctx.author.display_name}', file=File(img, 'bongocat.gif'))
+
     @command(name='petpet',
              aliases=['pet'],
              description='Pet person',
