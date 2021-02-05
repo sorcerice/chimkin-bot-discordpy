@@ -415,7 +415,7 @@ class Fun(Cog):
         if isinstance(exc, BadArgument):
             await ctx.send("You need to mention someone to pet!")
 
-    @ Cog.listener()
+    @Cog.listener()
     async def on_message(self, message):
         if not message.author.bot:
             if len(message.content) != 0:
@@ -437,7 +437,7 @@ class Fun(Cog):
             if messageConverter == 'revolution':
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
-    @ Cog.listener()
+    @Cog.listener()
     async def on_ready(self):
         if not self.bot.ready:
             self.bot.cogs_ready.ready_up("fun")
