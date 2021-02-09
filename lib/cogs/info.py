@@ -208,7 +208,7 @@ class Info(Cog):
             await ctx.send('Meow Bwun Nyun')
 
         elif(faq_tag.lower() == 'booster char' or faq_tag.lower() == 'boosterchar'):
-            await ctx.send('When you create a booster character, if you delete the  created  booster character or  if you cancel the booster NPC, *YOU WILL NOT BE ABLE TO CREATE A NEW BOOSTER CHARACTER* !\nPlease pay attention and be careful when you are making your choices.')
+            await ctx.send('`When you create a booster character, if you delete the  created  booster character or  if you cancel the booster NPC, **YOU WILL NOT BE ABLE TO CREATE A NEW BOOSTER CHARACTER** !`\nPlease pay attention and be careful when you are making your choices.')
 
         else:
             await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance, booster char')
