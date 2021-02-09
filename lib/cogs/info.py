@@ -169,7 +169,7 @@ class Info(Cog):
             await ctx.send(f'{ctx.author.mention}\n**Having resolution problems?**\nCheck this link out:\nhttps://www.shining-moon.com/w/index.php/Resolution')
 
         elif faq_tag.lower() == 'booster maps' or faq_tag.lower() == 'boostermaps':
-            embed = Embed(title='Maps used for booster leveling',
+            embed = Embed(title='Maps used for booster quests',
                           description='''```@warp prt_fild06 Fabre\n@warp pay_fild06 Snake, Spore Wormtail\n@warp mjolnir_06 Poison Spore\n@warp mjo_dun02 Martin, Giearth\n@warp mjo_dun03 Skeleton Worker\n@warp iz_dun03 Swordfish\n@warp iz_dun04 Swordfish (less), Merman, Strouf\n@warp pay_dun02 Munak, Bongun\n@warp pay_dun03 Sohee\n@warp c_tower1 Rideword\n@warp c_tower3 Alarm\n@warp c_tower4 Clock\n@warp tur_dun02 Permeter, Freezer\n@warp tur_dun03 Permeter, Freezer, Heater\n@warp tur_dun04 Permeter, Freezer, Heater \n@warp ice_dun03 Gazeti, Ice Titan, Snowier, Iceicle\n@warp ma_fild02 Bungisngis\n@warp dic_dun01 Scaraba (Small Insect 130-145)\n@warp abbey01 Banshee (Dark 130-145)\n@warp lasa_dun03 Combat Basilisk, Fruits Pom Spider (Earth Medium 145-160)\n@warp ein_d02_i (Small 145-160)\n@warp c_tower3_ Big Bell, Owl Viscount, Owl Marquis```''',
                           color=ctx.author.color)
             embed.set_footer(
@@ -201,14 +201,17 @@ class Info(Cog):
 
             await ctx.send(embed=embed)
 
-        elif(faq_tag == 'class rebalance'):
+        elif(faq_tag.lower() == 'class rebalance'):
             await ctx.send('https://www.divine-pride.net/forum/index.php?/topic/4203-kro-skill-adjustment-timeline/')
 
         elif(faq_tag.lower() == 'melon bun'):
             await ctx.send('Meow Bwun Nyun')
 
+        elif(faq_tag.lower() == 'booster char' or faq_tag.lower() == 'boosterchar'):
+            await ctx.send('When you create a booster character, if you delete the  created  booster character or  if you cancel the booster NPC, *YOU WILL NOT BE ABLE TO CREATE A NEW BOOSTER CHARACTER* !\nPlease pay attention and be careful when you are making your choices.')
+
         else:
-            await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance')
+            await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance, booster char')
 
     @Cog.listener()
     async def on_ready(self):
