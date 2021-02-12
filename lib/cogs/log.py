@@ -104,26 +104,30 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_message_delete(self, message):
-        if not message.author.bot:
-            embed = Embed(title=f"Message Deletions **({message.guild.name})**",
-                          description=f"Deleted by **{message.author.display_name}**",
-                          colour=message.author.colour,
-                          timestamp=datetime.utcnow())
+        try:
+            if not message.author.bot:
+                embed = Embed(title=f"Message Deletions **({message.guild.name})**",
+                              description=f"Deleted by **{message.author.display_name}**",
+                              colour=message.author.colour,
+                              timestamp=datetime.utcnow())
 
-            if len(message.content) != 0:
-                fields = [("Content", message.content, False)]
-            elif len(message.attachments) != 0:
-                attachments = message.attachments
-                for attachment in attachments:
-                    proxyUrl = attachment.proxy_url
-                fields = [('Content', proxyUrl, False)]
-            else:
-                fields = [('Content', 'Deleted message couldn\'t be logged')]
+                if len(message.content) != 0:
+                    fields = [("Content", message.content, False)]
+                elif len(message.attachments) != 0:
+                    attachments = message.attachments
+                    for attachment in attachments:
+                        proxyUrl = attachment.proxy_url
+                    fields = [('Content', proxyUrl, False)]
+                else:
+                    fields = [
+                        ('Content', 'Deleted message couldn\'t be logged')]
 
-            for name, value, inline in fields:
-                embed.add_field(name=name, value=value, inline=inline)
+                for name, value, inline in fields:
+                    embed.add_field(name=name, value=value, inline=inline)
 
-                await self.log_channel.send(embed=embed)
+                    await self.log_channel.send(embed=embed)
+        except ValueError:
+            await self.log_channel.send(f'Value Error.\n Message deleted by {message.author.display_name}')
 
 
 def setup(bot):
