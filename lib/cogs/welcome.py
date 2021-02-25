@@ -22,7 +22,7 @@ class Welcome(Cog):
 
             await member.add_roles(*(member.guild.get_role(id_) for id_ in [(633887205806440499)]))
         if member.guild.id == 285121209027264512:
-            await self.bot.get_channel(814146892094636034).send(f'''Hey {member.mention}, welcome to **{member.guild.name}**!!\nIf you have any questions or issues check out <#814253664734281780>\n\nSpecific server channels are:\n<#814325488029401108> and <#814325488029401108>''')
+            await self.bot.get_channel(814146892094636034).send(f'''Hey {member.mention}, welcome to **{member.guild.name}**!!\nIf you have any questions or issues check out <#814334346302586910>\n\nSpecific server channels are:\n<#814334346302586910> and <#814334346302586910>''')
         else:
             pass
 
