@@ -21,6 +21,8 @@ class Welcome(Cog):
             await self.bot.get_channel(598539329320648897).send(f'''Hello {member.mention}, welcome to **{member.guild.name}**<:peepoblush:633637992090697739>!\n\nFeel free to check out the <#600949560386256907> so you don't get lost!\nIf you're from SMRO, please role yourself at <#686074623506382891>''')
 
             await member.add_roles(*(member.guild.get_role(id_) for id_ in [(633887205806440499)]))
+        if member.guild.id == 285121209027264512:
+            await self.bot.get_channel(814146892094636034).send(f'''Hey {member.mention}, welcome to **{member.guild.name}**!!\nIf you have any questions or issues check out <#814253664734281780>\n\nSpecific server channels are:\n<#814325488029401108> and <#814325488029401108>''')
         else:
             pass
 
