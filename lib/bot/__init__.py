@@ -181,6 +181,8 @@ class Bot(BotBase):
             print("bot reconnected")
 
     async def on_message(self, message):
+        self.testServerModMail = self.get_channel(804202154784718848)
+
         if not message.author.bot:
             if isinstance(message.channel, DMChannel):
                 if len(message.content) < 10:
@@ -199,9 +201,10 @@ class Bot(BotBase):
                     for name, value, inline in fields:
                         embed.add_field(name=name, value=value, inline=inline)
 
+                    await self.testServerModMail.send(embed=embed)
+
                 mod = self.get_cog('Mod')
-                self.testServerModMail = self.get_channel(804202154784718848)
-                await self.testServerModMail.send(embed=embed)
+
                 await message.channel.send("Message relayed to Awie Government")
 
             else:
