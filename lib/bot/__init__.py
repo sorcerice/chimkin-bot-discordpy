@@ -187,7 +187,7 @@ class Bot(BotBase):
                     await message.channel.send("Your message should be atleast 10 characters in length.")
 
                 else:
-                    member = self.butter.get_member(message.author.id)
+                    member = self.guild.get_member(message.author.id)
                     embed = Embed(title=f'''{member.display_name} slid into Chimkin's DMs''',
                                   colour=member.colour,
                                   timestamp=datetime.utcnow())
