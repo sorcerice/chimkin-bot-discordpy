@@ -202,10 +202,9 @@ class Bot(BotBase):
                         embed.add_field(name=name, value=value, inline=inline)
 
                     await self.testServerModMail.send(embed=embed)
+                    await message.channel.send("Message relayed to Awie Government")
 
                 mod = self.get_cog('Mod')
-
-                await message.channel.send("Message relayed to Awie Government")
 
             else:
                 await self.process_commands(message)
