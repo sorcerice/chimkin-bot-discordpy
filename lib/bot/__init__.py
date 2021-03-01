@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import discord
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from discord import Embed, File, DMChannel
+from discord import Embed, File, DMChannel, Colour
 from discord.errors import HTTPException, Forbidden, NotFound
 from discord.ext.commands import Bot as BotBase
 from discord.ext.commands import Context
@@ -187,14 +187,13 @@ class Bot(BotBase):
                     await message.channel.send("Your message should be atleast 10 characters in length.")
 
                 else:
-                    member = self.guild.get_member(message.author.id)
-                    embed = Embed(title=f'''{member.display_name} slid into Chimkin's DMs''',
-                                  colour=member.colour,
+                    embed = Embed(title=f'''{message.author.name}#{message.author.discriminator} slid into Chimkin's DMs''',
+                                  colour=Colour.green(),
                                   timestamp=datetime.utcnow())
 
-                    embed.set_thumbnail(url=member.avatar_url)
+                    embed.set_thumbnail(url=message.author.avatar_url)
 
-                    fields = [('Member', member.display_name, False),
+                    fields = [('Member', message.author.name, False),
                               ('Message', message.content, False)]
 
                     for name, value, inline in fields:
