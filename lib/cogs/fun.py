@@ -104,7 +104,7 @@ class Fun(Cog):
         elif message.startswith("/tts"):
             await ctx.send("I don't think so buster")
         else:
-            await ctx.message.delete()
+            await message.delete()
             await ctx.send(message)
 
     @command(name="fact",
