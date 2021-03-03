@@ -91,7 +91,7 @@ class Log(Cog):
             if before.content != after.content:
                 try:
                     embed = Embed(title=f"Message Edit **({after.guild.name})**",
-                                  description=f"Edit by **{after.author.display_name}**",
+                                  description=f"Edit by **{after.author.display_name}** in **#{after.channel.name}**",
                                   colour=after.author.colour,
                                   timestamp=datetime.utcnow())
 
@@ -111,7 +111,7 @@ class Log(Cog):
         try:
             if not message.author.bot:
                 embed = Embed(title=f"Message Deletions **({message.guild.name})**",
-                              description=f"Deleted by **{message.author.display_name}**",
+                              description=f"Deleted by **{message.author.display_name}** in **#{message.channel.name}**",
                               colour=message.author.colour,
                               timestamp=datetime.utcnow())
 
