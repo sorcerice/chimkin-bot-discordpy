@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from re import search
 
 from discord import Embed, Member
+from discord.errors import HTTPException
 from discord.ext.commands import Cog
 from discord.ext.commands import CheckFailure
 from discord.ext.commands import command, has_permissions, bot_has_permissions
@@ -34,16 +35,20 @@ class SMRO(Cog):
     async def on_message_edit(self, before, after):
         if not after.author.bot and after.guild.id == 285121209027264512:
             if before.content != after.content:
-                embed = Embed(title=f"Message Edited!",
-                              description=f"Edited by **{after.author.display_name}** in {after.channel.name}",
-                                          colour=0x11806a,  # Dark Teal
-                              timestam=datetime.utcnow())
-                fields = [("Before", before.content, False),
-                          ("After", after.content, False)]
+                try:
+                    embed = Embed(title=f"Message Edited!",
+                                  description=f"Edited by **{after.author.display_name}** in {after.channel.name}",
+                                  colour=0x11806a,  # Dark Teal
+                                  timestam=datetime.utcnow())
+                    fields = [("Before", before.content, False),
+                              ("After", after.content, False)]
 
-                for name, value, inline in fields:
-                    embed.add_field(name=name, value=value, inline=inline)
-                await self.smro_log.send(embed=embed)
+                    for name, value, inline in fields:
+                        embed.add_field(name=name, value=value, inline=inline)
+                    await self.smro_log.send(embed=embed)
+                except HTTPException as exc:
+                    self.smro_log.send(
+                        'A message that exceeded/did not meet discord embed restrictions was edited')
 
     @Cog.listener()
     async def on_message_delete(self, message):

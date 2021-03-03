@@ -89,18 +89,22 @@ class Log(Cog):
     async def on_message_edit(self, before, after):
         if not after.author.bot:
             if before.content != after.content:
-                embed = Embed(title=f"Message Edit **({after.guild.name})**",
-                              description=f"Edit by **{after.author.display_name}**",
-                              colour=after.author.colour,
-                              timestamp=datetime.utcnow())
+                try:
+                    embed = Embed(title=f"Message Edit **({after.guild.name})**",
+                                  description=f"Edit by **{after.author.display_name}**",
+                                  colour=after.author.colour,
+                                  timestamp=datetime.utcnow())
 
-                fields = [("Before", before.content, False),
-                          ("After", after.content, False)]
+                    fields = [("Before", before.content, False),
+                              ("After", after.content, False)]
 
-                for name, value, inline in fields:
-                    embed.add_field(name=name, value=value, inline=inline)
+                    for name, value, inline in fields:
+                        embed.add_field(name=name, value=value, inline=inline)
 
-                await self.log_channel.send(embed=embed)
+                    await self.log_channel.send(embed=embed)
+                except HTTPException as exc:
+                    self.log_channel.send(
+                        'A message that exceeded/did not meet discord embed restrictions was edited')
 
     @Cog.listener()
     async def on_message_delete(self, message):
