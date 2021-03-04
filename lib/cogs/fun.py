@@ -94,7 +94,6 @@ class Fun(Cog):
              brief="Chimkin repeats anything you want to say",
              description="Chimkin repeats anything you want to say",
                          help='Chimkin repeats anything you want to say')
-    @bot_has_role(286937446611156992)
     @cooldown(5, 60, BucketType.user)
     async def echo_message(self, ctx, *, message):
         if message == "Sora's code fucked up":
@@ -102,8 +101,9 @@ class Fun(Cog):
         elif message == "An error occured":
             await ctx.send("How about no?")
         elif message.startswith("/tts"):
-            await ctx.send("I don't think so buster")
+            await ctx.send("LOL NO")
         else:
+            await message.delete()
             await ctx.send(message)
 
     @command(name="fact",
