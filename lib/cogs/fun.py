@@ -237,7 +237,7 @@ class Fun(Cog):
                          help='Chat with Chimkin',
                          usage='`.c How are you today chimkin?`')
     async def chat_command(self, ctx, *, message: str):
-        APIKEY = os.getenv.SRA_KEY
+        APIKEY = os.getenv.('SRA_KEY')
         spaceReplacedMessage = message.replace(" ", "%20")
         replyLink = f"https://some-random-api.ml/chatbot/?key={APIKEY}&message={spaceReplacedMessage}"
 
