@@ -103,7 +103,7 @@ class Log(Cog):
 
                     await self.log_channel.send(embed=embed)
                 except HTTPException as exc:
-                    self.log_channel.send(
+                    await self.log_channel.send(
                         'A message that exceeded/did not meet discord embed restrictions was edited')
 
     @Cog.listener()

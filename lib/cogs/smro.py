@@ -47,7 +47,7 @@ class SMRO(Cog):
                         embed.add_field(name=name, value=value, inline=inline)
                     await self.smro_log.send(embed=embed)
                 except HTTPException as exc:
-                    self.smro_log.send(
+                    await self.smro_log.send(
                         'A message that exceeded/did not meet discord embed restrictions was edited')
 
     @Cog.listener()
