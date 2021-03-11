@@ -245,9 +245,11 @@ class Fun(Cog):
             if response.status == 200:
                 data = await response.json()
 
-                reply = data["response"]
-
-                await ctx.send(reply)
+                try:
+                    reply = data["response"]
+                    await ctx.send(reply)
+                except KeyError:
+                    await ctx.send('Something went wrong.\nTry not to use formatted text.\nThank you!')
             else:
                 await ctx.send(f"{ctx.author.mention}, I'm sorry.\nI think I might be broken for a while.")
 
