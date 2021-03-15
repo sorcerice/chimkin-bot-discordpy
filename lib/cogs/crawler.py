@@ -192,14 +192,14 @@ class Crawler(Cog):
                         else:
                             df1 = dfs[1][['Price', 'Amount', 'Shop Name']].sort_values(
                                 by=['Price'], ascending=True)
-                        embed = Embed(title='Awie Market(Click here to go this page)',
+                        embed = Embed(title='Helheim Marketplace(Click here to go this page)',
                                       description=f"```{df1}```",
                                       colour=ctx.author.colour,
                                       url=f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}')
                         embed.set_author(
                             name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
                         embed.set_footer(
-                            text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
+                            text="Note: This only shows the Helheim Marketplace trying Niflheim market items will result in unhandled bugs", icon_url=ctx.guild.icon_url)
                         await ctx.send(embed=embed)
                     except (KeyError, IndexError):
                         await ctx.send("Item is probably not on vend.")
@@ -261,7 +261,7 @@ class Crawler(Cog):
                     embed.set_author(name=ctx.author.display_name,
                                      icon_url=ctx.author.avatar_url)
                     embed.set_footer(
-                        text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
+                        text="Note: This only shows the Helheim Marketplace trying Niflheim market items will result in unhandled bugs", icon_url=ctx.guild.icon_url)
                     await ctx.send(embed=embed)
 
                 except AttributeError:
@@ -323,7 +323,7 @@ class Crawler(Cog):
                     embed.set_author(name=ctx.author.display_name,
                                      icon_url=ctx.author.avatar_url)
                     embed.set_footer(
-                        text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
+                        text="Note: This only shows the Helheim Marketplace trying Niflheim market items will result in unhandled bugs", icon_url=ctx.guild.icon_url)
                     await ctx.send(embed=embed)
                 except IndexError:
                     grabName = soup.find_all(
@@ -366,7 +366,7 @@ class Crawler(Cog):
                     embed.set_author(name=ctx.author.display_name,
                                      icon_url=ctx.author.avatar_url)
                     embed.set_footer(
-                        text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
+                        text="Note: This only shows the Helheim Marketplace trying Niflheim market items will result in unhandled bugs", icon_url=ctx.guild.icon_url)
                     await ctx.send(embed=embed)
 
                 except AttributeError:
@@ -413,7 +413,7 @@ class Crawler(Cog):
                     embed.set_author(name=ctx.author.display_name,
                                      icon_url=ctx.author.avatar_url)
                     embed.set_footer(
-                        text="Taken from Lunar's basement", icon_url=ctx.guild.icon_url)
+                        text="Note: This only shows the Helheim Marketplace trying Niflheim market items will result in unhandled bugs", icon_url=ctx.guild.icon_url)
                     await ctx.send(embed=embed)
                 except UnboundLocalError:
                     await ctx.send('Try again later.')
