@@ -30,7 +30,7 @@ class Fun(Cog):
              brief="Ask Chimkin yes or no questions",
              description="Ask Chimkin yes or no questions",
              help='Ask Chimkin yes or no questions',
-             usage='`.8ball Will Chimkin ever be happy?`')
+             usage=' Will Chimkin ever be happy?')
     @bot_has_role(286937446611156992)
     async def _8ball(self, ctx, *, question):
         responses = ['Awie council says yes.',
@@ -61,7 +61,7 @@ class Fun(Cog):
              brief="Rolls a dice and sums the output (useful if we ever want to play D&D)",
              description=f'Rolls a dice and sums the output',
              help='Type the number of rolls followed by \'d\' followed by the number of sides on the dice',
-             usage='`.dice 3d6`\n3 is the number of rolls\n6 is the number of sides on the dice')
+             usage=' 3d6\n3 is the number of rolls\n6 is the number of sides on the dice')
     # @cooldown(5, 30, BucketType.user)
     async def roll_dice(self, ctx, die_string: str):
         dice, value = (int(term) for term in die_string.split("d"))
@@ -77,8 +77,8 @@ class Fun(Cog):
     @command(name="slap",
              brief="Makes you slap someone",
              description="Makes you slap someone",
-                         help='Makes you slap someone',
-                         usage='`.slap @lunch cuz why not`')
+             help='Makes you slap someone',
+             usage='@Lunch cuz why not')
     @bot_has_role(286937446611156992)
     @cooldown(5, 10, BucketType.user)
     async def slap_member(self, ctx, member: Member, *, reason: Optional[str] = "for no reason"):
@@ -111,8 +111,8 @@ class Fun(Cog):
              aliases=["animal"],
              brief='''Has random facts and images of cats, dogs, pandas, foxes, birds and koalas''',
              description='''Has random facts and images of cats, dogs, pandas, foxes, birds and koalas''',
-                         help='Gives a random fact and image of dog, cat, panda, fox, birb, koala, kangaroo, racoon, red_panda',
-                         usage='`.fact cat`')
+             help='Gives a random fact and image of dog, cat, panda, fox, birb, koala, kangaroo, racoon, red_panda',
+             usage=' cat')
     @cooldown(5, 20, BucketType.user)
     async def animal_fact(self, ctx, animal: str):
         fact_url = f"https://some-random-api.ml/animal/{animal}"
@@ -134,7 +134,7 @@ class Fun(Cog):
     @command(name='roast',
              brief='Roast someone',
              description='Roast someone',
-                         help='Roast someone')
+             help='Roast someone')
     @bot_has_role(286937446611156992)
     # @cooldown(1, 20, BucketType.user)
     async def roast_command(self, ctx):
@@ -156,7 +156,7 @@ class Fun(Cog):
     @command(name='meme',
              brief='Shows a random meme Sora stole from somewhere',
              description='Shows a random meme Sora stole from somewhere',
-                         help='Shows a random meme Sora stole from somewhere')
+             help='Shows a random meme Sora stole from somewhere')
     @bot_has_role(286937446611156992)
     # @cooldown(3, 30, BucketType.guild)
     async def pull_meme(self, ctx):
@@ -166,8 +166,8 @@ class Fun(Cog):
     @command(name='bless',
              aliases=['compliment'],
              description='Chimken compliments the person you mention',
-                         help='Chimken compliments the person you mention',
-                         usage='`.bless @melonbun`')
+             help='Chimken compliments the person you mention',
+             usage='`.bless @melonbun`')
     @cooldown(1, 20, BucketType.guild)
     async def bless_command(self, ctx, member: Member):
         responses = [f'{member.mention} is an awesome friend.',
@@ -223,8 +223,8 @@ class Fun(Cog):
              aliases=["decide"],
              description="Need help choosing between things? Ask Chimkin!",
              brief="Need help choosing between things? Ask Chimkin!",
-                         help='Need help choosing between things? Ask Chimkin!',
-                         usage='`.choose cat, dog, birb`')
+             help='Need help choosing between things? Ask Chimkin!',
+             usage=' cat, ashe, chimkin, sora')
     async def choose_command(self, ctx, *, options: str):
         randomOption = options.split(', ')
 
@@ -234,8 +234,8 @@ class Fun(Cog):
              aliases=["c"],
              description="Chat with Chimkin",
              brief="Chat with Chimkin",
-                         help='Chat with Chimkin',
-                         usage='`.c How are you today chimkin?`')
+             help='Chat with Chimkin',
+             usage='How are you today chimkin?')
     async def chat_command(self, ctx, *, message: str):
         APIKEY = os.getenv('SRA_KEY')
         spaceReplacedMessage = message.replace(" ", "%20")
@@ -256,8 +256,8 @@ class Fun(Cog):
     @command(name="lyrics",
              description="Gets lyrics if you give a song title and artist",
              brief="Gives lyrics if you give a song title and artist",
-                         help='Gives lyrics if you give a song title and artist',
-                         usage='`.lyrics More K/DA`\nThere is a 1 in 100 chance that the lyrics get uwufied')
+             help='Gives lyrics if you give a song title and artist',
+             usage=' More K/DA\nThere is a 1 in 100 chance that the lyrics get uwufied')
     async def get_lyrics(self, ctx, *, query: str):
         spaceReplacedQuery = query.replace(" ", "%20")
         if randint(0, 100) == 100:

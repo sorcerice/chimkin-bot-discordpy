@@ -17,9 +17,7 @@ class Sigs(Cog):
     @command(name='novasig',
              aliases=['poop'],
              description='Gives a dirty signature of your stinky noba character.',
-             brief='Gives a dirty signature of your stinky noba character.',
-             help='Gives a dirty signature of your stinky noba character.',
-             usage='`.novasig <Your character\'s ingame name>`')
+             usage=' <Your character\'s ingame name>')
     async def get_poop(self, ctx, *, charName: str):
         bgNum = randint(0, 11)
         posNum = randint(0, 15)
@@ -33,7 +31,7 @@ class Sigs(Cog):
              description='Get a signature with your Shining Moon(Helheim) character',
              brief='Get a signature with your Shining Moon(Helheim) character',
              help='Get a signature with your Shining Moon(Helheim) character',
-             usage='`.hsig <Your character\'s ingame name>`')
+             usage=' <Your character\'s ingame name>')
     async def get_helsig(self, ctx, *, charName: str):
         linkName = charName.replace(' ', '%20')
         sigURL = f'http://51.161.117.101/char/index.php/helsig/{linkName}'
@@ -62,7 +60,7 @@ class Sigs(Cog):
              description='Get a signature of your Shining Moon(Niflheim) character',
              brief='Get a signature of your Shining Moon(Niflheim) character',
              help='Get a signature of your Shining Moon(Niflheim) character',
-             usage='`.nsig <Your character\'s ingame name>`')
+             usage=' <Your character\'s ingame name>')
     async def get_nifsig(self, ctx, *, charName: str):
         linkName = charName.replace(' ', '%20')
         sigURL = f'http://51.161.117.101/char/index.php/nifsig/{linkName}'

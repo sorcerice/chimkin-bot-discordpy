@@ -50,7 +50,7 @@ class Formulas(Cog):
              description='Converts X currency to Y currency',
              brief='Converts X currency to Y currency',
              help='Converts X currency to Y currency',
-             usage='`.currencyconvert XCurrency to YCurrency`')
+             usage='XCurrency to YCurrency')
     async def convert_currency(self, ctx, amount: float, fromCurrency: str, to: Optional[str], toCurrency: str):
         URL = f'https://free.currconv.com/api/v7/convert?q={fromCurrency}_{toCurrency}&compact=y&apiKey={APIKEY}'
 
@@ -76,7 +76,7 @@ class Formulas(Cog):
              description='Gives total amount of mindslots and castable warlock book spells',
              brief='Gives total amount of mindslots and castable warlock book spells',
              help='Gives total amount of mindslots and castable warlock book spells',
-             usage='`.ms <Freezing Spell Level> <Base Level> <Total Int>`\nEg: `.ms 10 200 150`\nInt shown ingame is INT XX+XX - Total int is the sum of that')
+             usage='<Freezing Spell Level> <Base Level> <Total Int>\nEg: `.ms 10 200 150`\nInt shown ingame is INT XX+XX - Total int is the sum of that')
     async def mindSlots(self, ctx, freezingSpellLevel: int, baseLevel: int, totalInt: int):
         totalMindSlots = (freezingSpellLevel*8)+(baseLevel//10)+(totalInt//10)
 
@@ -102,7 +102,7 @@ class Formulas(Cog):
              brief='Calculates how much ACD you need for spamming a skill',
              description='Calculates how much ACD you need for spamming a skill',
              help='Calculates how much ACD you need for spamming a skill',
-             usage='`.acd <ASPD> <Skill Delay> <Skill Cooldown>`\nYou can get your ASPD from your stat info ingame pressing Alt+A\nFor the Skill Delay and Skill Cooldown hover over the skill ingame')
+             usage='<ASPD> <Skill Delay> <Skill Cooldown>\nYou can get your ASPD from your stat info ingame pressing Alt+A\nFor the Skill Delay and Skill Cooldown hover over the skill ingame')
     async def get_acd(self, ctx, aspd: int, skillDelay: float, coolDown: Optional[float] = 0):
         try:
             # attacks per second
@@ -148,7 +148,7 @@ class Formulas(Cog):
              brief='Calculates VCT reduction based on total DEX and INT',
              description='Provide the total DEX followed by total INT to get VCT Reduction % and the remaining VCT %',
              help='When using the command please provide total DEX and then the total INT in that order only',
-             usage='`.vctstat <TOTAL DEX> <TOTAL INT>\nTotal of any stat means the sum of the stat shown in your ALT+A window ingame\nEx: DEX 120+30 will be shown ingame so the Total DEX will be 150`')
+             usage='<TOTAL DEX> <TOTAL INT>\nTotal of any stat means the sum of the stat shown in your ALT+A window ingame\nEx: DEX 120+30 will be shown ingame so the Total DEX will be 150')
     async def get_vctstat(self, ctx, totalDex: int, totalInt: int):
         vctReduction = ((totalDex*2 + totalInt)/530) * 100
         vctRemaining = 100 - vctReduction
@@ -172,7 +172,7 @@ class Formulas(Cog):
              brief='Calculates how many seconds of VCT remains based on total DEX, INT and skill VCT',
              description='Provide the total DEX, total INT and skill VCT to get the VCT remaining in seconds',
              help='When using the command please provide total DEX, total INT and then skill VCT in that order only',
-             usage='`.vctcount <TOTAL DEX> <TOTAL INT> <SKILL VCT>\nTotal of any stat means the sum of the stat shown in your ALT+A window ingame\nEx: DEX 120+30 will be shown ingame so the Total DEX will be 150`\nTo get the skill VCT count hover over the skill ingame')
+             usage='<TOTAL DEX> <TOTAL INT> <SKILL VCT>\nTotal of any stat means the sum of the stat shown in your ALT+A window ingame\nEx: DEX 120+30 will be shown ingame so the Total DEX will be 150\nTo get the skill VCT count hover over the skill ingame')
     async def get_vctcount(self, ctx, totalDex: int, totalInt: int, skillVCT: int):
         vctRemainingSeconds = skillVCT * (1 - ((totalDex*2 + totalInt)/530))
 

@@ -26,8 +26,8 @@ class Crawler(Cog):
     @command(name='monster',
              aliases=['m', 'mi2', 'mob'],
              brief='Provides monster info from SMRO',
-             description='Provides monster info from SMRO',
-             help='Provides monster info from SMRO\nUses monster ID')
+             description='Provides monster info from SMRO by searching the provided mob ID',
+             usage='monsterID')
     async def monster_search(self, ctx, monsterID: int):
         spriteURL = f'https://www.shining-moon.com/data/monsters/{monsterID}.gif'
         URL = f'https://www.shining-moon.com/hel/?module=monster&action=view&id={monsterID}'
@@ -70,8 +70,8 @@ class Crawler(Cog):
     @command(name='item',
              aliases=['ii2', 'i'],
              brief='Provides item info from SMRO',
-             description='Provides item info from SMRO',
-             help='Provides item info from SMRO\nUses Item ID')
+             description='Provides item info from SMRO using the item ID',
+             usage='Item ID')
     async def item_search(self, ctx, itemID: int):
         spriteURL = f'https://www.shining-moon.com/hel/data/items/images/{itemID}.png'
         URL = f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}'
@@ -113,8 +113,8 @@ class Crawler(Cog):
     @command(name='monsterid',
              aliases=['mi', 'mid'],
              brief='Looks for mob IDs',
-             description='Looks for mob IDs',
-                         help='Grabs a table of matching monster names')
+             description='Looks for mob IDs based on the input name',
+             usage='Mob Name')
     async def mobID_search(self, ctx, *, mobName: str):
         URL = f'https://www.shining-moon.com/hel/?module=monster&action=index&monster_id=&name={mobName}&mvp=all&size=-1&race=-1&element=-1&card_id=&custom='
 
@@ -143,8 +143,8 @@ class Crawler(Cog):
     @command(name='itemid',
              aliases=['iid', 'idi', 'ii'],
              brief="Looks for item IDs",
-             description="Looks for item IDs",
-                         help='Grabs a list of matching item names')
+             description="Looks for item IDs based on the item name provided",
+             usage='Item Name')
     async def itemID_search(self, ctx, *, itemName: str):
         URL = f'https://www.shining-moon.com/hel/?module=item&action=index&item_id=&name={itemName}&script=&type=-1&equip_loc=-1&npc_buy_op=eq&npc_buy=&npc_sell_op=eq&npc_sell=&weight_op=eq&weight=&range_op=eq&range=&slots_op=eq&slots=&defense_op=eq&defense=&attack_op=eq&attack=&matk_op=eq&matk=&refineable=&for_sale=&custom='
 
@@ -174,8 +174,8 @@ class Crawler(Cog):
     @command(name='market',
              aliases=['shop', 'prices', 'ws'],
              brief='Look for items in market',
-             description='Looks for items in market',
-                         help='Grabs a table of items in vend using the item ID')
+             description='Looks for items in market based on the ID provided',
+             usage='Item ID')
     async def market_search(self, ctx, itemID: int):
         URL = f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}'
 
@@ -211,9 +211,7 @@ class Crawler(Cog):
     @command(name='marketenchants',
              aliases=['wse', 'enchants', 'markete', 'ws2'],
              brief='Looks for enchants on specified item number in vends',
-             description='Looks for enchants on specified item number in vends',
-             help='Use `.ws` to get a table of vends\nThen use this command and give it the item ID and the index of the item in the vend table',
-             usage='`.ws2 4128 1`\n4128 is the item ID and 1 is the index number from `.ws`')
+             description='Use .ws to get a table of vends\nThen use this command and give it the item ID and the index of the item in the vend table')
     async def market_enchants(self, ctx, itemID: int, index: int):
         URL = f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}'
 
@@ -275,9 +273,7 @@ class Crawler(Cog):
     @command(name='historyenchants',
              aliases=['wshe', 'henchants', 'olde', 'wsh2'],
              brief='Looks for enchants on specified item number in vend history',
-             description='Looks for enchants on specified item number in vend history',
-             help='Use `.wsh` to get a table of vending history\nThen use this command and give it the item ID and the index of the item in the table',
-             usage='`.wsh2 4128 1`\n4128 is the item ID and 1 is the index number from `.wsh`')
+             description='Use `.wsh` to get a table of vending history\nThen use this command and give it the item ID and the index of the item in the table')
     async def history_enchants(self, ctx, itemID: int, index: int):
         URL = f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}'
 
@@ -381,8 +377,7 @@ class Crawler(Cog):
     @command(name='vendhistory',
              aliases=['wsh', 'shoph', 'oldprices'],
              brief='Look for vend history',
-             description='Look for vend history',
-                         help='Look for vend history')
+             description='Look for vend history')
     async def vend_history(self, ctx, itemID: int):
         URL = f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}'
         async with request("GET", URL, headers={'User-Agent': 'Mozilla/5.0'}) as response:
@@ -428,8 +423,7 @@ class Crawler(Cog):
     @command(name='whereis',
              aliases=['wi'],
              brief='Look for mob location. Does not work with SMRO custom mobs',
-             description='Look for mob location provided by Divine Pride',
-             help='Look for a mob location provided by Divine Pride\nDoes not work with SMRO\'s custom mobs')
+             description='Look for a mob location provided by Divine Pride\nDoes not work with SMRO\'s custom mobs')
     async def mob_location(self, ctx, mobID: int):
 
         # with open("./lib/bot/dpapikey.0", "r", encoding="utf-8") as dp:
@@ -482,7 +476,7 @@ class Crawler(Cog):
     @command(name='news',
              description='Latest News from SMRO',
              brief='Latest News from SMRO',
-                         help='Provides latest news from SMRO')
+             help='Provides latest news from SMRO')
     async def get_news(self, ctx):
         URL = "https://www.shining-moon.com/"
 
