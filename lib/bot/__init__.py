@@ -57,6 +57,7 @@ class Bot(BotBase):
 
         db.autosave(self.scheduler)
         super().__init__(command_prefix=get_prefix,
+                         case_insensitive=True,
                          owner_ids=OWNER_IDS,
                          help_command=PrettyHelp(color=discord.Color.green()),
                          intents=Intents.all()
@@ -84,6 +85,7 @@ class Bot(BotBase):
         super().run(self.TOKEN, reconnect=True)
 
     async def process_commands(self, message):
+
         ctx = await self.get_context(message, cls=Context)
 
         if ctx.command is not None and ctx.guild is not None:
