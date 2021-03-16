@@ -83,8 +83,8 @@ class Bot(BotBase):
         print("running bot...")
         super().run(self.TOKEN, reconnect=True)
 
-    async def process_commands(self, message.lower()):
-        ctx = await self.get_context(message, cls=Context)
+    async def process_commands(self, message):
+        ctx = await self.get_context(message.lower(), cls=Context)
 
         if ctx.command is not None and ctx.guild is not None:
             if self.ready:
