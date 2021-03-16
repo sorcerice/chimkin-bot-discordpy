@@ -207,7 +207,7 @@ class Bot(BotBase):
                 mod = self.get_cog('Mod')
 
             else:
-                await self.process_commands(message)
+                await self.process_commands(message.lower())
 
 
 bot = Bot()
