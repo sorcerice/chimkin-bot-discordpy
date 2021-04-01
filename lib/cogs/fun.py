@@ -431,7 +431,7 @@ class Fun(Cog):
                     hiGreetings = ['henyo', 'hi', 'hello']
                     for greeting in hiGreetings:
                         if messageConverter == greeting:
-                            await message.channel.send(f'Henyo {message.author.mention}!,\A farming guide for you: https://www.shining-moon.com/ipb/index.php?/topic/8185-advanced-farming-guide-updated-091920/')
+                            await message.channel.send(f'Henyo {message.author.mention}!,\nA farming guide for you: https://www.shining-moon.com/ipb/index.php?/topic/8185-advanced-farming-guide-updated-091920/ \nFor build, equipment or any other guides check out the forum! \nTo access a major chunk of the forum you need a separate forum ID.')
 
                 await hiGreetCheck(message, messageConverter)
 
@@ -440,22 +440,29 @@ class Fun(Cog):
             if messageConverter == 'revolution':
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
-            messageTags = re.split('\s+', message.content.lower())
+            messageLower = message.content.lower()
 
-            bestClassTags = ['best', 'class', ['start', 'starting']]
-            fourthJobTags = ['fourth', '4th', 'job', 'class', 'when']
-            himmelCardTags = ['himmel', 'himmelmez', 'card', 'where', 'get']
-            rsSetTags = ['ruby', 'sapphire', 'set']
+            bestClassTags = ['best', 'class', 'start']
+            fourthJobTags = ['4th', 'job', 'class', 'when']
+            himmelCardTags = ['himmelmez', 'card', 'where', 'get']
             tempCircTags = ['temporal', 'circlet', 'when']
             resetEnchantTags = ['how', 'to', 'reset', 'enchant', 'of']
 
-            def tagMatcher(message, tagMatchList):
-                outList = list(
-                    filter(lambda tags: tags in message, tagMatchList))
-                return outList
+            if len(message.content) != 0:
+                if all(tags in messageLower for tags in bestClassTags):
+                    await message.channel.send('Start with rebel! Easiest class to gear, level and fast zeny farm \n Guides: *make sure you have a forum ID to view these guides* \nNiflheim: https://www.shining-moon.com/ipb/index.php?/topic/8113-budget-rebel-for-farm/')
 
-            matchedTags = tagMatcher(messageTags, bestClassTags)
-            print(matchedTags)
+                if all(tags in messageLower for tags in fourthJobTags):
+                    await message.channel.send('It\'s currently in development on the test server. Lunar is working through some kinks. But there is no fixed ETA on it yet.')
+
+                if all(tags in messageLower for tags in himmelCardTags):
+                    await message.channel.send('Currently only obtainable from ECA <:SMeca:668824453588844554>\n Later available from Old Glast Heim Challenge Mode instance when it will be implemented (No ETA)')
+
+                if all(tags in messageLower for tags in tempCircTags):
+                    await message.channel.send('Available from Old Glast Heim Challenge Mode instance when it will be implemented (No ETA)')
+
+                if all(tags in messageLower for tags in resetEnchantTags):
+                    await message.channel.send('Most enchants that use the Lapine Box UI for enchants can be reset by using the same item again \nFor more details about enchanting check here: https://www.shining-moon.com/helheim/index.php/Lapine_Enchanting')
 
     @Cog.listener()
     async def on_ready(self):
