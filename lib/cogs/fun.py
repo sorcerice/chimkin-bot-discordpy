@@ -455,6 +455,7 @@ class Fun(Cog):
                 return outList
 
             matchedTags = tagMatcher(messageTags, bestClassTags)
+            print(matchedTags)
 
     @Cog.listener()
     async def on_ready(self):
