@@ -441,9 +441,8 @@ class Fun(Cog):
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
             messageTags = re.split('\s+', message.content.lower())
-            print(messageTags)
 
-            bestClassTags = ['best', 'class', 'start', 'starting']
+            bestClassTags = ['best', 'class', ['start', 'starting']]
             fourthJobTags = ['fourth', '4th', 'job', 'class', 'when']
             himmelCardTags = ['himmel', 'himmelmez', 'card', 'where', 'get']
             rsSetTags = ['ruby', 'sapphire', 'set']
@@ -455,8 +454,7 @@ class Fun(Cog):
                     filter(lambda tags: tags in message, tagMatchList))
                 return outList
 
-            if len(message.content) != 0:
-                print(tagMatcher(messageTags, bestClassTags))
+            matchedTags = tagMatcher(messageTags, bestClassTags)
 
     @Cog.listener()
     async def on_ready(self):
