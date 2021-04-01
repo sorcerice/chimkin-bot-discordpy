@@ -440,7 +440,7 @@ class Fun(Cog):
             if messageConverter == 'revolution':
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
-            messageTags = re.split('/\w+/gi', message.content.lower())
+            messageTags = re.split('/\s+/gi', message.content.lower())
             print(messageTags)
 
             bestClassTags = ['best', 'class', 'start', 'starting']
