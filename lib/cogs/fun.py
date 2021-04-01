@@ -425,13 +425,13 @@ class Fun(Cog):
                 messageConverter = message.content.split()[0].lower()
             else:
                 return
-            if message.author.id == 105416043521957888:
+            if message.channel.guild.id == 285121209027264512:  # smro guild id
 
                 async def hiGreetCheck(message, messageConverter):
                     hiGreetings = ['henyo', 'hi', 'hello']
                     for greeting in hiGreetings:
                         if messageConverter == greeting:
-                            await message.channel.send(f'Henyo {message.author.mention}')
+                            await message.channel.send(f'Henyo {message.author.mention}!,\A farming guide for you: https://www.shining-moon.com/ipb/index.php?/topic/8185-advanced-farming-guide-updated-091920/')
 
                 await hiGreetCheck(message, messageConverter)
 
@@ -439,6 +439,24 @@ class Fun(Cog):
                 await message.channel.send(f'Bye {message.author.mention}~~~')
             if messageConverter == 'revolution':
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
+
+            messageTags = re.split('/\w+/gi', message.content.lower())
+            print(messageTags)
+
+            bestClassTags = ['best', 'class', 'start', 'starting']
+            fourthJobTags = ['fourth', '4th', 'job', 'class', 'when']
+            himmelCardTags = ['himmel', 'himmelmez', 'card', 'where', 'get']
+            rsSetTags = ['ruby', 'sapphire', 'set']
+            tempCircTags = ['temporal', 'circlet', 'when']
+            resetEnchantTags = ['how', 'to', 'reset', 'enchant', 'of']
+
+            def tagMatcher(message, tagMatchList):
+                outList = list(
+                    filter(lambda tags: tags in message, tagMatchList))
+                return outList
+
+            if len(message.content) != 0:
+                print(tagMatcher(messageTags, bestClassTags))
 
     @Cog.listener()
     async def on_ready(self):
