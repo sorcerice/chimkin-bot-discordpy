@@ -444,7 +444,7 @@ class Fun(Cog):
                 messageLower = message.content.lower()
 
                 bestClassTags = ['best', 'class', 'start']
-                fourthJobTags = ['4th', 'job', 'class', 'when']
+                fourthJobTags = ['4th', 'job', 'when']
                 himmelCardTags = ['himmelmez', 'card', 'where', 'get']
                 tempCircTags = ['temporal', 'circlet', 'when']
                 resetEnchantTags = ['how', 'to', 'reset', 'enchant', 'of']
