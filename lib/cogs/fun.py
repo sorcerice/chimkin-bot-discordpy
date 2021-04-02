@@ -440,15 +440,15 @@ class Fun(Cog):
             if messageConverter == 'revolution':
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
-            messageLower = message.content.lower()
+            if len(message.content) != 12:
+                messageLower = message.content.lower()
 
-            bestClassTags = ['best', 'class', 'start']
-            fourthJobTags = ['4th', 'job', 'class', 'when']
-            himmelCardTags = ['himmelmez', 'card', 'where', 'get']
-            tempCircTags = ['temporal', 'circlet', 'when']
-            resetEnchantTags = ['how', 'to', 'reset', 'enchant', 'of']
+                bestClassTags = ['best', 'class', 'start']
+                fourthJobTags = ['4th', 'job', 'class', 'when']
+                himmelCardTags = ['himmelmez', 'card', 'where', 'get']
+                tempCircTags = ['temporal', 'circlet', 'when']
+                resetEnchantTags = ['how', 'to', 'reset', 'enchant', 'of']
 
-            if len(message.content) != 0:
                 if all(tags in messageLower for tags in bestClassTags):
                     await message.channel.send('Start with rebel! Easiest class to gear, level and fast zeny farm \n Guides: *make sure you have a forum ID to view these guides* \nNiflheim: https://www.shining-moon.com/ipb/index.php?/topic/8113-budget-rebel-for-farm/')
 
