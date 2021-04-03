@@ -428,7 +428,7 @@ class Fun(Cog):
             if message.channel.guild.id == 285121209027264512:  # smro guild id
 
                 async def hiGreetCheck(message, messageConverter):
-                    hiGreetings = ['henyo', 'hi', 'hello']
+                    hiGreetings = ['henyo', 'hi', 'hello', 'hey']
                     for greeting in hiGreetings:
                         if messageConverter == greeting:
                             await message.channel.send(f'Henyo {message.author.mention}!,\nA farming guide for you: https://www.shining-moon.com/ipb/index.php?/topic/8185-advanced-farming-guide-updated-091920/ \nFor build, equipment or any other guides check out the forum! \nTo access a major chunk of the forum you need a separate forum ID.')
