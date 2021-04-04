@@ -423,17 +423,14 @@ class Fun(Cog):
         if not message.author.bot:
             if len(message.content) != 0:
                 messageConverter = message.content.split()[0].lower()
+                messageLower = message.content.lower()
             else:
                 return
             if message.channel.guild.id == 285121209027264512:  # smro guild id
-
-                async def hiGreetCheck(message, messageConverter):
-                    hiGreetings = ['henyo', 'hi', 'hello', 'hey']
-                    for greeting in hiGreetings:
-                        if messageConverter == greeting:
-                            await message.channel.send(f'Henyo {message.author.mention}!,\nA farming guide for you: https://www.shining-moon.com/ipb/index.php?/topic/8185-advanced-farming-guide-updated-091920/ \nFor build, equipment or any other guides check out the forum! \nTo access a major chunk of the forum you need a separate forum ID.')
-
-                await hiGreetCheck(message, messageConverter)
+                greetingTags = ['hi', 'henyo', 'hello', 'hey']
+                helpTags = ['help', 'new', 'where', ]
+                if any(tags in messageLower for tags in greetingTags) and any(tags in messageLower for tags in helpTags):
+                    await message.channel.send(f'Heya {message.author.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \nLeveling Guide: \nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
 
             if messageConverter == 'bye':
                 await message.channel.send(f'Bye {message.author.mention}~~~')
@@ -441,8 +438,6 @@ class Fun(Cog):
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
             if len(message.content) != 12:
-                messageLower = message.content.lower()
-
                 bestClassTags = ['best', 'class', 'start']
                 fourthJobTags = ['4th', 'job', 'when']
                 himmelCardTags = ['himmelmez', 'card', 'where', 'get']
