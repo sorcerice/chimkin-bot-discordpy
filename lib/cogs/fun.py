@@ -428,7 +428,7 @@ class Fun(Cog):
                 return
             if message.channel.guild.id == 285121209027264512:  # smro guild id
                 greetingTags = ['hi', 'henyo', 'hello', 'hey']
-                helpTags = ['help', 'new', 'where', ]
+                helpTags = ['help', 'new', 'where', 'please']
                 if any(tags in messageLower for tags in greetingTags) and any(tags in messageLower for tags in helpTags):
                     await message.channel.send(f'Heya {message.author.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \nLeveling Guide: \nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
 
