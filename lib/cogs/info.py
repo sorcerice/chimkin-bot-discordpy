@@ -86,7 +86,7 @@ class Info(Cog):
         await ctx.send(embed=embed)
 
     @command(name='guides',
-             alias=['guide']
+             alias=['guide'],
              brief='Provides useful forum links to the mentioned person',
              description='You can either use the command by itself or mention a person to tag with the response')
     async def helper_command(self, ctx, member: Optional[Member]):
