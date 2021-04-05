@@ -85,6 +85,16 @@ class Info(Cog):
 
         await ctx.send(embed=embed)
 
+    @command(name='guides',
+             alias=['guide']
+             brief='Provides useful forum links to the mentioned person',
+             description='You can either use the command by itself or mention a person to tag with the response')
+    async def helper_command(self, ctx, member: Optional[Member]):
+        if member:
+            await ctx.send(f'Heya {member.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \n\nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
+        else:
+            await ctx.send('Forum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \n\nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
+
     @command(name='faq',
              brief='To help out with support questions',
              description='You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance')
