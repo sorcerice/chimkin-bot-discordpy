@@ -1,4 +1,4 @@
-from datetime import datetime as d
+from datetime import datetime
 from random import choice, randint
 from typing import Optional
 from glob import glob
@@ -427,10 +427,15 @@ class Fun(Cog):
             else:
                 return
             if message.channel.guild.id == 285121209027264512:  # smro guild id
+                joinTime = message.author.joined_at
+                currentTime = datetime.now()
+                elapsedTime = currentTime - joinTime
                 greetingTags = ['hi', 'henyo', 'hello', 'hey']
                 helpTags = ['help', 'new', 'where', 'please']
-                if any(tags in messageLower for tags in greetingTags) and any(tags in messageLower for tags in helpTags):
-                    await message.channel.send(f'Heya {message.author.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \n\nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
+
+                if elapsedTime.days < 30:
+                    if any(tags in messageLower for tags in greetingTags) and any(tags in messageLower for tags in helpTags):
+                        await message.channel.send(f'Heya {message.author.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \n\nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
 
             if messageConverter == 'bye':
                 await message.channel.send(f'Bye {message.author.mention}~~~')
