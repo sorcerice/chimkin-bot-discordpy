@@ -1,5 +1,5 @@
 from lib.bot import bot
 
-VERSION = "0.2.2"  # modmail redirected to test server
+VERSION = "0.5"  # implemented art-only smro channel check
 
 bot.run(VERSION)
