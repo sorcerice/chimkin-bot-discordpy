@@ -38,7 +38,7 @@ class SMRO(Cog):
                     print(f'A message was allowed in {message.channel.name}')
                 else:
                     await message.delete()
-                    await message.channel.send('1. No chit chat in this channel!\n2. Only post art work that **YOU*, **YOURSELF** have done!\n3. Only **LINKS** to artwork and/or image **MESSAGE ATTACHMENTS** allowed\n4. If you want to post artwork not done by you, you can use the <#604319965658480640> channel instead!\n5. The artwork has to be SFW only and meet Discord\'s Terms and Conditions for SFW Servers', delete_after=60)
+                    await message.channel.send('1. No chit chat in this channel!\n2. Only post art work that **YOU**, **YOURSELF** have done!\n3. Only **LINKS** to artwork and/or image **MESSAGE ATTACHMENTS** allowed\n4. If you want to post artwork not done by you, you can use the <#604319965658480640> channel instead!\n5. The artwork has to be SFW only and meet Discord\'s Terms and Conditions for SFW Servers', delete_after=60)
 
     @Cog.listener()
     async def on_message_edit(self, before, after):
