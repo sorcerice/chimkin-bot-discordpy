@@ -24,6 +24,8 @@ andreID = 468021052128231434
 class Fun(Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.blacklistedAutoReplyChannels = [
+            756197003482103900, 756197026806366379, 756197090643935463, 836575998782734356]
 
     @command(name="8ball",
              aliases=["predict", "foresee", "noodleme"],
@@ -428,15 +430,16 @@ class Fun(Cog):
                 return
             try:
                 if message.channel.guild.id == 285121209027264512:  # smro guild id
-                    joinTime = message.author.joined_at
-                    currentTime = datetime.now()
-                    memberAge = currentTime - joinTime
+                    if not message.channel.guild.id in self.blacklistedAutoReplyChannels:
+                        joinTime = message.author.joined_at
+                        currentTime = datetime.now()
+                        memberAge = currentTime - joinTime
 
-                    greetingTags = ['hi', 'henyo', 'hello', 'hey']
-                    helpTags = ['help', 'new', 'where', 'please']
+                        greetingTags = ['hi', 'henyo', 'hello', 'hey']
+                        helpTags = ['help', 'new', 'where', 'please']
 
-                    if memberAge.days < 7 and any(tags in messageLower for tags in greetingTags) and any(tags in messageLower for tags in helpTags):
-                        await message.channel.send(f'Heya {message.author.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \n\nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
+                        if memberAge.days < 7 and any(tags in messageLower for tags in greetingTags) and any(tags in messageLower for tags in helpTags):
+                            await message.channel.send(f'Heya {message.author.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \n\nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
             except AttributeError:
                 print('A new SMRO member messaged in my DMs')
 

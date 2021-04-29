@@ -204,7 +204,7 @@ class Bot(BotBase):
                         embed.add_field(name=name, value=value, inline=inline)
 
                     await self.testServerModMail.send(embed=embed)
-                    await message.channel.send("Message relayed to Awie Government")
+                    await message.channel.send("Thanks for using Chimkin Modmail! The concerning parties will reply to your queries as soon as possible!")
 
                 mod = self.get_cog('Mod')
 
