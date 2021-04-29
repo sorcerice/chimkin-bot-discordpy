@@ -439,7 +439,7 @@ class Fun(Cog):
                         helpTags = ['help', 'new', 'where', 'please']
 
                         if memberAge.days < 7 and any(tags in messageLower for tags in greetingTags) and any(tags in messageLower for tags in helpTags):
-                            await message.channel.send(f'Heya {message.author.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \n\nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.')
+                            await message.channel.send(f'Heya {message.author.mention}! \nForum Guides Section: https://www.shining-moon.com/ipb/index.php?/forum/45-guides/ \nHelheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/82-helheim/ \nNiflheim Guide Section: https://www.shining-moon.com/ipb/index.php?/forum/58-niflheim/ \n\nFor build, equipment or any other guides check out the forum! \nNote: To access a major chunk of the forum you need a separate forum ID.', delete_after=60)
             except AttributeError:
                 print('A new SMRO member messaged in my DMs')
 
@@ -456,19 +456,19 @@ class Fun(Cog):
                 resetEnchantTags = ['how', 'to', 'reset', 'enchant', 'of']
 
                 if all(tags in messageLower for tags in bestClassTags):
-                    await message.channel.send('Start with rebel! Easiest class to gear, level and fast zeny farm \n Guides: *make sure you have a forum ID to view these guides* \nNiflheim: https://www.shining-moon.com/ipb/index.php?/topic/8113-budget-rebel-for-farm/')
+                    await message.channel.send('Start with rebel! Easiest class to gear, level and fast zeny farm \n Guides: *make sure you have a forum ID to view these guides* \nNiflheim: https://www.shining-moon.com/ipb/index.php?/topic/8113-budget-rebel-for-farm/', delete_after=20)
 
                 if all(tags in messageLower for tags in fourthJobTags):
-                    await message.channel.send('It\'s currently in development on the test server. Lunar is working through some kinks. But there is no fixed ETA on it yet.')
+                    await message.channel.send('It\'s currently in development on the test server. Lunar is working through some kinks. But there is no fixed ETA on it yet.', delete_after=10)
 
                 if all(tags in messageLower for tags in himmelCardTags):
-                    await message.channel.send('Currently only obtainable from ECA <:SMeca:668824453588844554>\n Later available from Old Glast Heim Challenge Mode instance when it will be implemented (No ETA)')
+                    await message.channel.send('Currently only obtainable from ECA <:SMeca:668824453588844554>\n Later available from Old Glast Heim Challenge Mode instance when it will be implemented (No ETA)', delete_after=10)
 
                 if all(tags in messageLower for tags in tempCircTags):
-                    await message.channel.send('Available from Old Glast Heim Challenge Mode instance when it will be implemented (No ETA)')
+                    await message.channel.send('Available from Old Glast Heim Challenge Mode instance when it will be implemented (No ETA)', delete_after=10)
 
                 if all(tags in messageLower for tags in resetEnchantTags):
-                    await message.channel.send('Most enchants that use the Lapine Box UI for enchants can be reset by using the same item again \nFor more details about enchanting check here: https://www.shining-moon.com/helheim/index.php/Lapine_Enchanting')
+                    await message.channel.send('Most enchants that use the Lapine Box UI for enchants can be reset by using the same item again \nFor more details about enchanting check here: https://www.shining-moon.com/helheim/index.php/Lapine_Enchanting', delete_after=10)
 
     @Cog.listener()
     async def on_ready(self):
