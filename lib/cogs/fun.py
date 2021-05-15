@@ -454,6 +454,7 @@ class Fun(Cog):
                 himmelCardTags = ['himmelmez', 'card', 'where', 'get']
                 tempCircTags = ['temporal', 'circlet', 'when']
                 resetEnchantTags = ['how', 'to', 'reset', 'enchant', 'of']
+                homunAITags = ['homunculus', 'ai', 'does\'t', 'work']
 
                 if all(tags in messageLower for tags in bestClassTags):
                     await message.channel.send('Start with rebel! Easiest class to gear, level and fast zeny farm \n Guides: *make sure you have a forum ID to view these guides* \nNiflheim: https://www.shining-moon.com/ipb/index.php?/topic/8113-budget-rebel-for-farm/', delete_after=20)
@@ -469,6 +470,9 @@ class Fun(Cog):
 
                 if all(tags in messageLower for tags in resetEnchantTags):
                     await message.channel.send('Most enchants that use the Lapine Box UI for enchants can be reset by using the same item again \nFor more details about enchanting check here: https://www.shining-moon.com/helheim/index.php/Lapine_Enchanting', delete_after=10)
+
+                if all(tags in messageLower for tags in homunAITags):
+                    await message.channel.send('Homunculus AI was disabled in a kRO patch by kRO itself and thus we do not have it since we are on that patch. Homunculus AI returned in a later patch which is going to be the next update to SMRO.', delete_after=180)
 
     @Cog.listener()
     async def on_ready(self):
