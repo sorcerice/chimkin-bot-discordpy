@@ -460,7 +460,7 @@ class Fun(Cog):
                     await message.channel.send('Start with rebel! Easiest class to gear, level and fast zeny farm \n Guides: *make sure you have a forum ID to view these guides* \nNiflheim: https://www.shining-moon.com/ipb/index.php?/topic/8113-budget-rebel-for-farm/', delete_after=20)
 
                 if all(tags in messageLower for tags in fourthJobTags):
-                    await message.channel.send('It\'s currently in development on the test server. Lunar is working through some kinks. But there is no fixed ETA on it yet.', delete_after=10)
+                    await message.channel.send('It\'s coming sooner than you think! Hold on to your seats little egglings we are on our way to <:SM2099:678243126812344332>', delete_after=10)
 
                 if all(tags in messageLower for tags in himmelCardTags):
                     await message.channel.send('Currently only obtainable from ECA <:SMeca:668824453588844554>\n Later available from Old Glast Heim Challenge Mode instance when it will be implemented (No ETA)', delete_after=10)
