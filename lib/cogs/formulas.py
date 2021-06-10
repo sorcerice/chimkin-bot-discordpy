@@ -106,6 +106,7 @@ class Formulas(Cog):
     async def get_acd(self, ctx, aspd: int, skillDelay: float, coolDown: Optional[float] = 0):
         try:
             # attacks per second
+            aps = 0
             if coolDown == 0:
                 aps = round(50/(200-aspd))
             elif coolDown > 0.14:
