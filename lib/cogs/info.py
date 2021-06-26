@@ -138,7 +138,7 @@ class Info(Cog):
         elif faq_tag.lower() == 'shadow':
             await ctx.send(f'{ctx.author.mention}\nShadow Equipment List:\nhttps://www.shining-moon.com/helheim/index.php/Shadow_Equipment')
 
-        elif faq_tag.lower() == 'helnif':
+        elif faq_tag.lower() == 'helnif' or faq_tag.lower() == 'nifhel':
             embed = Embed(title='Difference between Helheim and Niflheim',
                           description='''**TL;DR:**\n```**Helheim** = kRO only balance and progressions, newer server, more players.\n*``````*Niflheim** = A mix of kRO, jRO and iRO balance and progressions, older server, less players, more build possibilities, more competitively viable endgame builds, better endgame damage potentials due to gears and easier refines.```''',
                           colour=0x4dfc32)
@@ -212,9 +212,6 @@ class Info(Cog):
 
         elif(faq_tag.lower() == 'class rebalance'):
             await ctx.send('https://www.divine-pride.net/forum/index.php?/topic/4203-kro-skill-adjustment-timeline/')
-
-        elif(faq_tag.lower() == 'melon bun'):
-            await ctx.send('Meow Bwun Nyun')
 
         elif(faq_tag.lower() == 'booster char' or faq_tag.lower() == 'boosterchar'):
             await ctx.send('`When you create a booster character, if you delete the  created  booster character or  if you cancel the booster NPC, **YOU WILL NOT BE ABLE TO CREATE A NEW BOOSTER CHARACTER** !`\nPlease pay attention and be careful when you are making your choices.')
