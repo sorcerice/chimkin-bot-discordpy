@@ -226,8 +226,11 @@ class Info(Cog):
                       285121209027264512, 727488027391426652]
 
         for g in self.bot.guilds:
+            print(f'{g.name} : {g.id}')
+
+        for g in self.bot.guilds:
             if g.id not in valid_list:
-                g.leave()
+                await g.leave()
 
     @Cog.listener()
     async def on_ready(self):
