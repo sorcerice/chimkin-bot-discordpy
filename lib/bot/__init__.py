@@ -138,9 +138,6 @@ class Bot(BotBase):
             self.butter = self.get_guild(228966491628765185)
             self.butterch = self.get_channel(642347588107894815)
 
-            self.royals = self.get_guild(568790926017691653)
-            self.royalsch = self.get_channel(631021549532479498)
-
             self.sm = self.get_guild(285121209027264512)
             self.smch = self.get_channel(664707489371258881)
 
@@ -149,7 +146,6 @@ class Bot(BotBase):
 
             # await self.butterch.send("Chimkin is now alive! Everyone bow down to the almighty Chimkin!\n<:duckknife:669212549194973204>")
             # await self.smch.send("I am online! Rejoice citizens of Shining Moon!")
-            # await self.royalsch.send("I am now awake and here to service the followers of Zill!")
             # await self.testch.send("Chimkin is now online!")
 
             # embed = Embed(title="Nyes, it is I, teh mighty Chimkin", description="This isn't even my final form",
