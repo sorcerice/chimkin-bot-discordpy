@@ -406,7 +406,7 @@ class Crawler(Cog):
                         except (ValueError, IndexError):
                             await ctx.send('Item was probably never on sale or removed from vending history.')
                 try:
-                    embed = Embed(title='Awie Market(Click here to go this page)',
+                    embed = Embed(title='Helheim Marketplace (Click here to go this page)',
                                   description=f"```{df1}```",
                                   colour=ctx.author.colour,
                                   url=f'https://www.shining-moon.com/hel/?module=item&action=view&id={itemID}')

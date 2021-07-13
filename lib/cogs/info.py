@@ -219,19 +219,6 @@ class Info(Cog):
         else:
             await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance, booster char')
 
-    @command(name='serverPrune',
-             hidden=True)
-    async def serverPrune_command(self, ctx):
-        valid_list = [228966491628765185,
-                      285121209027264512, 727488027391426652]
-
-        for g in self.bot.guilds:
-            print(f'{g.name} : {g.id}')
-
-        for g in self.bot.guilds:
-            if g.id not in valid_list:
-                await g.leave()
-
     @Cog.listener()
     async def on_ready(self):
         if not self.bot.ready:

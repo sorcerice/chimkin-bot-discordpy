@@ -449,18 +449,11 @@ class Fun(Cog):
                 await message.channel.send(content='RISE UP BROTHERS!!', file=File('./data/images/deuxvultchimkin.png'))
 
             if len(message.content) != 12:
-                bestClassTags = ['best', 'class', 'start']
-                fourthJobTags = ['4th', 'job', 'when']
                 himmelCardTags = ['himmelmez', 'card', 'where', 'get']
                 tempCircTags = ['temporal', 'circlet', 'when']
                 resetEnchantTags = ['how', 'to', 'reset', 'enchant', 'of']
                 homunAITags = ['homunculus', 'ai', 'not', 'working']
-
-                if all(tags in messageLower for tags in bestClassTags):
-                    await message.channel.send('Start with rebel! Easiest class to gear, level and fast zeny farm \n Guides: *make sure you have a forum ID to view these guides* \nNiflheim: https://www.shining-moon.com/ipb/index.php?/topic/8113-budget-rebel-for-farm/', delete_after=20)
-
-                if all(tags in messageLower for tags in fourthJobTags):
-                    await message.channel.send('It\'s coming sooner than you think! Hold on to your seats little egglings we are on our way to <:SM2099:678243126812344332>', delete_after=10)
+                testServerCommandTags = ['test', 'server', 'commands']
 
                 if all(tags in messageLower for tags in himmelCardTags):
                     await message.channel.send('Currently only obtainable from ECA <:SMeca:668824453588844554>\n Later available from Old Glast Heim Challenge Mode instance when it will be implemented (No ETA)', delete_after=10)
@@ -473,6 +466,9 @@ class Fun(Cog):
 
                 if all(tags in messageLower for tags in homunAITags):
                     await message.channel.send('Homunculus AI was disabled in a kRO patch by kRO itself and thus we do not have it since we are on that patch. Homunculus AI returned in a later patch which is going to be the next update to SMRO.', delete_after=180)
+
+                if all(tags in messageLower for tags in testServerCommandTags):
+                    await message.channel.send('@item <ID> <quantity> \n@blvl <number> \n@blvl -<number> \n@jlvl <number> \n@jlvl -<number> \n@disable_damage 0 ~ 4 / @dd 0 ~ 4 \n@smartcast 0/1 \n@spellbook')
 
     @Cog.listener()
     async def on_ready(self):

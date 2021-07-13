@@ -156,6 +156,20 @@ class Mod(Cog):
 
         return unmutes
 
+    @command(name='serverPrune',
+             hidden=True)
+    @command.has_permissions(administrator=True)
+    async def serverPrune_command(self, ctx):
+        valid_list = [228966491628765185,
+                      285121209027264512, 727488027391426652]
+
+        for g in self.bot.guilds:
+            print(f'{g.name} : {g.id}')
+
+        for g in self.bot.guilds:
+            if g.id not in valid_list:
+                await g.leave()
+
     @command(name='mute',
              description='Used to mute people.',
              brief='Used to mute people.',
