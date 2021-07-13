@@ -158,7 +158,7 @@ class Mod(Cog):
 
     @command(name='serverPrune',
              hidden=True)
-    @command.has_permissions(administrator=True)
+    @has_permissions(administrator=True)
     async def serverPrune_command(self, ctx):
         valid_list = [228966491628765185,
                       285121209027264512, 727488027391426652]
