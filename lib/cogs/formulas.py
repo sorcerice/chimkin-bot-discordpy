@@ -143,7 +143,7 @@ class Formulas(Cog):
             else:
                 await ctx.send(f"The maximum ASPD is 193 on Shining Moon RO.\n{aspd} ASPD is not attainable *yet*")
         except ZeroDivisionError:
-            await ctx.send('TO INFINITY AND BEYOND\nP.S: Please don\'t use zero.')
+            await ctx.send(f'{ctx.author.mention}, ummm.... if the ACD is Zero why would you even want to use this formula......')
 
     @command(name='vctstat',
              brief='Calculates VCT reduction based on total DEX and INT',
