@@ -5,8 +5,6 @@ from discord import Embed, Member, File
 from discord.ext.commands import Cog
 from discord.ext.commands import command
 
-currentTags = ''
-
 
 class Info(Cog):
     def __init__(self, bot):
@@ -221,6 +219,34 @@ class Info(Cog):
 
         else:
             await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance, booster char, elements')
+
+    @command(name='element',
+             brief='Provide mob element and get Chimkin will tell you what element is best suited against it',
+             description='Ever wonder what element you should use against X element mob? Now leave the thinking to Chimkin!',
+             usage='.element <monster element>')
+    async def element_command(self, ctx, mobElement: str):
+        if mobElement.lower() == 'neutral':
+            await ctx.send('All except Ghost')
+        elif mobElement.lower() == 'water':
+            await ctx.send('Wind')
+        elif mobElement.lower() == 'earth':
+            await ctx.send('Fire')
+        elif mobElement.lower() == 'fire':
+            await ctx.send('Water')
+        elif mobElement.lower() == 'wind':
+            await ctx.send('Earth')
+        elif mobElement.lower() == 'poison':
+            await ctx.send('Water/Earth/Fire/Wind')
+        elif mobElement.lower() == 'holy':
+            await ctx.send('Dark/Undead')
+        elif mobElement.lower() == 'dark':
+            await ctx.send('Holy')
+        elif mobElement.lower() == 'ghost':
+            await ctx.send('Ghost')
+        elif mobElement.lower() == 'undead':
+            await ctx.send('Fire/Holy')
+        else:
+            await ctx.send('Ragnarok has the following elements - water, earth, fire, wind, poison, holy, dark, ghost and undead')
 
     @Cog.listener()
     async def on_ready(self):
