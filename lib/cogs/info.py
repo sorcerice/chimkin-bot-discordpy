@@ -246,7 +246,7 @@ class Info(Cog):
         elif mobElement.lower() == 'undead':
             await ctx.send('Fire/Holy')
         else:
-            await ctx.send('Ragnarok has the following elements - water, earth, fire, wind, poison, holy, dark, ghost and undead')
+            await ctx.send(f'Ragnarok has the following elements - water, earth, fire, wind, poison, holy, dark, ghost and undead \n{mobElement} is not a valid element')
 
     @Cog.listener()
     async def on_ready(self):
