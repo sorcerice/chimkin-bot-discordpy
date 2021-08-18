@@ -131,7 +131,7 @@ class Info(Cog):
             await ctx.send(embed=embed)
 
         elif faq_tag.lower() == 'replay':
-            await ctx.send(f'{ctx.author.mention}\n**How To Play Replays:**\nhttps://cdn.discordapp.com/attachments/546255961992724481/673116241526915072/replay.mp4')
+            await ctx.send(content=f'{ctx.author.mention}\n**How To Play Replays:**', file=File('./data/faq/replay.mp4', filename='How to use Replay.mp4'))
 
         elif faq_tag.lower() == 'shadow':
             await ctx.send(f'{ctx.author.mention}\nShadow Equipment List:\nhttps://www.shining-moon.com/helheim/index.php/Shadow_Equipment')
@@ -140,15 +140,13 @@ class Info(Cog):
             embed = Embed(title='Difference between Helheim and Niflheim',
                           description='''**TL;DR:**\n```**Helheim** = kRO only balance and progressions, newer server, more players.\n*``````*Niflheim** = A mix of kRO, jRO and iRO balance and progressions, older server, less players, more build possibilities, more competitively viable endgame builds, better endgame damage potentials due to gears and easier refines.```''',
                           colour=0x4dfc32)
-            embed.set_image(
-                url='https://cdn.discordapp.com/attachments/605132888265981962/605135987890192393/unknown.png')
 
             embed.set_author(name=ctx.author.display_name,
                              icon_url=ctx.author.avatar_url)
             embed.set_footer(
                 text='This FAQ was stolen from SMRO discord', icon_url=ctx.guild.icon_url)
 
-            await ctx.send(embed=embed)
+            await ctx.send(embed=embed, file=File('./data/faq/helnif.png', filename='Hel/Nif.png'))
 
         elif faq_tag.lower() == 'aspd':
             embed = Embed(title='ASPD Golden Numbers',
@@ -215,10 +213,13 @@ class Info(Cog):
             await ctx.send('`When you create a booster character, if you delete the  created  booster character or  if you cancel the booster NPC, **YOU WILL NOT BE ABLE TO CREATE A NEW BOOSTER CHARACTER** !`\nPlease pay attention and be careful when you are making your choices.')
 
         elif(faq_tag.lower() == 'elements'):
-            await ctx.send('https://cdn.discordapp.com/attachments/772453956810571829/874308672677883945/unknown.png')
+            await ctx.send(file=File('./data/faq/elementtable.png', filename='Element Table.png'))
+
+        elif(faq_tag.lower() == 'traits'):
+            await ctx.send(file=File('./data/faq/traits.png', filename='Traits Info.png'))
 
         else:
-            await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance, booster char, elements')
+            await ctx.send('You need to have a valid faq tag\nCurrent FAQ tags are: ip, init, replay, shadow, helnif, aspd, enchants, resolution, boostermaps, 4th alt ticket, power dim essence, class rebalance, booster char, elements, traits')
 
     @command(name='element',
              brief='Provide mob element and get Chimkin will tell you what element is best suited against it',
