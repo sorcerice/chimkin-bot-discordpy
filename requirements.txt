@@ -11,11 +11,13 @@ bs4==0.0.1
 certifi==2020.12.5
 chardet==3.0.4
 coverage==5.4
+discord==1.0.1
 discord-pretty-help==1.2.1
 discord-py-slash-command==2.3.2
 discord.py==1.6.0
 docutils==0.16
 heroku==0.1.4
+html5lib==1.1
 idna==2.10
 libneko==0.24.9
 lxml==4.6.3
@@ -35,6 +37,7 @@ toml==0.10.2
 typing-extensions==3.7.4.3
 tzlocal==2.1
 urllib3==1.26.6
+webencodings==0.5.1
 websockets==9.1
 yarl==1.6.3
 git+https://github.com/Rapptz/discord-ext-menus@84caae8038d0d
