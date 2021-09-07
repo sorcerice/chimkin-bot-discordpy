@@ -403,6 +403,7 @@ class Fun(Cog):
              description='Pet person',
              brief='Tag a person to pet them or pet yourself!',
              help='.petpet @Lunch')
+    @bot_has_role(286937446611156992)
     async def petpet_command(self, ctx, member: Member):
         APIKEY = os.getenv('SRA_KEY')
         memberAvatarUrl = member.avatar_url_as(format='png')
