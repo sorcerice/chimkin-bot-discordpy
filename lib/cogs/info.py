@@ -140,7 +140,7 @@ class Info(Cog):
             embed = Embed(title='Difference between Helheim and Niflheim',
                           description='''**TL;DR:**\n```**Helheim** = kRO only balance and progressions, newer server, more players.\n*``````*Niflheim** = A mix of kRO, jRO and iRO balance and progressions, older server, less players, more build possibilities, more competitively viable endgame builds, better endgame damage potentials due to gears and easier refines.```''',
                           colour=0x4dfc32,
-                          image='attachment://helnif.png')
+                          image='attachment://Hel/Nif.png')
 
             embed.set_author(name=ctx.author.display_name,
                              icon_url=ctx.author.avatar_url)
